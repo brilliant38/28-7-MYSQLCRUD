@@ -1,0 +1,19 @@
+MEMBER			Member
+member_no(PK)	member_name	member_age	MemberDao
+			MemberAddr
+MEMBER_ADDR			MemberAddrDao
+member_addr_no(PK)	member_no(FK)	member_addr_content	*.jsp
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~			
+			
+STUDENT			Student
+student_no(PK)	student_name	student_age	StudentDao
+			StudentAddr
+STUDENT_ADDR			StudentAddrDao
+studentr_addr_no(PK)	student_no(FK)	student_addr_content	*.jsp
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~			
+			
+TEACHER			teacher
+teacher_no(PK)	teacher_name	teacher_age	teacherDao
+			teacherAddr
+TEACHER_ADDR			teacherAddrDao
+teacher_addr_no(PK)	teacher_no(FK)	teacher_addr_content	*.jsp
