@@ -1,10 +1,10 @@
 <!-- 2018-06-26 이광재 -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-		<title>memberInsert</title>
+		<title>InsertMemberForm</title>
 		<style>
 			table {
 				width: 200px;
@@ -17,8 +17,8 @@
 		</style>
 	</head>
 	<body>
-		<h3> 회원 가입</h3>
-		<form action="./memberInsertAction.jsp" method="post">
+		<h3>회원 가입</h3>
+		<form action="./InsertMemberAction.jsp" method="post">
 			<table>
 				<tr>
 					<th>이름</th>

@@ -12,15 +12,14 @@ public class MemberAddrDao {
 	
 	public int insertMemberAddr(Member member) {
 		
-		MemberAddr ma = new MemberAddr();	//MemberAddr 객체 생성
-		int memberNo = ma.getMember_no();	//MemberAddr객체의 getMember_no 메소드 호출 후 변수에 저장
-		String memberAddrContent = ma.getMember_addr_content();	//MemberAddr객체의 getMember_addr_content 메소드 호출 후 변수에 저장
+		MemberAddr MemberAddr = new MemberAddr();	//MemberAddr 객체 생성
+		int memberNo = MemberAddr.getMember_no();	//MemberAddr객체의 getMember_no 메소드 호출 후 변수에 저장
+		String memberAddrContent = MemberAddr.getMember_addr_content();	//MemberAddr객체의 getMember_addr_content 메소드 호출 후 변수에 저장
 		
 		//mysql 드라이버 로딩
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-		
-		
+			
 			//Database 연결(Connection 객체 생성)
 			String jdbcDriver = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
 			String dbUser = "root";
