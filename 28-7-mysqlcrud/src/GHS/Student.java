@@ -22,7 +22,7 @@ public class Student {
 	public void setStudent_age(int student_age) {
 		this.student_age = student_age;
 	}
-}	// 깨짐 확인용..
+}	// 깨짐 확인용...
 
 	
 

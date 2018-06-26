@@ -1,4 +1,4 @@
-// 28-07 ±¸ÇØ¼º
+// 28-07 ï¿½ï¿½ï¿½Ø¼ï¿½
 package GHS;
 
 import GHS.Student;
@@ -7,30 +7,27 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class StudentDao {        //ÇöÁ¦ ÀÌ ÆäÀÌÁöÀÇ class ¸¦ ¾â·ÁÁÖ°íÀÖ´Ù.
+public class StudentDao {        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ class ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö°ï¿½ï¿½Ö´ï¿½.
 	
-	public void insertStudent(Student student ) { //Student Å¬·¡½º¿¡¼­ insertStudent ÀÎ ¸Þ¼Òµå¸í¿¡¼­ student º¯¼ö¸¦ »ý¼ºÇÞ´Ù.
+	public void insertStudent(Student student ) { //Student Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ insertStudent ï¿½ï¿½ ï¿½Þ¼Òµï¿½ï¿½ï¿½ï¿½ student ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Þ´ï¿½.
 		System.out.println("StudentDao 01");
-		int no = student.getNo();
-		String st = student.getName(); // ÁÖ¼Ò°¡ ´ã°ÜÁ®ÀÖ´Âstudent ÁÖ¼Ò·Î  
+		String st = student.getStudent_name(); // ï¿½Ö¼Ò°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½student ï¿½Ö¼Ò·ï¿½  
 		System.out.println(st + "<- 02 st");
-		int ag = student.getAge();	//
+		int ag = student.getStudent_age();	//
 		
 		
 			try {
-				Class.forName("com.mysql.jdbc.Driver");		//DB ¿¬°á µå¶óÀÌ¹ö ·Îµù
+				Class.forName("com.mysql.jdbc.Driver");		//DB ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ ï¿½Îµï¿½
 			
 		
-			String jdbcDriver = "jdbc:mysql://localhost:3306/jjdev?" +
-					"useUnicode=true&characterEncoding=euckr";
+			String jdbcDriver = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
 			String dbUser = "root";
 			String dbPass = "java0000";
 			Connection conn  = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
 			
- 			PreparedStatement pstmt = conn.prepareStatement("insert into student values (?, ?, ?)");
-			pstmt.setInt(1, no);
-			pstmt.setString(2,st);
-			pstmt.setInt(3, ag);
+ 			PreparedStatement pstmt = conn.prepareStatement("insert into student (student_name, student_age) values (?, ? )");
+			pstmt.setString(1,st);
+			pstmt.setInt(2, ag);
 			pstmt.executeUpdate();
 			
 			pstmt.close();
