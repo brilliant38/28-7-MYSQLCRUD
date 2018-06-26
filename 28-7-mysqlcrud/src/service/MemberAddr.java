@@ -1,24 +1,24 @@
-/*2018-06-26 ÀÌ±¤Àç*/
+/*2018-06-26 ì´ê´‘ì¬*/
 package service;
 
-public class MemberAddr {	//Domain class³»ÀÇ ÇÊµå´Â ¹«Á¶°Ç Á¢±ÙÁ¦ÇÑÀÚ´Â private·Î ÀÛ¼ºÇÏ´Â °ÍÀÌ ¿øÄ¢ÀÌ´Ù.
+public class MemberAddr {	//Domain classë‚´ì˜ í•„ë“œëŠ” ë¬´ì¡°ê±´ ì ‘ê·¼ì œí•œìëŠ” privateë¡œ ì‘ì„±í•˜ëŠ” ê²ƒì´ ì›ì¹™ì´ë‹¤.
 	private int member_addr_no = 0;
 	private int member_no = 0;
 	private String member_addr_content = null;
 	
-	public int getMember_addr_no() {
+	public int getMember_addr_no() {	//ì „ì—­ë³€ìˆ˜ ê°’ì„ ë¦¬í„´
 		return member_addr_no;
 	}
-	public void setMember_addr_no(int member_addr_no) {
+	public void setMember_addr_no(int member_addr_no) {	//ë§¤ê°œë³€ìˆ˜ì— ì…ë ¥ëœ ê°’ì„ ì „ì—­ë³€ìˆ˜ì— ì €ì¥í•¨.
 		this.member_addr_no = member_addr_no;
 	}
-	public int getMember_no() {
+	public int getMember_no() {	
 		return member_no;
 	}
-	public void setMember_no(int member_no) {
+	public void setMember_no(int member_no) {	
 		this.member_no = member_no;
 	}
-	public String getMember_addr_content() {
+	public String getMember_addr_content() {	
 		return member_addr_content;
 	}
 	public void setMember_addr_content(String member_addr_content) {

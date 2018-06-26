@@ -9,16 +9,16 @@ import java.sql.SQLException;
 public class MemberAddrDao {
 	//DAO는 멤버변수를 만들면 안된다. 필요한 변수는 모두 메소드내의 지역변수로 만들어야한다.
 	
-	public int insertMemberAddr(Member member, MemberAddrDao memberAddrDao) {	//
+	public int insertMemberAddr(Member member) {	//Member_addr 테이블에 1행을 추가 하기 위한 메소드의 호출. 매개변수는 member 객체의 주소값
 		
 		int memberNo = member.getMemberNo();	//MemberAddr객체의 getMember_no 메소드 호출 후 변수에 저장
-		String memberAddrContent = emberAddr.getMember_addr_content();	//MemberAddr객체의 getMember_addr_content 메소드 호출 후 변수에 저장
 		int result = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
 		//mysql 드라이버 로딩
 		try {
+			//com.mysql.jdbc.Driver 클래스 로딩 완료
 			Class.forName("com.mysql.jdbc.Driver");
 			
 			//Database 연결(Connection 객체 생성)
@@ -31,7 +31,7 @@ public class MemberAddrDao {
 			//prepareStatement메소드 호출하여 쿼리문 실행 준비
 			pstmt = conn.prepareStatement("insert into member_addr (member_no,member_addr_content) values (?,?)");
 			pstmt.setInt(1, memberNo);
-			pstmt.setString(2, memberAddrContent);
+			//2
 			System.out.println(pstmt + " : PreparedStatement 객체 생성 완료");
 			
 			result = pstmt.executeUpdate();	//executeUpdate메소드를 호출하여 쿼리문 실행

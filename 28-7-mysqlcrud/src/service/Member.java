@@ -1,27 +1,27 @@
-/*2018-06-26 ÀÌ±¤Àç*/
+/*2018-06-26 ì´ê´‘ì¬*/
 package service;
 
 public class Member {
-	private int MemberNo = 0;	//Domain class³»ÀÇ ÇÊµå´Â ¹«Á¶°Ç Á¢±ÙÁ¦ÇÑÀÚ´Â private·Î ÀÛ¼ºÇÏ´Â °ÍÀÌ ¿øÄ¢ÀÌ´Ù.
+	private int MemberNo = 0;	//Domain classë‚´ì˜ í•„ë“œëŠ” ë¬´ì¡°ê±´ ì ‘ê·¼ì œí•œìëŠ” privateë¡œ ì‘ì„±í•˜ëŠ” ê²ƒì´ ì›ì¹™ì´ë‹¤.
 	private String member_name = null;
 	private int member_age = 0;
 	
-	public int getMemberNo() { //Àü¿ªº¯¼ö °ªÀ» ¸®ÅÏ
+	public int getMemberNo() {	//ì „ì—­ë³€ìˆ˜ ê°’ì„ ë¦¬í„´
 		return MemberNo;
 	}
-	public void setMemberNo(int memberNo) { //¸Å°³º¯¼ö¿¡ ÀÔ·ÂµÈ °ªÀ» Àü¿ªº¯¼ö¿¡ ÀúÀåÇÔ.
+	public void setMemberNo(int memberNo) { //ë§¤ê°œë³€ìˆ˜ì— ì…ë ¥ëœ ê°’ì„ ì „ì—­ë³€ìˆ˜ì— ì €ì¥í•¨.
 		this.MemberNo = memberNo;
 	}
-	public String getMember_name() {//Àü¿ªº¯¼ö °ªÀ» ¸®ÅÏ
+	public String getMember_name() {	
 		return member_name;
 	}
-	public void setMember_name(String member_name) {//¸Å°³º¯¼ö¿¡ ÀÔ·ÂµÈ °ªÀ» Àü¿ªº¯¼ö¿¡ ÀúÀåÇÔ.
+	public void setMember_name(String member_name) {
 		this.member_name = member_name;
 	}
-	public int getMember_age() {//Àü¿ªº¯¼ö °ªÀ» ¸®ÅÏ
+	public int getMember_age() {
 		return member_age;
 	}
-	public void setMember_age(int member_age) {//¸Å°³º¯¼ö¿¡ ÀÔ·ÂµÈ °ªÀ» Àü¿ªº¯¼ö¿¡ ÀúÀåÇÔ.
+	public void setMember_age(int member_age) {
 		this.member_age = member_age;
 	}
 	
