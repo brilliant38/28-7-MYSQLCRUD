@@ -1,0 +1,20 @@
+1. 커밋메세지 : [이름]...
+
+2. 파일 상단 : 주석 이름...
+
+3. DriverDB 클래스 X
+
+4. DTO, VO 도메인
+	private 멤버 변수(속성)
+	public setter,getter
+
+5. DAO
+	멤버변수 X
+	지역변수 O
+	메소드 try...catch...finally
+	//설명
+	//매개변수 : 
+	//리턴값 :
+
+Entity / DAO.insertEntity / jsp
+Entity / DAO / jsp

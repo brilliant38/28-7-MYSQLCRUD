@@ -1,6 +1,7 @@
+/*2018-06-26 이광재*/
 package service;
 
-public class MemberAddr {
+public class MemberAddr {	//Domain class내의 필드는 무조건 접근제한자는 private로 작성하는 것이 원칙이다.
 	private int member_addr_no = 0;
 	private int member_no = 0;
 	private String member_addr_content = null;
