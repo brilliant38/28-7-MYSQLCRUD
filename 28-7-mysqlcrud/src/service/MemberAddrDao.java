@@ -1,4 +1,4 @@
-/*2018-06-26 ÀÌ±¤Àç*/
+/*2018-06-26 ì´ê´‘ì¬*/
 package service;
 
 import java.sql.Connection;
@@ -7,45 +7,61 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class MemberAddrDao {
-	//DAO´Â ¸â¹öº¯¼ö¸¦ ¸¸µé¸é ¾ÈµÈ´Ù. ÇÊ¿äÇÑ º¯¼ö´Â ¸ğµÎ ¸Ş¼Òµå³»ÀÇ Áö¿ªº¯¼ö·Î ¸¸µé¾î¾ßÇÑ´Ù.
-	@SuppressWarnings("finally")
+	//DAOëŠ” ë©¤ë²„ë³€ìˆ˜ë¥¼ ë§Œë“¤ë©´ ì•ˆëœë‹¤. í•„ìš”í•œ ë³€ìˆ˜ëŠ” ëª¨ë‘ ë©”ì†Œë“œë‚´ì˜ ì§€ì—­ë³€ìˆ˜ë¡œ ë§Œë“¤ì–´ì•¼í•œë‹¤.
 	
-	public int insertMemberAddr(Member member) {
+	public int insertMemberAddr(Member member, MemberAddrDao memberAddrDao) {	//
 		
-		MemberAddr MemberAddr = new MemberAddr();	//MemberAddr °´Ã¼ »ı¼º
-		int memberNo = MemberAddr.getMember_no();	//MemberAddr°´Ã¼ÀÇ getMember_no ¸Ş¼Òµå È£Ãâ ÈÄ º¯¼ö¿¡ ÀúÀå
-		String memberAddrContent = MemberAddr.getMember_addr_content();	//MemberAddr°´Ã¼ÀÇ getMember_addr_content ¸Ş¼Òµå È£Ãâ ÈÄ º¯¼ö¿¡ ÀúÀå
+		int memberNo = member.getMemberNo();	//MemberAddrê°ì²´ì˜ getMember_no ë©”ì†Œë“œ í˜¸ì¶œ í›„ ë³€ìˆ˜ì— ì €ì¥
+		String memberAddrContent = emberAddr.getMember_addr_content();	//MemberAddrê°ì²´ì˜ getMember_addr_content ë©”ì†Œë“œ í˜¸ì¶œ í›„ ë³€ìˆ˜ì— ì €ì¥
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		
-		//mysql µå¶óÀÌ¹ö ·Îµù
+		//mysql ë“œë¼ì´ë²„ ë¡œë”©
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			
-			//Database ¿¬°á(Connection °´Ã¼ »ı¼º)
+			//Database ì—°ê²°(Connection ê°ì²´ ìƒì„±)
 			String jdbcDriver = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
 			String dbUser = "root";
 			String dbPass = "java0000";
-			Connection conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
+			conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
+			System.out.println(conn + " : Connection ê°ì²´ ìƒì„± ì™„ë£Œ");
 			
-			//prepareStatement¸Ş¼Òµå È£ÃâÇÏ¿© Äõ¸®¹® ½ÇÇà ÁØºñ
-			PreparedStatement pstmt = conn.prepareStatement("insert into member_addr (member_no,member_addr_content) values (?,?)");
+			//prepareStatementë©”ì†Œë“œ í˜¸ì¶œí•˜ì—¬ ì¿¼ë¦¬ë¬¸ ì‹¤í–‰ ì¤€ë¹„
+			pstmt = conn.prepareStatement("insert into member_addr (member_no,member_addr_content) values (?,?)");
 			pstmt.setInt(1, memberNo);
 			pstmt.setString(2, memberAddrContent);
+			System.out.println(pstmt + " : PreparedStatement ê°ì²´ ìƒì„± ì™„ë£Œ");
 			
-			pstmt.executeUpdate();	//executeUpdate¸Ş¼Òµå¸¦ È£ÃâÇÏ¿© Äõ¸®¹® ½ÇÇà
+			result = pstmt.executeUpdate();	//executeUpdateë©”ì†Œë“œë¥¼ í˜¸ì¶œí•˜ì—¬ ì¿¼ë¦¬ë¬¸ ì‹¤í–‰
 			
-			pstmt.close();	//PreparedStatement °´Ã¼ Á¾·á
-			
-			conn.close();	//Database ¿¬°á Á¾·á
-			
-		} catch (ClassNotFoundException e) { //Å¬·¡½º ¿¹¿ÜÃ³¸® ÀÛ¼º
-			// TODO Auto-generated catch block
-			System.out.println("ÄÄÆÄÀÏµÈ ÀÚ¹Ù Å¬·¡½º ÆÄÀÏÀ» Ã£À» ¼ö ¾ø´Â ¹®Á¦");
+		} catch (ClassNotFoundException e) {	//í´ë˜ìŠ¤ ì˜ˆì™¸ì²˜ë¦¬ ì‘ì„±
+			System.out.println("ì»´íŒŒì¼ëœ ìë°” í´ë˜ìŠ¤ íŒŒì¼ì„ ì°¾ì„ ìˆ˜ ì—†ëŠ” ë¬¸ì œ");
 			e.printStackTrace();
-		} catch (SQLException e) {//Äõ¸®¹® ¿¹¿ÜÃ³¸® ÀÛ¼º
-			System.out.println("SQL Äõ¸®¹® ÀÛ¼º¹®Á¦");
+		} catch (SQLException e) {	//ì¿¼ë¦¬ë¬¸ ì˜ˆì™¸ì²˜ë¦¬ ì‘ì„±
+			System.out.println("SQL ì¿¼ë¦¬ë¬¸ ì‘ì„±ë¬¸ì œ");
 			e.printStackTrace();
-		} finally {// ÀÛ¾÷ ¿Ï·á½Ã Á¾·á 
-			return 0;
+			
+		} finally {	// ì‘ì—… ì™„ë£Œì‹œ ì¢…ë£Œ 
+			if(pstmt != null) {	//PreparedStatement ê°ì²´ ì¢…ë£Œ
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					System.out.println("SQL ì¿¼ë¦¬ë¬¸ ì‘ì„±ë¬¸ì œ");
+					e.printStackTrace();
+				}
+			}
+			
+			if(conn != null) {	//Database ì—°ê²° ì¢…ë£Œ
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					System.out.println("SQL ì¿¼ë¦¬ë¬¸ ì‘ì„±ë¬¸ì œ");
+					e.printStackTrace();
+				}
+			}
 		}
+		return result;
 	}
 }

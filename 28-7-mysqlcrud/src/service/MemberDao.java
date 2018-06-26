@@ -18,6 +18,9 @@ public class MemberDao {
 		int memberAge = member.getMember_age(); //Member객체의 getMember_age 메소드 호출 후 변수에 저장
 		System.out.println(memberName + " : memberName 저장 완료");
 		System.out.println(memberAge + " : memberAge 저장 완료");
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		
 		//mysql 드라이버 로딩
 		try {			
@@ -28,23 +31,20 @@ public class MemberDao {
 			String jdbcDriver = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
 			String dbUser = "root";
 			String dbPass = "java0000";
-			Connection conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass); // getConnection메소드의 호출 및 Connection객체의 생성
+			conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass); // getConnection메소드의 호출 및 Connection객체의 생성
 			System.out.println(conn + " : Connection 객체 생성 완료");
 			
 			//prepareStatement메소드 호출하여 쿼리문 실행 준비
-			PreparedStatement pstmt = conn.prepareStatement("insert into member (member_name, member_age) values (?,?)"); //쿼리문 입력
+			pstmt = conn.prepareStatement("insert into member (member_name, member_age) values (?,?)"); //쿼리문 입력
 			pstmt.setString(1, memberName);
 			pstmt.setInt(2, memberAge);
 			System.out.println(pstmt + " : PreparedStatement 객체 생성 완료");
 			
-			
-			pstmt.executeUpdate(); // executeUpdate메소드를 호출하여 쿼리문 실행
+			result = pstmt.executeUpdate();	//executeUpdate메소드를 호출하여 쿼리문 실행
 			
 			pstmt.close();	//PreparedStatement 객체 종료
 			
 			conn.close();	//Database 연결 종료
-			
-			
 			
 		} catch (ClassNotFoundException e) { //클래스 예외처리 작성
 			// TODO Auto-generated catch block
@@ -53,9 +53,26 @@ public class MemberDao {
 		} catch (SQLException e) {//쿼리문 예외처리 작성
 			System.out.println("SQL 쿼리문 작성문제");
 			e.printStackTrace();
-		}
-				
-		return 0;
 		
+		} finally {	// 작업 완료시 종료 
+			if(pstmt != null) {	//PreparedStatement 객체 종료
+				try {
+					pstmt.close();
+				} catch (SQLException e) {
+					System.out.println("SQL 쿼리문 작성문제");
+					e.printStackTrace();
+				}
+			}
+			
+			if(conn != null) {	//Database 연결 종료
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					System.out.println("SQL 쿼리문 작성문제");
+					e.printStackTrace();
+				}
+			}
+		}
+		return result;
 	}
 }
