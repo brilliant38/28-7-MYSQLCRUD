@@ -11,7 +11,6 @@
 	<body>
 		<table>
 		<%
-			
 	        
 			int currentPage = 1;
 			if(request.getParameter("currentPage") != null) { //다음을 클릭 했을때 참조값을 넘기지 않으면 null로 처리한다.
