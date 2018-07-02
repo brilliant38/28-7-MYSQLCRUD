@@ -1,23 +1,22 @@
 // 28-07 ���ؼ�
-package GHS;
+package service;
 
-import GHS.Student;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class StudentDao {        //���� �� �������� class �� ����ְ��ִ�.
+public class StudentDao {        
 	
-	public void insertStudent(Student student ) { //Student Ŭ�������� insertStudent �� �޼ҵ���� student ������ �����޴�.
+	public void insertStudent(Student student ) { 
 		System.out.println("StudentDao 01");
-		String st = student.getStudent_name(); // �ּҰ� ������ִ�student �ּҷ�  
+		String st = student.getStudent_name(); 
 		System.out.println(st + "<- 02 st");
-		int ag = student.getStudent_age();	//
+		int ag = student.getStudent_age();	
 		
 		
 			try {
-				Class.forName("com.mysql.jdbc.Driver");		//DB ���� ����̹� �ε�
+				Class.forName("com.mysql.jdbc.Driver");		
 			
 		
 			String jdbcDriver = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";

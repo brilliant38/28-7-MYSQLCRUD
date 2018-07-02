@@ -1,4 +1,4 @@
-package GHS;
+package service;
 
 
 public class StudentAddr {
