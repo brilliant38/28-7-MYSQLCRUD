@@ -1,7 +1,7 @@
-<!-- 2018-07-02 이광재 -->
+<!-- 2018-07-03 이광재 -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import = "service.MemberDao"%>
-<%@ page import = "service.Member" %>
+<%@ page import = "service.EmployeeDao"%>
+<%@ page import = "service.Employee" %>
 <%@ page import = "java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
@@ -30,22 +30,20 @@
  
 			int pagePerRow = 5;
 			
-			Member member = new Member();
+			Employee employee = new Employee();
 			
-			
-			MemberDao memberDao = new MemberDao();
-			ArrayList<Member> list = memberDao.selectMemberByPage(currentPage, pagePerRow);
+			EmployeeDao employeeDao = new EmployeeDao();
+			ArrayList<Employee> list = employeeDao.selectEmployeeByPage(currentPage, pagePerRow);
 			System.out.println(list + " : 01 list check");
-			
-			member = list.get(1);
+			employee = list.get(1);
 			
 			for(int i=0; i<list.size(); i++) {
-				member = list.get(i);
+				employee = list.get(i);
 		%>
 				<tr>
-					<td><%=member.getMemberNo()%></td>
-					<td><%=member.getMemberName()%></td>
-					<td><%=member.getMemberAge()%></td>
+					<td><%=employee.getEmployeeNo()%></td>
+					<td><%=employee.getEmployeeName()%></td>
+					<td><%=employee.getEmployeeAge()%></td>
 				</tr>
 		<%
 			}
@@ -57,9 +55,9 @@
 			<a href="./Member_List.jsp?currentPage=<%=currentPage-1%>">이전</a> <!-- 이전 페이지 버튼 클릭시 "currentPage"변수로 currentPage-1의 값을 전송 --> 
 		<%
 			}
-			int lastPage = (member.getRowNumber()-1) / pagePerRow; // rowNumber-1의 값과 페이지당 행의 수와의 몫이 마지막 페이지의 넘버.
+			int lastPage = (employee.getRowNumber()-1) / pagePerRow; // rowNumber-1의 값과 페이지당 행의 수와의 몫이 마지막 페이지의 넘버.
 			
-			if ((member.getRowNumber()-1) % pagePerRow !=0) { // rowNumber-1의 값과 페이지당 행의 수와의 나머지가 1이 아닐때
+			if ((employee.getRowNumber()-1) % pagePerRow !=0) { // rowNumber-1의 값과 페이지당 행의 수와의 나머지가 1이 아닐때
 				lastPage++;
 			}
 			if(currentPage<lastPage) { //현재 페이지 넘버가 마지막 페이지 넘버보다 작아졌을때만 실행.

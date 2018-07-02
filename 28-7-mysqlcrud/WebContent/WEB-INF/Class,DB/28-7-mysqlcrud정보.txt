@@ -17,3 +17,10 @@ teacher_no(PK)	teacher_name	teacher_age	teacherDao
 			teacherAddr
 TEACHER_ADDR			teacherAddrDao
 teacher_addr_no(PK)	teacher_no(FK)	teacher_addr_content	*.jsp
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+EMPLOYEE			employee
+employee_no(PK)	employee_name	employee_age	employeeDao
+			employeeAddr
+EMPLOYEE_ADDR			employeeAddrDao
+employee_addr_no(PK)	employee_no(FK)	employee_addr_content	*.jsp

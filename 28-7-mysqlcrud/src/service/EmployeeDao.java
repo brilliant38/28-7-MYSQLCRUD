@@ -1,4 +1,3 @@
-/*2018-07-02 이광재*/
 package service;
 
 import java.sql.Connection;
@@ -8,27 +7,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class MemberDao {
-	//insertMemberForm,inserMemberAction.jsp
-	//DAO는 멤버변수를 만들면 안된다. 필요한 변수는 모두 메소드내의 지역변수로 만들어야한다.
-	//Model1에서는 DAO 클래스를 만들때 반드시 try..catch..finally를 사용한다. throws로 예외를 처리하지 않는다.
-	 
-	public ArrayList<Member> selectMemberByPage(int currentPage, int pagePerRow) {	//현재 페이지 숫자, 페이지당 행의 갯수를 입력받아 정해진 행의 갯수만큼을 조회하는 메소드
-		/*
-		 * List :  갯수가 동적, list.size 입력된 값
-		 * 배열 : 갯수가 정적, [].length 만들어진 배열이 모두 존재.
-		 * 배열의 사용을 편하게 -> List, Set, Map
-		 * JDBC API SELECT의 결과물은 ResultSet이므로 JDBC API를 JSP 페이지에서 사용하지 않기 위해 배열(ArrayList<Member>)로 타입을 전환시킨다.
-		 * 
-		 */
-		ArrayList<Member> List = new ArrayList<>();
+public class EmployeeDao {
+	
+	public ArrayList<Employee> selectEmployeeByPage(int currentPage, int pagePerRow) {
+		
+		ArrayList<Employee> List = new ArrayList<>();
 		Connection connection = null;
 		PreparedStatement preparedstatementRowNumber = null;
 		PreparedStatement preparedstatementPagePerRow = null;
 		ResultSet resultsetRowNumber = null;
 		ResultSet resultsetPagePerRow = null;
-		String sqlRowNumber = "SELECT count(*) FROM member";
-		String sqlPage = "SELECT member_no, member_name, member_age FROM member ORDER BY member_no LIMIT ?,?";
+		String sqlRowNumber = "SELECT count(*) FROM employee";
+		String sqlPage = "SELECT employee_no,employee_name, employee_age FROM employee ORDER BY employee_no LIMIT ?,?";
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");	//Database 연결
@@ -40,7 +30,6 @@ public class MemberDao {
 			
 			connection = DriverManager.getConnection(dataBaseAddress, dataBaseID, DataBasePW);
 			System.out.println(connection + " : 01 connection");
-			
 			
 			preparedstatementRowNumber = connection.prepareStatement(sqlRowNumber); //변수에 저장된 쿼리문 입력
 			System.out.println(preparedstatementRowNumber + " : 02 preparedstatementRowNumber");
@@ -73,12 +62,12 @@ public class MemberDao {
 			System.out.println(resultsetPagePerRow + " : 08 resultsetPagePerRow");
 			
 			while(resultsetPagePerRow.next()) {
-				Member member = new Member(); 
-				member.setMemberNo(resultsetPagePerRow.getInt(1));
-				member.setMemberName(resultsetPagePerRow.getString(2));;
-				member.setMemberAge(resultsetPagePerRow.getInt(3));;
-				member.setRowNumber(rowNumber);
-				List.add(member);
+				Employee employee = new Employee(); 
+				employee.setEmployeeNo(resultsetPagePerRow.getInt(1));
+				employee.setEmployeeName(resultsetPagePerRow.getString(2));;
+				employee.setEmployeeAge(resultsetPagePerRow.getInt(3));;
+				employee.setRowNumber(rowNumber);
+				List.add(employee);
 			}
 			
 		} catch (ClassNotFoundException e) {
@@ -113,23 +102,21 @@ public class MemberDao {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
 		}
-		
-		return List; // list 최대 pagePerRow~1
+		return List;
 	}
 	
 	
-	public int insertMember(Member member) {
-		System.out.println("insertMember 메소드 실행 완료");
+	public int insertEmployee(Employee employee) {
+		System.out.println("insertEmployee 메소드 실행 완료");
 		
-		String memberName = member.getMemberName(); //Member_addr 테이블에 1행을 추가 하기 위한 메소드의 호출. 매개변수는 member 객체의 주소값
-		int memberAge = member.getMemberAge(); //MemberAddr객체의 getMember_no 메소드 호출 후 변수에 저장
-		System.out.println(memberName + " : memberName 전송완료");
-		System.out.println(memberAge + " : memberAge 전송완료");
+		String employeeName = employee.getEmployeeName(); //Member_addr 테이블에 1행을 추가 하기 위한 메소드의 호출. 매개변수는 member 객체의 주소값
+		int employeeAge = employee.getEmployeeAge(); //MemberAddr객체의 getMember_no 메소드 호출 후 변수에 저장
+		System.out.println(employeeName + " : employeeName 전송완료");
+		System.out.println(employeeAge + " : employeeAge 전송완료");
 		int result = 0;
-		Connection conn = null;
-		PreparedStatement pstmt = null;
+		Connection connection = null;
+		PreparedStatement preparedstatement = null;
 		
 		//mysql 드라이버 로딩
 		try {			
@@ -140,16 +127,16 @@ public class MemberDao {
 			String jdbcDriver = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
 			String dbUser = "root";
 			String dbPass = "java0000";
-			conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass); 
-			System.out.println(conn + " : Connection 객체 생성 완료");
+			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass); 
+			System.out.println(connection + " : Connection 객체 생성 완료");
 			
 			//prepareStatement메소드 호출하여 쿼리문 실행 준비
-			pstmt = conn.prepareStatement("insert into member (member_name, member_age) values (?,?)"); 
-			pstmt.setString(1, memberName);
-			pstmt.setInt(2, memberAge);
-			System.out.println(pstmt + " : PreparedStatement 객체 생성 완료");
+			preparedstatement = connection.prepareStatement("insert into employee (employee_name, employee_age) values (?,?)"); 
+			preparedstatement.setString(1, employeeName);
+			preparedstatement.setInt(2, employeeAge);
+			System.out.println(preparedstatement + " : PreparedStatement 객체 생성 완료");
 			
-			result = pstmt.executeUpdate();	//executeUpdate메소드를 호출하여 쿼리문 실행
+			result = preparedstatement.executeUpdate();	//executeUpdate메소드를 호출하여 쿼리문 실행
 			
 		} catch (ClassNotFoundException e) { //executeUpdate메소드를 호출하여 쿼리문 실행
 			// TODO Auto-generated catch block
@@ -160,18 +147,18 @@ public class MemberDao {
 			e.printStackTrace();
 		
 		} finally {	// 작업 완료시 종료 
-			if(pstmt != null) {	//PreparedStatement 객체 종료
+			if(preparedstatement != null) {	//PreparedStatement 객체 종료
 				try {
-					pstmt.close();
+					preparedstatement.close();
 				} catch (SQLException e) {
 					System.out.println("SQL 쿼리문 작성문제");
 					e.printStackTrace();
 				}
 			}
 			
-			if(conn != null) {	//Database 연결 종료
+			if(connection != null) {	//Database 연결 종료
 				try {
-					conn.close();
+					connection.close();
 				} catch (SQLException e) {
 					System.out.println("SQL 쿼리문 작성문제");
 					e.printStackTrace();
@@ -180,4 +167,5 @@ public class MemberDao {
 		}
 		return result;
 	}
+
 }
