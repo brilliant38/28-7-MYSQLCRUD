@@ -11,7 +11,7 @@
 <title>insert TeacherAddr Action</title>
 </head>
 <body>
-<% 	request.setCharacterEncoding("euc-kr");
+	<% 	request.setCharacterEncoding("euc-kr");
 	
 	
 		TeacherAddr teacherAddr = new TeacherAddr();
@@ -19,6 +19,6 @@
 		teacherAddr.setTeacherAddrContent(request.getParameter("teacherAddrContent"));
 		TeacherAddrDao dao = new TeacherAddrDao();
 		dao.insertTeacherAddr(teacherAddr);
-%>
+	%>
 </body>
 </html>
