@@ -13,11 +13,12 @@
 <body>
 <% 	request.setCharacterEncoding("euc-kr");
 	
-	TeacherAddr teacherAddr = new TeacherAddr();
-	teacherAddr.setTeacherNo(Integer.parseInt(request.getParameter("teacherNo")));
-	teacherAddr.setTeacherAddrContent(request.getParameter("teacherAddrContent"));
-	TeacherAddrDao dao = new TeacherAddrDao();
-	dao.insertTeacherAddr(teacherAddr);
+	
+		TeacherAddr teacherAddr = new TeacherAddr();
+		teacherAddr.setTeacherNo(Integer.parseInt(request.getParameter("teacherNo")));
+		teacherAddr.setTeacherAddrContent(request.getParameter("teacherAddrContent"));
+		TeacherAddrDao dao = new TeacherAddrDao();
+		dao.insertTeacherAddr(teacherAddr);
 %>
 </body>
 </html>
