@@ -12,7 +12,7 @@ public class MemberDao {
 	//insertMemberForm,inserMemberAction.jsp
 	//DAO는 멤버변수를 만들면 안된다. 필요한 변수는 모두 메소드내의 지역변수로 만들어야한다.
 	//Model1에서는 DAO 클래스를 만들때 반드시 try..catch..finally를 사용한다. throws로 예외를 처리하지 않는다.
-	
+	 
 	public ArrayList<Member> selectMemberByPage(int currentPage, int pagePerRow) {	//현재 페이지 숫자, 페이지당 행의 갯수를 입력받아 정해진 행의 갯수만큼을 조회하는 메소드
 		/*
 		 * List :  갯수가 동적, list.size 입력된 값

@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class MemberAddrDao {
 	//DAO는 멤버변수를 만들면 안된다. 필요한 변수는 모두 메소드내의 지역변수로 만들어야한다.
-	
+	 
 	public int insertMemberAddr(Member member) {	//Member_addr 테이블에 1행을 추가 하기 위한 메소드의 호출. 매개변수는 member 객체의 주소값
 		
 		int memberNo = member.getMemberNo();	//MemberAddr객체의 getMember_no 메소드 호출 후 변수에 저장

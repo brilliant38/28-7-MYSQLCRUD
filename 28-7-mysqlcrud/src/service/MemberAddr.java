@@ -5,7 +5,7 @@ public class MemberAddr {	//Domain class내의 필드는 무조건 접근제한�
 	private int member_addr_no = 0;
 	private int member_no = 0;
 	private String member_addr_content = null;
-	
+	 
 	public int getMember_addr_no() {	//전역변수 값을 리턴
 		return member_addr_no;
 	}

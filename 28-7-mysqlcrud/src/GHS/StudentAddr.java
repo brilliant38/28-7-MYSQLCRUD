@@ -22,6 +22,6 @@ public class StudentAddr {
 	}
 	public void setStudent_addr_content(String student_addr_content) {
 		this.student_addr_content = student_addr_content;
-	}
-	
+	} 
+	// 깨짐 확인용...
 }

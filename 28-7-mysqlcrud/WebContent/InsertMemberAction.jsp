@@ -1,4 +1,4 @@
-<!-- 2018-06-26 이광재 -->
+<!-- 2018-07-02 이광재 -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import = "service.Member" %>
 <%@ page import = "service.MemberDao" %>
@@ -9,7 +9,7 @@
 		<title>memberInsertAction</title>
 	</head>
 	<body>
-		<%
+		<% 
 			request.setCharacterEncoding("euc-kr"); //받는 값의 형식을 euc-kr로 인코딩
 			
 			String name = request.getParameter("name");

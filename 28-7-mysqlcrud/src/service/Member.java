@@ -7,7 +7,7 @@ public class Member {
 	private int member_age = 0;
 	private int rowNumber = 0;
 	
-	
+	 
 	public int getMemberNo() {	//전역변수 값을 리턴
 		return MemberNo;
 	}

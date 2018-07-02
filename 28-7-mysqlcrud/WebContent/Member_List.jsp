@@ -16,7 +16,7 @@
 			if(request.getParameter("currentPage") != null) { //다음을 클릭 했을때 참조값을 넘기지 않으면 null로 처리한다.
 				currentPage = Integer.parseInt(request.getParameter("currentPage")); // String 타입으로 넘어온 "currentPage" 변수의 타입을 int로 변환하여 저장한다.
 			}    
-
+ 
 			int pagePerRow = 5;
 			
 			Member member = new Member();

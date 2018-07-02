@@ -3,9 +3,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 public class StudentAddrDao {
-	//01µå¶óÀÌ¹ö·Îµù°ú02DB¿¬°áÈÄ Connection°´Ã¼ ÁÖ¼Ò°ª ¸®ÅÏ
+	//01ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½Îµï¿½ï¿½ï¿½02DBï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Connectionï¿½ï¿½Ã¼ ï¿½Ö¼Ò°ï¿½ ï¿½ï¿½ï¿½ï¿½
 	public Connection driverDbcon() throws ClassNotFoundException, SQLException {
-		System.out.println("01µå¶óÀÌ¹ö·Îµù¹×DB¿¬°á");
+		System.out.println("01ï¿½ï¿½ï¿½ï¿½Ì¹ï¿½ï¿½Îµï¿½ï¿½ï¿½DBï¿½ï¿½ï¿½ï¿½");
 		Class.forName("com.mysql.jdbc.Driver");
 
 		String jdbcDriver = "jdbc:mysql://localhost:3306/jjdev?" +
@@ -17,6 +17,6 @@ public class StudentAddrDao {
 		System.out.println(reconn + "<-- reconn");
 
 		return reconn;
-	}
+	} 
 }
 
