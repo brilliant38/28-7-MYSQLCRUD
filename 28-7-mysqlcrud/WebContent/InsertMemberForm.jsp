@@ -32,7 +32,6 @@
 					<th>주소</th>
 					<td><input type="text" name="address" size="17"></td>
 				</tr>
-				
 				<tr>
 					<td colspan="2"><input type="submit" value="회원가입버튼"></td>
 				</tr>
