@@ -17,16 +17,16 @@
 		</style>
 	</head>
 	<body>
-		<h3>회원 가입</h3>
-		<form action="./InsertMemberAction.jsp" method="post">
+		<h3>주소 입력</h3>
+		<form action="./InsertMemberAddrAction.jsp" method="post">
 			<table>
 				<tr>
 					<th>이름</th>
 					<td><input type="text" name="name" size="17"></td>
 				</tr>
 				<tr>
-					<th>나이</th>
-					<td><input type="text" name="age" size="17"></td>
+					<th>주소</th>
+					<td><input type="text" name="address" size="17"></td>
 				</tr>
 				<tr>
 					<td colspan="2"><input type="submit" value="회원가입버튼"></td>

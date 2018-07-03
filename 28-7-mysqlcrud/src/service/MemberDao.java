@@ -1,4 +1,4 @@
-/*2018-07-02 이광재*/
+/*2018-07-03 이광재*/
 package service;
 
 import java.sql.Connection;
@@ -12,7 +12,157 @@ public class MemberDao {
 	//insertMemberForm,inserMemberAction.jsp
 	//DAO는 멤버변수를 만들면 안된다. 필요한 변수는 모두 메소드내의 지역변수로 만들어야한다.
 	//Model1에서는 DAO 클래스를 만들때 반드시 try..catch..finally를 사용한다. throws로 예외를 처리하지 않는다.
-	 
+	
+	public void updateMember(Member member) {
+		
+		Connection connection = null;
+		PreparedStatement preparedstatementupdateMember = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");	//Database 연결
+			
+			String dataBaseAddress = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
+			String dataBaseID = "root";
+			String DataBasePW = "java0000";
+			System.out.println(dataBaseAddress + " : dataBaseAddress");
+			
+			connection = DriverManager.getConnection(dataBaseAddress, dataBaseID, DataBasePW);
+			System.out.println(connection + " : 01 connection");
+			
+			preparedstatementupdateMember = connection.prepareStatement("UPDATE member SET member_name = ?, member_age = ? where member_no = ?"); //변수에 저장된 쿼리문 입력
+			preparedstatementupdateMember.setString(1, member.getMemberName());
+			preparedstatementupdateMember.setInt(2, member.getMemberAge());
+			preparedstatementupdateMember.setInt(3, member.getMemberNo());
+			System.out.println(preparedstatementupdateMember + " : 02 preparedstatementupdateMember");
+			
+			preparedstatementupdateMember.executeUpdate();
+			
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("클래스 파일을 찾을 수 없습니다.");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("쿼리문장이 잘못 되었습니다.");
+			e.printStackTrace();
+		} finally {
+			try {
+				preparedstatementupdateMember.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public ArrayList<Member> updateForSelectMember(int memberNo) {
+		ArrayList<Member> list = new ArrayList<Member>();
+		
+		Connection connection = null;
+		PreparedStatement preparedstatementUpdateForSelect = null;
+		ResultSet resultsetUpdateForSelect = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");	//Database 연결
+			
+			String dataBaseAddress = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
+			String dataBaseID = "root";
+			String DataBasePW = "java0000";
+			System.out.println(dataBaseAddress + " : dataBaseAddress");
+			
+			connection = DriverManager.getConnection(dataBaseAddress, dataBaseID, DataBasePW);
+			System.out.println(connection + " : 01 connection");
+			
+			preparedstatementUpdateForSelect = connection.prepareStatement("select member_no, member_name, member_age from member where member_no=?"); //변수에 저장된 쿼리문 입력
+			preparedstatementUpdateForSelect.setInt(1, memberNo);
+			System.out.println(preparedstatementUpdateForSelect + " : 02 preparedstatementUpdateForSelect");
+			
+			resultsetUpdateForSelect = preparedstatementUpdateForSelect.executeQuery();
+			
+			while(resultsetUpdateForSelect.next()) {
+				Member member = new Member();
+				member.setMemberNo(resultsetUpdateForSelect.getInt("member_no"));
+				member.setMemberName(resultsetUpdateForSelect.getString("member_name"));
+				member.setMemberAge(resultsetUpdateForSelect.getInt("member_age"));
+				list.add(member);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("클래스 파일을 찾을 수 없습니다.");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("쿼리문장이 잘못 되었습니다.");
+			e.printStackTrace();
+		} finally {
+			try {
+				resultsetUpdateForSelect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				preparedstatementUpdateForSelect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return list;
+	}
+	
+	public void deleteMember(int memberNo) {
+		Connection connection = null;
+		PreparedStatement preparedstatementDeleteMember = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");	//Database 연결
+			
+			String dataBaseAddress = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
+			String dataBaseID = "root";
+			String DataBasePW = "java0000";
+			System.out.println(dataBaseAddress + " : dataBaseAddress");
+			
+			connection = DriverManager.getConnection(dataBaseAddress, dataBaseID, DataBasePW);
+			System.out.println(connection + " : 01 connection");
+			
+			preparedstatementDeleteMember = connection.prepareStatement("delete from member where member_no = ?"); //변수에 저장된 쿼리문 입력
+			preparedstatementDeleteMember.setInt(1, memberNo);
+			System.out.println(preparedstatementDeleteMember + " : 02 preparedstatementDeleteMember");
+			
+			preparedstatementDeleteMember.executeUpdate();
+			
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("클래스 파일을 찾을 수 없습니다.");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("쿼리문장이 잘못 되었습니다.");
+			e.printStackTrace();
+		} finally {
+			try {
+				preparedstatementDeleteMember.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+
+	}
+	
 	public ArrayList<Member> selectMemberByPage(int currentPage, int pagePerRow) {	//현재 페이지 숫자, 페이지당 행의 갯수를 입력받아 정해진 행의 갯수만큼을 조회하는 메소드
 		/*
 		 * List :  갯수가 동적, list.size 입력된 값
@@ -40,8 +190,7 @@ public class MemberDao {
 			
 			connection = DriverManager.getConnection(dataBaseAddress, dataBaseID, DataBasePW);
 			System.out.println(connection + " : 01 connection");
-			
-			
+
 			preparedstatementRowNumber = connection.prepareStatement(sqlRowNumber); //변수에 저장된 쿼리문 입력
 			System.out.println(preparedstatementRowNumber + " : 02 preparedstatementRowNumber");
 			

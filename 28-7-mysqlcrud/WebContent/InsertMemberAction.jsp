@@ -19,8 +19,8 @@
 			//傈价登绰 蔼 眉农
 			
 			Member member = new Member(); // Member 按眉 积己
-			member.setMember_name(name);
-			member.setMember_age(age);
+			member.setMemberName(name);
+			member.setMemberAge(age);
 			
 			MemberDao memberdao = new MemberDao(); //Memberdao 按眉 积己
 			int result = memberdao.insertMember(member);

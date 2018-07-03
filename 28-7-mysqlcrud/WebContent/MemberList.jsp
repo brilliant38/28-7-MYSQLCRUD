@@ -10,9 +10,10 @@
 		<title>memberList</title>
 		<style>
 			table {
-				width: 200px;
+				width: 300px;
 				border: 1px solid #444444;
 				border-collapse: collapse;
+				text-align:center;
 			}
 			th, td {
 				border: 1px solid #444444;
@@ -25,6 +26,7 @@
 				<th>no</th>
 				<th>name</th>
 				<th>age</th>
+				<th>주소입력</th>
 				<th>삭제</th>
 				<th>수정</th>
 			</tr>
@@ -39,7 +41,6 @@
 			
 			Member member = new Member();
 			
-			
 			MemberDao memberDao = new MemberDao();
 			ArrayList<Member> list = memberDao.selectMemberByPage(currentPage, pagePerRow);
 			System.out.println(list + " : 01 list check");
@@ -51,10 +52,11 @@
 		%>
 				<tr>
 					<td><%=member.getMemberNo()%></td>
-					<td><a href="./MemberAddrList.jsp?no=<%=no%>"><%=member.getMemberName()%></a></td>
+					<td><a href="./MemberAddrList.jsp?no=<%=member.getMemberNo()%>"><%=member.getMemberName()%></a></td>
 					<td><%=member.getMemberAge()%></td>
-					<td><a href="./deleteMemberAction.jsp?no=<%=no%>">삭제</a></td>
-					<td><a href="./updateMemberForm.jsp?no=<%=no%>">수정</a></td>
+					<td><a href="./InsertMemberAddrForm.jsp">주소입력</a></td>
+					<td><a href="./DeleteMemberAction.jsp?no=<%=member.getMemberNo()%>">삭제</a></td>
+					<td><a href="./UpdateMemberForm.jsp?no=<%=member.getMemberNo()%>">수정</a></td>
 					<!-- ./updateMemberForm.jsp -> updateMemberAction으로 전송-->
 				</tr>
 		<%

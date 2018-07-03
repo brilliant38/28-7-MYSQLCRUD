@@ -2,28 +2,29 @@
 package service;
 
 public class MemberAddr {	//Domain class내의 필드는 무조건 접근제한자는 private로 작성하는 것이 원칙이다.
-	private int member_addr_no = 0;
-	private int member_no = 0;
-	private String member_addr_content = null;
+	private int memberAddrNo = 0;
+	private int memberNo = 0;
+	private String memberAddrContent = null;
+	
+	public int getMemberAddrNo() {
+		return memberAddrNo;
+	}
+	public void setMemberAddrNo(int memberAddrNo) {
+		this.memberAddrNo = memberAddrNo;
+	}
+	public int getMemberNo() {
+		return memberNo;
+	}
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
+	public String getMemberAddrContent() {
+		return memberAddrContent;
+	}
+	public void setMemberAddrContent(String memberAddrContent) {
+		this.memberAddrContent = memberAddrContent;
+	}
 	 
-	public int getMember_addr_no() {	//전역변수 값을 리턴
-		return member_addr_no;
-	}
-	public void setMember_addr_no(int member_addr_no) {	//매개변수에 입력된 값을 전역변수에 저장함.
-		this.member_addr_no = member_addr_no;
-	}
-	public int getMember_no() {	
-		return member_no;
-	}
-	public void setMember_no(int member_no) {	
-		this.member_no = member_no;
-	}
-	public String getMember_addr_content() {	
-		return member_addr_content;
-	}
-	public void setMember_addr_content(String member_addr_content) {
-		this.member_addr_content = member_addr_content;
-	}
 
 	
 }
