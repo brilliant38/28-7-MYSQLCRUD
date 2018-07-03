@@ -2,14 +2,14 @@ package service;
 
 
 public class StudentAddr {
-	private int studentr_addr_no;
+	private int student_addr_no;
 	private int student_no;
 	private String student_addr_content;
 	public int getStudentr_addr_no() {
-		return studentr_addr_no;
+		return student_addr_no;
 	}
-	public void setStudentr_addr_no(int studentr_addr_no) {
-		this.studentr_addr_no = studentr_addr_no;
+	public void setStudent_addr_no(int studentr_addr_no) {
+		this.student_addr_no = studentr_addr_no;
 	}
 	public int getStudent_no() {
 		return student_no;
