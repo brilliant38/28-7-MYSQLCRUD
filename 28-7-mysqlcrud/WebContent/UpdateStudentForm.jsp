@@ -12,13 +12,20 @@
 <%
 String send_id = request.getParameter("send_id");
 System.out.println(send_id + "<---send_id");
+int dbno = student.get
+
+
+
+
+
+
 StudentDao dao = new StudentDao();
-Student Stu = dao.StudentUpdate(send_id);
+Student Stu = dao.updateStudent(send_id);
 System.out.println(Stu+"<--s");
 
-int dbno = Stu.getS_no();
-String dbname = Stu.getS_name();
-int dbage = Stu.getS_age();
+int dbno = Stu.getStudent_no();
+String dbname = Stu.getStudent_name();
+int dbage = Stu.getStudent_age();
 %>
 <form action="<%= request.getContextPath() %>/mupdate/m_update_pro.jsp" method="post">
 <table border="1">
