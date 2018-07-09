@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import = "service.Student" %>
 <%@ page import = "service.StudentDao" %>
+<%@ page import = "service.StudentAddrDao" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -21,8 +22,8 @@
 					Stu.setStudent_name(studentName);
 					Stu.setStudent_age(age);
 					
-					StudentDao Stud = new StudentDao();
-					Stud.insertStudent(Stu);
+					StudentAddrDao dao = new StudentAddrDao();
+					dao.insertStudent(Stu);
 					
 					response.sendRedirect("./InsertStudentForm.jsp");
 			
