@@ -13,10 +13,22 @@ public class MemberDao {
 	//DAO는 멤버변수를 만들면 안된다. 필요한 변수는 모두 메소드내의 지역변수로 만들어야한다.
 	//Model1에서는 DAO 클래스를 만들때 반드시 try..catch..finally를 사용한다. throws로 예외를 처리하지 않는다.
 	
+	/*String word -> null,"","검색단어" 세 가지경우에 맞는 쿼리가 다르다.
+	 *분기문이 필요하다.
+	 *이럴때 동적쿼리라고 칭한다.
+	 *WHERE member_name like ? ORDER 
+	 *List :  갯수가 동적, list.size 입력된 값
+	 * 배열 : 갯수가 정적, [].length 만들어진 배열이 모두 존재.
+	 * 배열의 사용을 편하게 -> List, Set, Map
+	 * JDBC API SELECT의 결과물은 ResultSet이므로 JDBC API를 JSP 페이지에서 사용하지 않기 위해 배열(ArrayList<Member>)로 타입을 전환시킨다.
+	 * like '%단어%'로 검색해야한다.
+	*/
+	
+	
 	public void updateMember(Member member) {
 		
 		Connection connection = null;
-		PreparedStatement preparedstatementupdateMember = null;
+		PreparedStatement preparedStatementUpdateMember = null;
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");	//Database 연결
@@ -29,13 +41,13 @@ public class MemberDao {
 			connection = DriverManager.getConnection(dataBaseAddress, dataBaseID, DataBasePW);
 			System.out.println(connection + " : 01 connection");
 			
-			preparedstatementupdateMember = connection.prepareStatement("UPDATE member SET member_name = ?, member_age = ? where member_no = ?"); //변수에 저장된 쿼리문 입력
-			preparedstatementupdateMember.setString(1, member.getMemberName());
-			preparedstatementupdateMember.setInt(2, member.getMemberAge());
-			preparedstatementupdateMember.setInt(3, member.getMemberNo());
-			System.out.println(preparedstatementupdateMember + " : 02 preparedstatementupdateMember");
+			preparedStatementUpdateMember = connection.prepareStatement("UPDATE member SET member_name = ?, member_age = ? where member_no = ?"); //변수에 저장된 쿼리문 입력
+			preparedStatementUpdateMember.setString(1, member.getMemberName());
+			preparedStatementUpdateMember.setInt(2, member.getMemberAge());
+			preparedStatementUpdateMember.setInt(3, member.getMemberNo());
+			System.out.println(preparedStatementUpdateMember + " : 02 preparedstatementupdateMember");
 			
-			preparedstatementupdateMember.executeUpdate();
+			preparedStatementUpdateMember.executeUpdate();
 			
 			
 		} catch (ClassNotFoundException e) {
@@ -46,7 +58,7 @@ public class MemberDao {
 			e.printStackTrace();
 		} finally {
 			try {
-				preparedstatementupdateMember.close();
+				preparedStatementUpdateMember.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

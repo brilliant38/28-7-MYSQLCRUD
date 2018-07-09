@@ -63,16 +63,17 @@
 			}
 		%>
 		</table>
-		<form>
+		<form action="./MemberAndScore.jsp" method="post">
 			<div>
 				이름 :
 				<input type="text" name="searchWord">
+				<button type="submit">회원검색</button>
 			</div>
 		</form>
 		<%
 			if(currentPage>1) { //currentPage 값이 1보다 클때만 실행
 		%>
-			<a href="./Member_List.jsp?currentPage=<%=currentPage-1%>">이전</a> <!-- 이전 페이지 버튼 클릭시 "currentPage"변수로 currentPage-1의 값을 전송 --> 
+			<a href="./MemberList.jsp?currentPage=<%=currentPage-1%>">이전</a> <!-- 이전 페이지 버튼 클릭시 "currentPage"변수로 currentPage-1의 값을 전송 --> 
 		<%
 			}
 			int lastPage = (member.getRowNumber()-1) / pagePerRow; // rowNumber-1의 값과 페이지당 행의 수와의 몫이 마지막 페이지의 넘버.
@@ -82,7 +83,7 @@
 			}
 			if(currentPage<lastPage) { //현재 페이지 넘버가 마지막 페이지 넘버보다 작아졌을때만 실행.
 		%>
-			<a href="./Member_List.jsp?currentPage=<%=currentPage+1%>">다음</a> <!-- 다음 페이지 버튼 클릭시 "currentPage"변수로 currentPage+1의 값을 전송 -->
+			<a href="./MemberList.jsp?currentPage=<%=currentPage+1%>">다음</a> <!-- 다음 페이지 버튼 클릭시 "currentPage"변수로 currentPage+1의 값을 전송 -->
 		<%
 			} 
 		%>
