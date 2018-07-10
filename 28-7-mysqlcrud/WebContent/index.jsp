@@ -14,5 +14,11 @@
 			<li><a href="./TeacherList.jsp">TeacherList</a></li>
 			<li><a href="./EmployeeList.jsp">EmployeeList</a></li>
 		</ul>
+		<ul>
+			<li><a href="./MemberListAboveAverage.jsp">MemberListAboveAverage</a></li>
+			<li><a href="./StudentListAboveAverage.jsp">StudentListAboveAverage</a></li>
+			<li><a href="./TeacherListAboveAverage.jsp">TeacherListAboveAverage</a></li>
+			<li><a href="./EmployeeListAboveAverage.jsp">EmployeeListAboveAverage</a></li>
+		</ul>
 	</body>
 </html>

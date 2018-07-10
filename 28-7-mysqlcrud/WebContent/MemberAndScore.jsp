@@ -59,18 +59,16 @@
 			//리스트에 담겨있는 객체내에 각각의 타입에 맞는 변수에 주소값을 get 한다. 
 			for(int i=0; i<memberAndScore.size(); i++) {
 				MemberAndScore memberAndScoreForMethod = memberAndScore.get(i);
-				Member member = memberAndScoreForMethod.getMember();
-				MemberScore memberScore = memberAndScoreForMethod.getMemberScore();
-				RowNumber = member.getRowNumber();
+				RowNumber = memberAndScore.get(1).getMember().getRowNumber();
 				
 				//get메소드를 호출하여 해당하는 값을 불러낸다.
 		%>
-			<tr>
-				<td><%=memberScore.getMemberScoreNo() %></td>
-				<td><%=memberScore.getMemberNo() %></td>
-				<td><%=member.getMemberName() %></td>
-				<td><%=member.getMemberAge() %></td>
-				<td><%=memberScore.getScore() %></td>
+			<tr><!-- 체인을 이용해서 메소드 호출 -->
+				<td><%=memberAndScore.get(1).getMemberScore().getMemberScoreNo() %></td>
+				<td><%=memberAndScore.get(1).getMember().getMemberNo() %></td>
+				<td><%=memberAndScore.get(1).getMember().getMemberName() %></td>
+				<td><%=memberAndScore.get(1).getMember().getMemberAge() %></td>
+				<td><%=memberAndScore.get(1).getMemberScore().getScore() %></td>
 			</tr>
 		<%
 			}
