@@ -35,15 +35,15 @@
 		<form action="./InsertMemberAddrAction.jsp" method="post">
 			<table id="customers">
 				<tr>
-					<th>이름</th>
-					<td><input type="text" name="name" size="17"></td>
+					<th>회원번호</th>
+					<td><input type="text" name="no" size="17" value="<%=request.getParameter("no")%>" readonly></td>
 				</tr>
 				<tr>
 					<th>주소</th>
 					<td><input type="text" name="address" size="17"></td>
 				</tr>
 				<tr>
-					<td colspan="2"><input type="submit" value="회원가입버튼"></td>
+					<td colspan="2"><input type="submit" value="주소입력"></td>
 				</tr>
 			</table>
 		</form>

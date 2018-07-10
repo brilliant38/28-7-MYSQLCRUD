@@ -67,7 +67,7 @@
 					<td><%=member.getMemberNo()%></td>
 					<td><a href="./MemberAddrList.jsp?no=<%=member.getMemberNo()%>"><%=member.getMemberName()%></a></td>
 					<td><%=member.getMemberAge()%></td>
-					<td><a href="./InsertMemberAddrForm.jsp">주소입력</a></td>
+					<td><a href="./InsertMemberAddrForm.jsp?no=<%=member.getMemberNo()%>">주소입력</a></td>
 					<td><a href="./DeleteMemberAction.jsp?no=<%=member.getMemberNo()%>">삭제</a></td>
 					<td><a href="./UpdateMemberForm.jsp?no=<%=member.getMemberNo()%>">수정</a></td>
 					<!-- ./updateMemberForm.jsp -> updateMemberAction으로 전송-->
@@ -101,6 +101,11 @@
 			} 
 		%>
 		<br><br>
+		<div>
 		<a href = "./index.jsp">메인화면으로..</a>
+		</div>
+		<div>
+		<a href="./InsertMemberForm.jsp">회원가입</a>
+		</div>
 	</body>
 </html>

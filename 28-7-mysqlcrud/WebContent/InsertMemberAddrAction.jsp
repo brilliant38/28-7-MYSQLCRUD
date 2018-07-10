@@ -13,19 +13,17 @@
 		<% 
 			request.setCharacterEncoding("euc-kr"); //받는 값의 형식을 euc-kr로 인코딩
 			
-			String name = request.getParameter("name");
+			int no = Integer.parseInt(request.getParameter("no"));
 			String address = request.getParameter("address");
-			System.out.println(name + " : name check");
+			System.out.println(no + " : name check");
 			System.out.println(address + " : address check");
 			//전송되는 값 체크
-			Member member = new Member();
-			member.setMemberName(name);
-			
 			MemberAddr memberaddr = new MemberAddr(); // Member 객체 생성
+			memberaddr.setMemberNo(no);
 			memberaddr.setMemberAddrContent(address);
 			
 			MemberAddrDao memberaddrdao = new MemberAddrDao(); //Memberdao 객체 생성
-			memberaddrdao.insertMemberAddr(member,memberaddr);
+			memberaddrdao.insertMemberAddr(memberaddr);
 			System.out.println("DB에 회원 주소 1줄이 추가되었습니다.");
 			
 			response.sendRedirect("./MemberList.jsp"); //InsertMemberAddrForm.jsp 페이지로 리다이렉트

@@ -29,14 +29,6 @@
 					<td><input type="text" name="age" size="17"></td>
 				</tr>
 				<tr>
-					<th>주소입력</th>
-					<td><input type="text" name="address" size="17"></td>
-				</tr>
-				<tr>
-					<th>점수입력</th>
-					<td><input type="text" name="score" size="17"></td>
-				</tr>
-				<tr>
 					<td colspan="2"><input type="submit" value="회원가입버튼"></td>
 				</tr>
 			</table>

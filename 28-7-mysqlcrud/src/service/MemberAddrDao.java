@@ -86,15 +86,10 @@ public class MemberAddrDao {
 		return address;
 	}
 	
-	public void insertMemberAddr(Member member, MemberAddr memberaddr) {	//Member_addr 테이블에 1행을 추가 하기 위한 메소드의 호출. 매개변수는 member 객체의 주소값과 MemberAddr 객체의 주소값
-		
-		String addrMember = member.getMemberName();
-		String addrMemberAddr = memberaddr.getMemberAddrContent();
+	public void insertMemberAddr(MemberAddr memberaddr) {	//Member_addr 테이블에 1행을 추가 하기 위한 메소드의 호출. 매개변수는 member 객체의 주소값과 MemberAddr 객체의 주소값
 		
 		Connection connection = null;
-		PreparedStatement preparedStatementRowNumber = null;
 		PreparedStatement preparedStatementAddress = null;
-		ResultSet resultsetRowNumber = null;
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -105,25 +100,11 @@ public class MemberAddrDao {
 			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
 			System.out.println(connection + " : Connection 객체 생성 완료");
 			
-			preparedStatementRowNumber = connection.prepareStatement("SELECT member_no FROM member WHERE member_name=?");
-			preparedStatementRowNumber.setString(1, addrMember);
-			System.out.println(preparedStatementRowNumber + " : PreparedStatement 객체 생성 완료");
-			
-			resultsetRowNumber = preparedStatementRowNumber.executeQuery();	
-
-			int rowNumber = 0;
-			
-			if(resultsetRowNumber.next()) {
-				resultsetRowNumber.getInt(1);
-			}
-			//현재 전체 선택된 사람의 행 번호 조회 후 저장
-			rowNumber = resultsetRowNumber.getInt(1);
-			
 			preparedStatementAddress = connection.prepareStatement("INSERT INTO member_addr (member_no,member_addr_content) VALUES (?,?)");
-			preparedStatementAddress.setInt(1, rowNumber);
-			preparedStatementAddress.setString(2, addrMemberAddr);
+			preparedStatementAddress.setInt(1, memberaddr.getMemberNo());
+			preparedStatementAddress.setString(2, memberaddr.getMemberAddrContent());
 			
-			//저장 된 번호를 참조하여 주소 테이블에 행 추가.
+			//번호를 참조하여 주소 테이블에 행 추가.
 			preparedStatementAddress.executeUpdate();
 			
 		} catch (ClassNotFoundException e) {	//클래스 예외처리 작성
@@ -134,24 +115,6 @@ public class MemberAddrDao {
 			e.printStackTrace();
 			
 		} finally {	// 작업 완료시 종료 
-			
-			if(resultsetRowNumber != null) {	//PreparedStatement 객체 종료
-				try {
-					resultsetRowNumber.close();
-				} catch (SQLException e) {
-					System.out.println("SQL 쿼리문 작성문제");
-					e.printStackTrace();
-				}
-			}
-			
-			if(preparedStatementRowNumber != null) {	//PreparedStatement 객체 종료
-				try {
-					preparedStatementRowNumber.close();
-				} catch (SQLException e) {
-					System.out.println("SQL 쿼리문 작성문제");
-					e.printStackTrace();
-				}
-			}
 			
 			if(preparedStatementAddress != null) {	//PreparedStatement 객체 종료
 				try {

@@ -9,6 +9,154 @@ import java.util.ArrayList;
 
 public class EmployeeDao {
 	
+	
+	public Employee updateEmployeeList(int EmployeeNo) {
+		Employee employee = new Employee();
+		
+		Connection connection = null;
+		PreparedStatement preparedstatementUpdateForSelect = null;
+		ResultSet resultsetUpdateForSelect = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");	//Database 연결
+			
+			String dataBaseAddress = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
+			String dataBaseID = "root";
+			String DataBasePW = "java0000";
+			System.out.println(dataBaseAddress + " : dataBaseAddress");
+			
+			connection = DriverManager.getConnection(dataBaseAddress, dataBaseID, DataBasePW);
+			System.out.println(connection + " : 01 connection");
+			
+			preparedstatementUpdateForSelect = connection.prepareStatement("select employee_no, employee_name, employee_age from employee where employee_no=?"); //변수에 저장된 쿼리문 입력
+			preparedstatementUpdateForSelect.setInt(1, EmployeeNo);
+			System.out.println(preparedstatementUpdateForSelect + " : 02 preparedstatementUpdateForSelect");
+			
+			resultsetUpdateForSelect = preparedstatementUpdateForSelect.executeQuery();
+			
+			while(resultsetUpdateForSelect.next()) {
+				employee.setEmployeeNo(resultsetUpdateForSelect.getInt("employee_no"));
+				employee.setEmployeeName(resultsetUpdateForSelect.getString("employee_name"));
+				employee.setEmployeeAge(resultsetUpdateForSelect.getInt("employee_age"));
+			}
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("클래스 파일을 찾을 수 없습니다.");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("쿼리문장이 잘못 되었습니다.");
+			e.printStackTrace();
+		} finally {
+			try {
+				resultsetUpdateForSelect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				preparedstatementUpdateForSelect.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return employee;
+	}
+	
+	public void updateEmployee(Employee employee) {
+		
+		Connection connection = null;
+		PreparedStatement preparedStatementUpdateEmployee = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");	//Database 연결
+			
+			String dataBaseAddress = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
+			String dataBaseID = "root";
+			String DataBasePW = "java0000";
+			System.out.println(dataBaseAddress + " : dataBaseAddress");
+			
+			connection = DriverManager.getConnection(dataBaseAddress, dataBaseID, DataBasePW);
+			System.out.println(connection + " : 01 connection");
+			
+			preparedStatementUpdateEmployee = connection.prepareStatement("UPDATE employee SET employee_name = ?, employee_age = ? where employee_no = ?"); //변수에 저장된 쿼리문 입력
+			preparedStatementUpdateEmployee.setString(1, employee.getEmployeeName());
+			preparedStatementUpdateEmployee.setInt(2, employee.getEmployeeAge());
+			preparedStatementUpdateEmployee.setInt(3, employee.getEmployeeNo());
+			System.out.println(preparedStatementUpdateEmployee + " : 02 preparedStatementUpdateEmployee");
+			
+			preparedStatementUpdateEmployee.executeUpdate();
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("클래스 파일을 찾을 수 없습니다.");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("쿼리문장이 잘못 되었습니다.");
+			e.printStackTrace();
+		} finally {
+			try {
+				preparedStatementUpdateEmployee.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+	
+	public void deleteEmployee(int employeeNo) {
+		Connection connection = null;
+		PreparedStatement preparedstatementDeleteEmployee = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");	//Database 연결
+			
+			String dataBaseAddress = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
+			String dataBaseID = "root";
+			String DataBasePW = "java0000";
+			System.out.println(dataBaseAddress + " : dataBaseAddress");
+			
+			connection = DriverManager.getConnection(dataBaseAddress, dataBaseID, DataBasePW);
+			System.out.println(connection + " : 01 connection");
+			
+			preparedstatementDeleteEmployee = connection.prepareStatement("delete from employee where employee_no = ?"); //변수에 저장된 쿼리문 입력
+			preparedstatementDeleteEmployee.setInt(1, employeeNo);
+			System.out.println(preparedstatementDeleteEmployee + " : 02 preparedstatementDeleteEmployee");
+			
+			preparedstatementDeleteEmployee.executeUpdate();
+		
+		} catch (ClassNotFoundException e) {
+			System.out.println("클래스 파일을 찾을 수 없습니다.");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("쿼리문장이 잘못 되었습니다.");
+			e.printStackTrace();
+		} finally {
+			try {
+				preparedstatementDeleteEmployee.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		
+	}
+	
 	public ArrayList<Employee> selectEmployeeByPage(int currentPage, int pagePerRow) {
 		
 		ArrayList<Employee> List = new ArrayList<>();
