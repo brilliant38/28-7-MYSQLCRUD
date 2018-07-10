@@ -47,7 +47,7 @@ public class StudentDao {
 			if (end > pagePerRow-1) {
 				end = pagePerRow;
 			}
-			pstmt2 = conn.prepareStatement( "SELECT student_no, studnet_name, studnet_age FROM student ORDER BY student_no LIMIT ?,?");
+			pstmt2 = conn.prepareStatement( "SELECT student_no, student_name, student_age FROM student ORDER BY student_no asc LIMIT ?,?");
 			pstmt2.setInt(1, startRow);
 			pstmt2.setInt(2, pagePerRow);
 			
@@ -58,6 +58,9 @@ public class StudentDao {
 				student.setStudent_no(rs2.getInt(1));
 				student.setStudent_name(rs2.getString(2));
 				student.setStudent_age(rs2.getInt(3));
+				
+				student.setRowNumber(rowNumber);
+				List.add(student);
 			}
 			
 		}catch (Exception e) {
@@ -68,7 +71,65 @@ public class StudentDao {
 		
 	// TODO: handle exception
 }
-	
+	public ArrayList<Student> updateForSelectMember(int student_no) {
+		ArrayList<Student> list = new ArrayList<Student>();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");	//Database 연결
+			
+			String dataBaseAddress = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
+			String dataBaseID = "root";
+			String DataBasePW = "java0000";
+			System.out.println(dataBaseAddress + " : dataBaseAddress");
+			
+			conn = DriverManager.getConnection(dataBaseAddress, dataBaseID, DataBasePW);
+			System.out.println(conn + " : 01 connection");
+			
+			pstmt = conn.prepareStatement("select student_no, student_name, student_age from student where student_no=?"); //변수에 저장된 쿼리문 입력
+			pstmt.setInt(1, student_no);
+			System.out.println(pstmt + " : 02 preparedstatementUpdateForSelect");
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Student student = new Student();
+				student.setStudent_no(rs.getInt("student_no"));
+				student.setStudent_name(rs.getString("student_name"));
+				student.setStudent_age(rs.getInt("student_age"));
+				list.add(student);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("클래스 파일을 찾을 수 없습니다.");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("쿼리문장이 잘못 되었습니다.");
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return list;
+	}
 	
 	public void updateStudent(Student student) {
 		System.out.println(01 + "<-update 확인");

@@ -25,7 +25,7 @@
 					StudentAddrDao dao = new StudentAddrDao();
 					dao.insertStudent(Stu);
 					
-					response.sendRedirect("./InsertStudentForm.jsp");
+					response.sendRedirect("./StudentList.jsp");
 			
 			
 			%>	

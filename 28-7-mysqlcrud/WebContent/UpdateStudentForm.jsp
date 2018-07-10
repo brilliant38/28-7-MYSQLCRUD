@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -10,36 +11,29 @@
 </head>
 <body>
 <%
-String send_id = request.getParameter("send_id");
-System.out.println(send_id + "<---send_id");
-int dbno = student.get
-
-
-
-
-
-
-StudentDao dao = new StudentDao();
-Student Stu = dao.updateStudent(send_id);
-System.out.println(Stu+"<--s");
-
-int dbno = Stu.getStudent_no();
-String dbname = Stu.getStudent_name();
-int dbage = Stu.getStudent_age();
+	int student_no = Integer.parseInt(request.getParameter("student_no"));
+	System.out.println(student_no + "<---student");
+	
+	int Student_no = Integer.parseInt(request.getParameter("no"));
+	
+	StudentDao dao = new StudentDao();
+	ArrayList<Student> stu = dao.updateForSelectMember(student_no);
+	System.out.println(stu+"<--s");
+	
 %>
-<form action="<%= request.getContextPath() %>/mupdate/m_update_pro.jsp" method="post">
+<form action="./UpdateStudentAction.jsp" method="post">
 <table border="1">
 <tr>
 	<td>번호(no)</td>
-	<td><input type="text" name="m_id" size="20" value="<%= dbno %>" readonly></td>
+	<td><input type="text" name="s_id" size="20" value="<%= stu.get(0).getStudent_no() %>" readonly></td>
 <tr>
 <tr>
 	<td>이름(name)</td>
-	<td><input type="text" name="m_pw" size="20" value="<%= dbname %>"></td>
+	<td><input type="text" name="s_name" size="20" value="<%= stu.get(0).getStudent_name() %>"></td>
 <tr>
 <tr>
 	<td>나이(age)</td>
-	<td><input type="text" name="m_level" size="20" value="<%= dbage %>"></td>
+	<td><input type="text" name="s_age" size="20" value="<%= stu.get(0).getStudent_age() %>"></td>
 <tr>
 <tr>
 	<td colspan="4"><input type="submit" value="학생수정버튼"></td>

@@ -1,5 +1,5 @@
 <!-- 28기 구해성 -->
-<%@ page language="java" contentType="text/html; charset=EUC-KR"pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import = "service.StudentDao" %>
 <%@ page import = "service.Student" %>
 <%@page import="java.util.ArrayList"%>
@@ -33,29 +33,34 @@
 	int pagePerRow = 5;
 	
 	Student student = new Student();
-	
+	StudentDao rownumber = new StudentDao();
 	StudentDao studentdao = new StudentDao();
-	ArrayList<Student> list = studentdao.selectStudent(currentPage, pagePerRow);
-	
-	for(int i=0; i<list.size(); i++) {
-		student = list.get(i);
+	ArrayList<Student> List = studentdao.selectStudent(currentPage, pagePerRow);
+	System.out.println( rownumber + "<- list 확인");
+	System.out.println( student + "<- student 확인");
+	System.out.println( studentdao + "<- studentdao확인");
+	for(int i=0; i< List.size(); i++) {
+		student =  List.get(i);
 %>
 	<tr>
-		<td><%=student.getStudent_no() %></td>
-		<td><a href="./StudentList.jsp?no=<%=student.getStudent_no() %>"><%=student.getStudent_name() %></a></td>
+		<td><%=student.getStudent_no() %></td> 
+		<td><%=student.getStudent_name()%></td>
 		<td><%=student.getStudent_age()%></td>
 		<td><a href="./InsertStudentAddrForm.jsp">주소입력</a></td>
-		<td><a href="./DeleteStudentAction.jsp?no=<%=student.getStudent_no()%>">삭제</a></td>
-		<td><a href="./UpdateStudentForm.jsp?no=<%=student.getStudent_no()%>">수정</a></td>
+		<td><a href="./DeleteStudentAction.jsp?no=<%=student.getStudent_no()%>">삭제칸</a></td>
+		<td><a href="./UpdateStudentForm.jsp?no=<%=student.getStudent_no()%>">수정칸</a></td>
+		<td></td>
+		<td></td>
 		</tr>
 		<%
 		}
 		%>	
 		</table>
-		<form>
+		<form action="./StudentAndScore.jsp" method="post">
 			<div>
 				이름 :
-				<input type="text" name="searchWord">
+				<input type="text" name="student_name">
+				<button type="submit">회원검색</button>
 			</div>
 		</form>
 		<%
@@ -64,14 +69,14 @@
 			<a href="./StudentList.jsp?currentPage=<%=currentPage-1%>">이전</a> <!-- 이전 페이지 버튼 클릭시 "currentPage"변수로 currentPage-1의 값을 전송 --> 
 		<%
 			}
-			int lastPage = (student.get()-1) / pagePerRow; // rowNumber-1의 값과 페이지당 행의 수와의 몫이 마지막 페이지의 넘버.
+			int lastPage = (List.get(0).getRowNumber()-1) / pagePerRow; // rowNumber-1의 값과 페이지당 행의 수와의 몫이 마지막 페이지의 넘버.
 			
-			if ((student.getRownumber()-1) % pagePerRow !=0) { // rowNumber-1의 값과 페이지당 행의 수와의 나머지가 1이 아닐때
+			if ((List.get(0).getRowNumber()-1) % pagePerRow !=0) { // rowNumber-1의 값과 페이지당 행의 수와의 나머지가 1이 아닐때
 				lastPage++;
 			}
 			if(currentPage<lastPage) { //현재 페이지 넘버가 마지막 페이지 넘버보다 작아졌을때만 실행.
 		%>
-			<a href="./Member_List.jsp?currentPage=<%=currentPage+1%>">다음</a> <!-- 다음 페이지 버튼 클릭시 "currentPage"변수로 currentPage+1의 값을 전송 -->
+			<a href="./StudentList.jsp?currentPage=<%=currentPage+1%>">다음</a> <!-- 다음 페이지 버튼 클릭시 "currentPage"변수로 currentPage+1의 값을 전송 -->
 		<%
 			} 
 		%>

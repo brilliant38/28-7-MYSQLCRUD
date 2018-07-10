@@ -4,6 +4,7 @@ public class Student {
 	private int student_no;
 	private String student_name;
 	private int student_age;
+	private int rowNumber;
 	public int getStudent_no() {
 		return student_no;
 	}
@@ -22,7 +23,13 @@ public class Student {
 	public void setStudent_age(int student_age) {
 		this.student_age = student_age;
 	}
-}	// 깨짐 확인용...
-
+	public int getRowNumber() {
+		return rowNumber;
+	}
+	public void setRowNumber(int rowNumber) {
+		this.rowNumber = rowNumber;
+	}
 	
+
+}
 
