@@ -5,7 +5,7 @@ package service;
 
 public class TeacherAddr {
 
-	private int teacherAddrNo;
+	private int teacherAddrNo;	
 	private int teacherNo;
 	private String teacherAddrContent;
 	
