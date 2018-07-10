@@ -25,10 +25,10 @@
 			memberaddr.setMemberAddrContent(address);
 			
 			MemberAddrDao memberaddrdao = new MemberAddrDao(); //Memberdao 객체 생성
-			int result = memberaddrdao.insertMemberAddr(member,memberaddr);
+			memberaddrdao.insertMemberAddr(member,memberaddr);
 			System.out.println("DB에 회원 주소 1줄이 추가되었습니다.");
 			
-			response.sendRedirect("./InsertMemberAddrForm.jsp"); //InsertMemberAddrForm.jsp 페이지로 리다이렉트
+			response.sendRedirect("./MemberList.jsp"); //InsertMemberAddrForm.jsp 페이지로 리다이렉트
 		%>
 	</body>
 </html>

@@ -183,7 +183,7 @@ public class MemberDao {
 		 * JDBC API SELECT의 결과물은 ResultSet이므로 JDBC API를 JSP 페이지에서 사용하지 않기 위해 배열(ArrayList<Member>)로 타입을 전환시킨다.
 		 * 
 		 */
-		ArrayList<Member> List = new ArrayList<>();
+		ArrayList<Member> list = new ArrayList<>();
 		Connection connection = null;
 		PreparedStatement preparedstatementRowNumber = null;
 		PreparedStatement preparedstatementPagePerRow = null;
@@ -239,7 +239,7 @@ public class MemberDao {
 				member.setMemberName(resultsetPagePerRow.getString(2));;
 				member.setMemberAge(resultsetPagePerRow.getInt(3));;
 				member.setRowNumber(rowNumber);
-				List.add(member);
+				list.add(member);
 			}
 			
 		} catch (ClassNotFoundException e) {
@@ -277,7 +277,7 @@ public class MemberDao {
 			
 		}
 		
-		return List; // list 최대 pagePerRow~1
+		return list; // list 최대 pagePerRow~1
 	}
 	
 	

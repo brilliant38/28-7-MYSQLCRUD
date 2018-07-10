@@ -6,20 +6,34 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 		<title>InsertMemberForm</title>
 		<style>
-			table {
-				width: 200px;
-				border: 1px solid #444444;
-				border-collapse: collapse;
+			#customers {
+			    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+			    border-collapse: collapse;
+			    width: 500px;
 			}
-			th, td {
-				border: 1px solid #444444;
+			
+			#customers td, #customers th {
+			    border: 1px solid #ddd;
+			    padding: 8px;
+			}
+			
+			#customers tr:nth-child(even){background-color: #f2f2f2;}
+			
+			#customers tr:hover {background-color: #ddd;}
+			
+			#customers th {
+			    padding-top: 12px;
+			    padding-bottom: 12px;
+			    text-align: left;
+			    background-color: #4CAF50;
+			    color: white;
 			}
 		</style>
 	</head>
 	<body>
 		<h3>주소 입력</h3>
 		<form action="./InsertMemberAddrAction.jsp" method="post">
-			<table>
+			<table id="customers">
 				<tr>
 					<th>이름</th>
 					<td><input type="text" name="name" size="17"></td>

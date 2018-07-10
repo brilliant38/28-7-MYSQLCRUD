@@ -9,19 +9,32 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 		<title>memberList</title>
 		<style>
-			table {
-				width: 300px;
-				border: 1px solid #444444;
-				border-collapse: collapse;
-				text-align:center;
+			#customers {
+			    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+			    border-collapse: collapse;
+			    width: 500px;
 			}
-			th, td {
-				border: 1px solid #444444;
+			
+			#customers td, #customers th {
+			    border: 1px solid #ddd;
+			    padding: 8px;
+			}
+			
+			#customers tr:nth-child(even){background-color: #f2f2f2;}
+			
+			#customers tr:hover {background-color: #ddd;}
+			
+			#customers th {
+			    padding-top: 12px;
+			    padding-bottom: 12px;
+			    text-align: left;
+			    background-color: #4CAF50;
+			    color: white;
 			}
 		</style>
 	</head>
 	<body>
-		<table>
+		<table id="customers">
 			<tr>
 				<th>no</th>
 				<th>name</th>
@@ -45,7 +58,7 @@
 			ArrayList<Member> list = memberDao.selectMemberByPage(currentPage, pagePerRow);
 			System.out.println(list + " : 01 list check");
 			
-			member = list.get(1);
+			member = list.get(0);
 			
 			for(int i=0; i<list.size(); i++) {
 				member = list.get(i);
@@ -87,6 +100,7 @@
 		<%
 			} 
 		%>
-		
+		<br><br>
+		<a href = "./index.jsp">메인화면으로..</a>
 	</body>
 </html>

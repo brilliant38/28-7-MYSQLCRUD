@@ -32,6 +32,7 @@ public class MemberAddrDao {
 			preparedStatementAddress.setInt(1, memberNo);
 			
 			resultsetAddress = preparedStatementAddress.executeQuery();
+			System.out.println(resultsetAddress + " : resultsetAddress 객체 생성 완료");
 			
 			while(resultsetAddress.next()) {
 				//주소를 저장해줄 객체 생성
@@ -85,7 +86,7 @@ public class MemberAddrDao {
 		return address;
 	}
 	
-	public int insertMemberAddr(Member member, MemberAddr memberaddr) {	//Member_addr 테이블에 1행을 추가 하기 위한 메소드의 호출. 매개변수는 member 객체의 주소값과 MemberAddr 객체의 주소값
+	public void insertMemberAddr(Member member, MemberAddr memberaddr) {	//Member_addr 테이블에 1행을 추가 하기 위한 메소드의 호출. 매개변수는 member 객체의 주소값과 MemberAddr 객체의 주소값
 		
 		String addrMember = member.getMemberName();
 		String addrMemberAddr = memberaddr.getMemberAddrContent();
@@ -170,7 +171,5 @@ public class MemberAddrDao {
 				}
 			}
 		}
-		//리턴 값이 필요없으므로 0을 리턴하여 종료
-		return 0;
 	}
 }

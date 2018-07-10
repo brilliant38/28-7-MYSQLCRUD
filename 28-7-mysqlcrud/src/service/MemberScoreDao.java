@@ -130,12 +130,12 @@ public class MemberScoreDao {
 			System.out.println(end + " : 06 end");
 			
 			preparedStatement = connection.prepareStatement(selectMemberListAboveAverageSql);
-			
 			preparedStatement.setInt(1, startRow);
 			preparedStatement.setInt(2, pagePerRow);
 			System.out.println(preparedStatement + " : 07 preparedStatement 객체 생성 완료");
 			
 			resultSet = preparedStatement.executeQuery();
+			System.out.println(resultSet + " : 08 resultSet");
 			
 			while(resultSet.next()) {
 				Member member = new Member();
@@ -153,29 +153,27 @@ public class MemberScoreDao {
 				list.add(memberAndScore);
 			}
 			
-		} catch (Exception e){
+		} catch (ClassNotFoundException e) {
+			System.out.println("클래스 파일을 찾을 수 없습니다.");
 			e.printStackTrace();
-			
+		} catch (SQLException e) {
+			System.out.println("쿼리문장이 잘못 되었습니다.");
+			e.printStackTrace();
 		} finally {
 			
 			try {
 				resultSet.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 			try {
 				preparedStatement.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 			try {
 				connection.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			

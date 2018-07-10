@@ -13,19 +13,32 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 		<title>memberAndScore</title>
 		<style>
-			table {
-				width: 300px;
-				border: 1px solid #444444;
-				border-collapse: collapse;
-				text-align:center;
+			#customers {
+			    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+			    border-collapse: collapse;
+			    width: 500px;
 			}
-			th, td {
-				border: 1px solid #444444;
+			
+			#customers td, #customers th {
+			    border: 1px solid #ddd;
+			    padding: 8px;
+			}
+			
+			#customers tr:nth-child(even){background-color: #f2f2f2;}
+			
+			#customers tr:hover {background-color: #ddd;}
+			
+			#customers th {
+			    padding-top: 12px;
+			    padding-bottom: 12px;
+			    text-align: left;
+			    background-color: #4CAF50;
+			    color: white;
 			}
 		</style>
 	</head>
 	<body>
-		<table>
+		<table id="customers">
 			<tr>
 				<th>점수번호</th>
 				<th>회원번호</th>
@@ -40,7 +53,7 @@
 			if(request.getParameter("currentPage") != null) { //다음을 클릭 했을때 참조값을 넘기지 않으면 null로 처리한다.
 				currentPage = Integer.parseInt(request.getParameter("currentPage")); // String 타입으로 넘어온 "currentPage" 변수의 타입을 int로 변환하여 저장한다.
 			}    
-	
+			
 			int pagePerRow = 5;//페이지당 표시할 행의 수를 정한다.
 			
 			int RowNumber = 0;//전체 행의 수를 저장할 변수를 만든다.

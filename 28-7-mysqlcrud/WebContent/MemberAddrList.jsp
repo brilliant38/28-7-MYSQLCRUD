@@ -9,19 +9,32 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 		<title>MemberAddrList</title>
 		<style>
-			table {
-				width: 300px;
-				border: 1px solid #444444;
-				border-collapse: collapse;
-				text-align:center;
+			#customers {
+			    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+			    border-collapse: collapse;
+			    width: 500px;
 			}
-			th, td {
-				border: 1px solid #444444;
+			
+			#customers td, #customers th {
+			    border: 1px solid #ddd;
+			    padding: 8px;
+			}
+			
+			#customers tr:nth-child(even){background-color: #f2f2f2;}
+			
+			#customers tr:hover {background-color: #ddd;}
+			
+			#customers th {
+			    padding-top: 12px;
+			    padding-bottom: 12px;
+			    text-align: left;
+			    background-color: #4CAF50;
+			    color: white;
 			}
 		</style>
 	</head>
 	<body>
-		<table>
+		<table id="customers">
 			<tr>
 				<th>주소</th>
 			</tr>
@@ -29,14 +42,13 @@
 	        request.setCharacterEncoding("euc-kr");
 			
 			int memberNo = Integer.parseInt(request.getParameter("no"));
-			
+						
 			MemberAddr memberaddr = new MemberAddr();
 			
 			MemberAddrDao memberAddrDao = new MemberAddrDao();
 			ArrayList<MemberAddr> list = memberAddrDao.selectMemberAddrByPage(memberNo);
 			System.out.println(list + " : 01 list check");
 			
-			memberaddr = list.get(1);
 			
 			for(int i=0; i<list.size(); i++) {
 				memberaddr = list.get(i);
