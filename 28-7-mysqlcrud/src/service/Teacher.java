@@ -1,5 +1,5 @@
 //*2018-07-03 김준영*//
-
+	
 package service;//패키지명
 
 
@@ -9,7 +9,7 @@ public class Teacher {
 	private int teacherNo; //teacher의 번호
 	private String teacherName; //teacher의 이름
 	private int teacherAge; //teacher의 나이
-	private int rowNumber =0;
+	
 	//해당 클래스 내에서만 사용하기 위해서 변수를 private을 사용하여 만들어 줍니다.
 	
 	
@@ -32,12 +32,6 @@ public class Teacher {
 	public void setTeacherAge(int teacherAge) {
 		this.teacherAge = teacherAge; //매개변수 teacherAge에 담겨있는 값을 전역변수 teacherAge에 대입합니다.
 	}
-	public int getRowNumber() {
-		return rowNumber;
-	}
-	public void setRowNumber(int rowNumber) {
-		this.rowNumber = rowNumber;
-	}
-	
+
 	
 }

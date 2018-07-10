@@ -2,6 +2,18 @@ package service;
 
 public class StudentAndScore {
 	private Student student;
-	private StudentScore studnetScore;
+	private StudentScore studentScore;
+	public Student getStudent() {
+		return student;
+	}
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+	public StudentScore getStudentScore() {
+		return studentScore;
+	}
+	public void setStudentScore(StudentScore studentScore) {
+		this.studentScore = studentScore;
+	}
 
 }
