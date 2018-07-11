@@ -7,7 +7,7 @@
 		<title>Index</title>
 	</head>
 	<body>
-		<h1>index.jsp</h1>
+		<h1>index</h1>
 		<ul>
 			<li><a href="./MemberList.jsp">MemberList</a></li>
 			<li><a href="./Studentlist.jsp">StudentList</a></li>

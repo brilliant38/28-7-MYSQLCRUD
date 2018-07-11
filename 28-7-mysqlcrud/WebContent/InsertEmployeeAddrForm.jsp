@@ -40,7 +40,7 @@
 					<td><input type="text" name="address" size="17"></td>
 				</tr>
 				<tr>
-					<td><input type="submit" value="직원가입버튼">
+					<td><input type="submit" value="주소입력버튼">
 				</tr>
 			</table>
 		</form>
