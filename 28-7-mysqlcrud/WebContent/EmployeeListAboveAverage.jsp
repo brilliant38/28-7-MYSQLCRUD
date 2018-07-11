@@ -1,3 +1,4 @@
+<!-- 2018-07-11 이광재 -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import = "service.EmployeeScoreDao" %>
 <%@ page import = "service.EmployeeAndScore" %>
@@ -80,13 +81,13 @@
 		<%
 			}
 			// 마지막 페이지의 값은 고정. ex) 행의 갯수가 53개일때 페이지당 보여줄 행의 갯수가 5개라면 마지막 페이지의 숫자는 
-			int lastPage = list.get(0).getEmployee().getRowNumber() / pagePerRow ; 
+			int lastPage = ((list.get(0).getEmployee().getRowNumber() - 1) / pagePerRow) + 1 ; 
 			System.out.println(lastPage + ": 마지막 페이지의 숫자");
 			
 			if (list.get(0).getEmployee().getRowNumber() % pagePerRow != 0) {
 				lastPage++;
 			}
-			if(currentPage < lastPage) {
+			if(currentPage<lastPage) {
 		%>
 				<a href="./EmployeeListAboveAverage.jsp?currentPage=<%=currentPage+1 %>">다음</a>
 		<%		

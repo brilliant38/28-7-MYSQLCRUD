@@ -137,7 +137,7 @@ public class EmployeeScoreDao {
 		ResultSet resultsetScore = null;
 		ResultSet resultsetRowNumber = null;
 		String selectEmployeeAndScoredSql = "SELECT es.employee_score_no, es.employee_no, e.employee_name, e.employee_age, es.score FROM employee_score es INNER JOIN employee e ON es.employee_no = e.employee_no ORDER BY es.employee_score_no ASC LIMIT ?,?";
-		String rowNumberSql = "SELECT count(*) FROM employee";
+		String rowNumberSql = "SELECT count(score) FROM employee_score WHERE score >= (SELECT AVG(score) FROM employee_score)";
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			

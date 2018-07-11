@@ -157,6 +157,62 @@ public class EmployeeDao {
 		
 	}
 	
+	public int selectRowNumber() {
+		int RowNumber = 0;
+		
+		Connection connection = null;
+		PreparedStatement preparedstatementRowNumber = null;
+		ResultSet resultsetRowNumber = null;
+		String sqlRowNumber = "SELECT count(*) FROM employee";
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");	//Database 연결
+			
+			String dataBaseAddress = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
+			String dataBaseID = "root";
+			String DataBasePW = "java0000";
+			System.out.println(dataBaseAddress + " : dataBaseAddress");
+			
+			connection = DriverManager.getConnection(dataBaseAddress, dataBaseID, DataBasePW);
+			System.out.println(connection + " : connection called");
+			
+			preparedstatementRowNumber = connection.prepareStatement(sqlRowNumber);
+			System.out.println(preparedstatementRowNumber + " : preparedstatementRowNumber called");
+			
+			resultsetRowNumber = preparedstatementRowNumber.executeQuery();
+			
+			if(resultsetRowNumber.next()) {
+				RowNumber = resultsetRowNumber.getInt(1);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("클래스 파일을 찾을 수 없습니다.");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("쿼리문장이 잘못 되었습니다.");
+			e.printStackTrace();
+		} finally {
+			
+			try {
+				resultsetRowNumber.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				preparedstatementRowNumber.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return RowNumber;
+	}
+	
 	public ArrayList<Employee> selectEmployeeByPage(int currentPage, int pagePerRow) {
 		
 		ArrayList<Employee> List = new ArrayList<>();

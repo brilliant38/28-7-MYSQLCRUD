@@ -1,4 +1,4 @@
-<!-- 2018-07-03 이광재 -->
+<!-- 2018-07-11 이광재 -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import = "service.EmployeeDao"%>
 <%@ page import = "service.Employee" %>
@@ -46,31 +46,30 @@
 		<%
 	        
 			int currentPage = 1;
-			if(request.getParameter("currentPage") != null) { //다음을 클릭 했을때 참조값을 넘기지 않으면 null로 처리한다.
+			if(request.getParameter("currentPage") != null) { 
 				currentPage = Integer.parseInt(request.getParameter("currentPage")); // String 타입으로 넘어온 "currentPage" 변수의 타입을 int로 변환하여 저장한다.
 			}    
- 
+			
 			int pagePerRow = 5;
-			
-			
-			Employee employee = new Employee();
 			
 			EmployeeDao employeeDao = new EmployeeDao();
 			ArrayList<Employee> list = employeeDao.selectEmployeeByPage(currentPage, pagePerRow);
 			System.out.println(list + " : 01 list check");
-			employee = list.get(1);
+			
+			int rowNumber = employeeDao.selectRowNumber();
+			
 			
 			for(int i=0; i<list.size(); i++) {
-				employee = list.get(i);
+				
 		%>
 				<tr>
-					<td><%=employee.getEmployeeNo()%></td>
-					<td><a href="./EmployeeAddrList.jsp?no=<%=employee.getEmployeeNo()%>"><%=employee.getEmployeeName()%></a></td>
-					<td><%=employee.getEmployeeAge()%></td>
-					<td><a href="./InsertEmployeeAddrForm.jsp?no=<%=employee.getEmployeeNo()%>">주소입력</a></td>
-					<td><a href="./EmployeeAndScore.jsp?employeeNo=<%=employee.getEmployeeNo() %>">점수보기</a></td>
-					<td><a href="./DeleteEmployeeAction.jsp?no=<%=employee.getEmployeeNo()%>">삭제</a></td>
-					<td><a href="./UpdateEmployeeForm.jsp?no=<%=employee.getEmployeeNo()%>">수정</a></td>
+					<td><%=list.get(i).getEmployeeNo()%></td>
+					<td><a href="./EmployeeAddrList.jsp?no=<%=list.get(i).getEmployeeNo()%>"><%=list.get(i).getEmployeeName()%></a></td>
+					<td><%=list.get(i).getEmployeeAge()%></td>
+					<td><a href="./InsertEmployeeAddrForm.jsp?no=<%=list.get(i).getEmployeeNo()%>">주소입력</a></td>
+					<td><a href="./EmployeeAndScore.jsp?employeeNo=<%=list.get(i).getEmployeeNo() %>">점수보기</a></td>
+					<td><a href="./DeleteEmployeeAction.jsp?no=<%=list.get(i).getEmployeeNo()%>">삭제</a></td>
+					<td><a href="./UpdateEmployeeForm.jsp?no=<%=list.get(i).getEmployeeNo()%>">수정</a></td>
 				</tr>
 		<%
 			}
@@ -79,17 +78,34 @@
 		<%
 			if(currentPage>1) { //currentPage 값이 1보다 클때만 실행
 		%>
-			<a href="./EmployeeList.jsp?currentPage=<%=currentPage-1%>">이전</a> <!-- 이전 페이지 버튼 클릭시 "currentPage"변수로 currentPage-1의 값을 전송 --> 
+			<a href="./EmployeeList.jsp?currentPage=<%=currentPage-1%>">[이전]</a> <!-- 이전 페이지 버튼 클릭시 "currentPage"변수로 currentPage-1의 값을 전송 --> 
 		<%
 			}
-			int lastPage = (employee.getRowNumber()-1) / pagePerRow; // rowNumber-1의 값과 페이지당 행의 수와의 몫이 마지막 페이지의 넘버.
+			/*	마지막 페이지의 번호 구하기(페이지의 총 갯수는 총 행의 갯수 -1에서 페이지당 보여줄 행의 수를 나눈 몫에다가 1을 더한다.)
+				예) (총 행 갯수 (25 - 1) / 페이지당 보여줄 행의수 5 = 5) +1 = 마지막 페이지의 번호는 5 --> 행 갯수와 PPR이 딱 나누어 떨어질 때
+				예) (총 행 갯수 (27 - 1) / 페이지당 보여줄 행의수 5 = 5) +1 = 마지막 페이지의 번호는 6 --> 행 갯수와 PPR이 딱 나누어 떨어지지 않을 때
+			*/
+			int lastPage = ((rowNumber - 1) / pagePerRow) + 1 ;
+			System.out.println(rowNumber + " : rowNumber called");
+			System.out.println(pagePerRow + " : pagePerRow called");
+			System.out.println(lastPage + " : lastPage called");
 			
-			if ((employee.getRowNumber()-1) % pagePerRow !=0) { // rowNumber-1의 값과 페이지당 행의 수와의 나머지가 1이 아닐때
-				lastPage++;
-			}
-			if(currentPage<lastPage) { //현재 페이지 넘버가 마지막 페이지 넘버보다 작아졌을때만 실행.
+			/*	if ((employee.getRowNumber()-1) % pagePerRow !=0) { // rowNumber-1의 값과 페이지당 행의 수와의 나머지가 1이 아닐때
+					lastPage++;
+				}
+ 			*/
+			int pageNum = 0;
+ 			
+ 			for(int i=1; i<=lastPage; i++) {
+				
 		%>
-			<a href="./EmployeeList.jsp?currentPage=<%=currentPage+1%>">다음</a> <!-- 다음 페이지 버튼 클릭시 "currentPage"변수로 currentPage+1의 값을 전송 -->
+				<a href="./EmployeeList.jsp?currentPage=<%=i%>">[<%=i%>]</a>
+		<%
+ 			}
+ 			
+			if(currentPage<lastPage) { /* 현재 페이지 넘버가 마지막 페이지 넘버보다 작아졌을때만 실행. */
+		%>
+				<a href="./EmployeeList.jsp?currentPage=<%=currentPage+1%>">[다음]</a> <!-- 다음 페이지 버튼 클릭시 "currentPage"변수로 currentPage+1의 값을 전송 -->
 		<%
 			} 
 		%>
