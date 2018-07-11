@@ -4,7 +4,7 @@ package service;
 
 import java.util.ArrayList;
 import java.sql.*;
-import service.*;
+
 
 
 public class TeacherDao {
@@ -168,67 +168,104 @@ public class TeacherDao {
 		return teacher;
 	}
 	
+public int lastPageTeacher(int rowPerPage , String searchWord) {
+		
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+
+		int totalRow=0;
+		int lastPage=0;
+		
+		try {
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			String URL = "jdbc:mysql://localhost:3306/284db?useCode=true&characterEncoding=euckr";
+			String dbUser = "java";
+			String dbPass = "java0000";
+			String sql = "SELECT COUNT(teacher_no) FROM teacher";
+			
+			connection = DriverManager.getConnection(URL, dbUser, dbPass);
+			
+			// 검색 키워드가 없으면 전체 teacher_no의 수를 조회하고 키워드가 있으면 키워드가 들어간 조회된 결과의 teacher_no 수를 조회합니다.
+			if(searchWord.equals("")) {
+				statement = connection.prepareStatement(sql);
+			}else{
+				sql = "SELECT COUNT(teacher_no) FROM teacher WHERE teacher_name like ? ORDER BY teacher_no";
+				statement = connection.prepareStatement(sql);
+				statement.setString(1, "%"+searchWord+"%");
+
+			}
+			
+			resultSet = statement.executeQuery();
+			
+			if (resultSet.next()) {
+				totalRow=resultSet.getInt("COUNT(teacher_no)");
+			}
+			lastPage = (totalRow-1) / rowPerPage;
+			// if 조건문을 사용해 총 데이터갯수(COUNT(teacher_no))-1 을 rowPerPage로 나눈수가 0이 아닐때 마지막 페이지를 1씩 증가 시킵니다.
+			if((totalRow-1) % rowPerPage != 0) {
+				lastPage++;
+			}
+			
+		}catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally{
+			if(statement != null)try{
+				statement.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
+			if(connection != null)try{
+				connection.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
+		}
+		return lastPage;
+	} 
 	// Teacher 테이블의 특정 레코드를 삭제하는 메서드
 	// 매개변수는 교사번호를 입력받음. 특정 레코드를 가리키기 위함
 	// 리턴 데이터 타입은 없다.
-	public void deleteTeacher(int teacherNo) {
-		Connection conn = null;
-		PreparedStatement pstmtDeleteTeacher = null;
+public void deleteTeacher(int teacherNo) {
+	
+	Connection connection = null;
+	PreparedStatement statement = null;
+	
+	try {
 		
-		// teacherList.jsp로 부터 teacherNo값을 잘 전달 받았는지 테스트
-		System.out.println("teacherNo, teacherList.jsp => TeacherDao.java " + teacherNo);
+		Class.forName("com.mysql.jdbc.Driver");
 		
-		// teacher 테이블의 특정 레코드를 삭제하는 쿼리
-		String sqlDeleteTeacher = "DELETE FROM teacher WHERE teacher_no = ?";
+		String URL = "jdbc:mysql://localhost:3306/engineer?useCode=true&characterEncoding=euckr";
+		String dbUser = "java";
+		String dbPass = "java0000";
 		
-		try {
-			// mysql 드라이버 로딩
-			Class.forName("com.mysql.jdbc.Driver");
-			
-			// DB 연결 
-			String dbUrl = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
-			String dbUser = "root";
-			String dbPw = "java0000";
-			conn = DriverManager.getConnection(dbUrl,dbUser,dbPw);
+		connection = DriverManager.getConnection(URL, dbUser, dbPass);
 		
-			// 위의 쿼리 준비
-			pstmtDeleteTeacher = conn.prepareStatement(sqlDeleteTeacher);
-			
-			// ?에 값 대입
-			pstmtDeleteTeacher.setInt(1, teacherNo);
-			
-			// 위의 쿼리 실행 및 삭제된 레코드의 수 출력
-			System.out.println("삭제된 레코드의 수 : " + pstmtDeleteTeacher.executeUpdate());
-		} catch (ClassNotFoundException classException) {
-			System.out.println("DB Driver 클래스를 찾을 수 없습니다. 커넥터가 존재하는지 확인 해주세요!");
-		} catch (SQLException sqlException) {
-			System.out.println("DB와 관련된 예외가 발생하였습니다!");
-			sqlException.printStackTrace();
-		} finally {
-			// 객체를 종료하는 부분
-			if(pstmtDeleteTeacher != null) {
-				try {
-					pstmtDeleteTeacher.close();
-				} catch (SQLException sqlException){
-					System.out.println("pstmt1 객체 종료 중 예외 발생");
-					
-					// 예외가 발생한 부분을 출력해줌.
-					sqlException.printStackTrace();
-				}
-			}
-			if(conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException sqlException){
-					System.out.println("conn 객체 종료 중 예외 발생");
-					
-					// 예외가 발생한 부분을 출력해줌.
-					sqlException.printStackTrace();
-				}
-			}
+		statement = connection.prepareStatement("DELETE FROM teacher WHERE teacher_no=?");
+		statement.setInt(1, teacherNo);
+		statement.executeUpdate();
+		
+	}catch(ClassNotFoundException e) {
+		e.printStackTrace();
+	}catch(SQLException e) {
+		e.printStackTrace();
+	}finally{
+		if(statement != null)try{
+			statement.close(); 
+		}catch(SQLException ex){
+			ex.printStackTrace();
+		}
+		if(connection != null)try{
+			connection.close(); 
+		}catch(SQLException ex){
+			ex.printStackTrace();
 		}
 	}
-	
+}
 	// teacherList의 마지막 페이지를 구하기 위해 레코드의 총 갯수를 조회하는 메서드
 	// 매개변수는 검색어에 따라 총 레코드 수가 달라지기 때문에 searchValue를 입력 받음
 	// 리턴되는 데이터는 검색어에 따라 조회되는 총 레코드의 수 이다.

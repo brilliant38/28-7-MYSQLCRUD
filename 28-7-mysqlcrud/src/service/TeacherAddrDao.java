@@ -1,3 +1,4 @@
+//2018-07-10 김준영// 
 package service;
 
 import java.sql.*;
@@ -311,6 +312,53 @@ public class TeacherAddrDao {
 		}
 		// teacherAddr 객체 참조값 반환
 		return teacherAddr;
+	}
+	
+public TeacherAddr selectTeacherAddr(int teacherNo) {
+		
+		Connection connection = null;
+		PreparedStatement statement = null;
+		ResultSet resultSet = null;
+		TeacherAddr teacherAddr = new TeacherAddr();
+		
+		try {
+			
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			String URL = "jdbc:mysql://localhost:3306/284db?useCode=true&characterEncoding=euckr";
+			String dbUser = "java";
+			String dbPass = "java0000";
+			
+			connection = DriverManager.getConnection(URL, dbUser, dbPass);
+			
+			statement = connection.prepareStatement("SELECT * FROM teacheraddr WHERE teacher_no=?");
+			statement.setInt(1, teacherNo);
+			
+			resultSet = statement.executeQuery();
+			
+			if(resultSet.next()) {
+				teacherAddr.setTeacherNo(resultSet.getInt("teacher_no"));
+				teacherAddr.setTeacherAddrContent(resultSet.getString("teacher_addr_content"));
+			}
+			
+		}catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally{
+			if(statement != null)try{
+				statement.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
+			if(connection != null)try{
+				connection.close(); 
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
+		}
+		return teacherAddr;
+		
 	}
 	
 	// teacher_address 테이블에 레코드를 추가하는 메서드

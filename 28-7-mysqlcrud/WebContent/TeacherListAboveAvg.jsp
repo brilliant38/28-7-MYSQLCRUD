@@ -1,3 +1,4 @@
+<!-- 2018.07.10 김준영-->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
 <%@ page import = "service.Teacher" %>
@@ -29,7 +30,7 @@
 			<thead>
 				<tr>
 					<th>교사번호</th>
-					<th>교사 이름</th>
+					<th>교사이름</th>
 					<th>점수</th>
 				</tr>
 			</thead>

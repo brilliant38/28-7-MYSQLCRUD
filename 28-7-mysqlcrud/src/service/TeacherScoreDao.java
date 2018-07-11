@@ -1,7 +1,7 @@
+//* 2018.07.10 김준영*//
 package service;
 
 import java.sql.*;
-import service.*;
 import java.util.ArrayList;
 public class TeacherScoreDao {
 	
@@ -63,7 +63,7 @@ public ArrayList<TeacherAndScore> selectTeacherListAboveAvg(){
 	try {
 		
 		Class.forName("com.mysql.jdbc.Driver");
-		String URL = "jdbc:mysql://localhost:3306/284db?useCode=true&characterEncoding=euckr";
+		String URL = "jdbc:mysql://localhost:3306/engineer?useCode=true&characterEncoding=euckr";
 		String dbUser = "java";
 		String dbPass = "java0000";
 		
