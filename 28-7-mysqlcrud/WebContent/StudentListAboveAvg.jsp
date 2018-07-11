@@ -1,7 +1,11 @@
-<%@page import="service.StudentScoreDao"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@page import="service.StudentScoreDao"%>
+<%@page import="service.Student"%>
+<%@page import="service.StudentDao"%>
+<%@page import="service.StudentAndScore" %>
+<%@page import="java.util.ArrayList"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
@@ -10,8 +14,17 @@
 <body>
 	<h1>StudentrListAboveAvg</h1>
 	<%
+		int currentPage = 1;
+		if(request.getParameter("currentPage") != null) {
+			currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		}
+		int PagePerRow =5;
+		
+	
 		StudentScoreDao studentScoreDao = new StudentScoreDao();
-		int scoreAng = studentScoreDao.selectScoreAvg();
+		int scoreAvg = studentScoreDao.selectScoreAvg();
+		
+		ArrayList<StudentAndScore> list =  studentScoreDao.selectStudentListAboveAvg(currentPage, PagePerRow);
 	%>
 	<div>
 		평균 : <%=scoreAvg %>
@@ -26,12 +39,12 @@
 			</thead>
 		<tbody>
 			<%
-				for(int i=0; i<List.size();i++) {
+				for(int i=0; i<list.size();i++) {
 			%>
 					<tr>
-						<td><%List.get(i).getStudent().getStudentNo();%></td>
-						<td><%List.get(i).getStudent().getStudentName();%></td>
-						<td><%List.get(i).getStudentScore().getStudentage();%></td>
+						<td><%list.get(i).getStudent().getStudent_no();%></td>
+						<td><%list.get(i).getStudent().getStudent_name();%></td>
+						<td><%list.get(i).getStudentScore().getStudent_score_no();%></td>
 				<% 
 				}
 				%>

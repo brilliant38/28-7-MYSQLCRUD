@@ -11,11 +11,12 @@ public class StudentScoreDao {
 		return 0;
 		// SELECT AVG(score
 	}
-	public ArrayList<StudentAndScore> selectMemberListAboveAvg() {
+	public ArrayList<StudentAndScore> selectStudentListAboveAvg(int currentPage, int pagePerRow) {
 		ArrayList<StudentAndScore> list = new ArrayList<StudentAndScore>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		ResultSet rs2 = null;
 		String driver = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
 		String user = "root";
@@ -23,18 +24,17 @@ public class StudentScoreDao {
 		try {
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url, user, password);
-			pstmt = conn.prepareStatement("select avg(?) from student_score");
+			pstmt = conn.prepareStatement("SELECT ss.score,s.student_nameFROM student_score ss INNER JOIN student sON s.student_no = s.student_no WHERE ss.score>=(SELECT AVG(score) FROM student_score)ORDER BY ss.score ASC");
+			System.out.println(pstmt + "1st<-pstmt문장");
 			rs = pstmt.executeQuery();
 			
+			if(rs.next()) {
+				rs.getInt(1);
+			}
 			
-			/*
-			 SELECT m.member_name, ms.score
-			 FROm member_score ms INNER JOIN member m 
-			 ON ms.member_no = m.member_no
-			 WHERE ms.score >= (
-			 					SELECT AVG(score) FROM member_score;)
-			 					ORDER bu ms.
-			  */
+			int page = rs.getInt(1);
+			System.out.println(page + "2nd<-page ");
+	
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
