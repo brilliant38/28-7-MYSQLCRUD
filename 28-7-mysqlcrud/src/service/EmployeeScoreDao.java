@@ -9,14 +9,12 @@ import java.util.ArrayList;
 
 public class EmployeeScoreDao {
 	
-	public ArrayList<EmployeeAndScore> selectEmployeeAndScored(int currentPage, int pagePerRow, String searchWord) {
-		ArrayList<EmployeeAndScore> list = new ArrayList<EmployeeAndScore>();
-		
+	public ArrayList<EmployeeScore> personalScore(int employeeNo) {
+		ArrayList<EmployeeScore> list = new ArrayList<EmployeeScore>();
 		Connection connection = null;
-		PreparedStatement preparedStatementScore = null;
-		PreparedStatement preparedstatementRowNumber = null;
-		ResultSet resultsetScore = null;
-		ResultSet resultsetRowNumber = null;
+		PreparedStatement preparedstatement = null;
+		ResultSet resultset = null;
+		String personalScoreSql = "SELECT score FROM employee_score WHERE employee_no=?";
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -27,7 +25,129 @@ public class EmployeeScoreDao {
 			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
 			System.out.println(connection + " : Connection 객체 생성 완료");
 			
-			preparedstatementRowNumber = connection.prepareStatement("SELECT count(*) FROM employee"); //변수에 저장된 쿼리문 입력
+			preparedstatement = connection.prepareStatement(personalScoreSql);
+			preparedstatement.setInt(1, employeeNo);
+			
+			resultset = preparedstatement.executeQuery();
+			
+			if(resultset.next()) {
+				EmployeeScore employeeScore = new EmployeeScore();
+				employeeScore.setScore(resultset.getInt(1));
+				
+				list.add(employeeScore);
+			}
+			
+			
+		} catch (ClassNotFoundException e) {	//클래스 예외처리 작성
+			System.out.println("컴파일된 자바 클래스 파일을 찾을 수 없는 문제");
+			e.printStackTrace();
+		} catch (SQLException e) {	//쿼리문 예외처리 작성
+			System.out.println("SQL 쿼리문 작성문제");
+			e.printStackTrace();
+			
+		} catch (IndexOutOfBoundsException e) {
+			System.out.println("인덱스의 크기를 벗어났습니다.");
+			e.printStackTrace();
+		} finally {
+			
+			try {
+				resultset.close();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			try {
+				preparedstatement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		
+		return list;
+	}
+	
+	public int averageScore() {
+		int average = 0;
+		
+		Connection connection = null;
+		PreparedStatement preparedStatementaverage = null;
+		ResultSet resultsetaverage = null;
+		String averageSql = "SELECT LEFT(AVG(score),2) Average FROM employee_score";
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			String jdbcDriver = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
+			String dbUser = "root";
+			String dbPass = "java0000";
+			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
+			System.out.println(connection + " : Connection 객체 생성 완료");
+			
+			preparedStatementaverage = connection.prepareStatement(averageSql);
+			
+			resultsetaverage = preparedStatementaverage.executeQuery();
+			
+			if(resultsetaverage.next()) {
+				average = resultsetaverage.getInt(1);
+			}
+			
+			System.out.println(average + " : average called");
+			
+		} catch (ClassNotFoundException e) {	//클래스 예외처리 작성
+			System.out.println("컴파일된 자바 클래스 파일을 찾을 수 없는 문제");
+			e.printStackTrace();
+		} catch (SQLException e) {	//쿼리문 예외처리 작성
+			System.out.println("SQL 쿼리문 작성문제");
+			e.printStackTrace();
+			
+		} catch (IndexOutOfBoundsException e) {
+			System.out.println("인덱스의 크기를 벗어났습니다.");
+			e.printStackTrace();
+		} finally {
+			
+			try {
+				preparedStatementaverage.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return average;
+	}
+	
+	
+	public ArrayList<EmployeeAndScore> selectEmployeeAndScored(int currentPage, int pagePerRow, String searchWord) {
+		ArrayList<EmployeeAndScore> list = new ArrayList<EmployeeAndScore>();
+		
+		Connection connection = null;
+		PreparedStatement preparedStatementScore = null;
+		PreparedStatement preparedstatementRowNumber = null;
+		ResultSet resultsetScore = null;
+		ResultSet resultsetRowNumber = null;
+		String selectEmployeeAndScoredSql = "SELECT es.employee_score_no, es.employee_no, e.employee_name, e.employee_age, es.score FROM employee_score es INNER JOIN employee e ON es.employee_no = e.employee_no ORDER BY es.employee_score_no ASC LIMIT ?,?";
+		String rowNumberSql = "SELECT count(*) FROM employee";
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			String jdbcDriver = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
+			String dbUser = "root";
+			String dbPass = "java0000";
+			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
+			System.out.println(connection + " : Connection 객체 생성 완료");
+			
+			preparedstatementRowNumber = connection.prepareStatement(rowNumberSql); //변수에 저장된 쿼리문 입력
 			System.out.println(preparedstatementRowNumber + " : 02 preparedstatementRowNumber");
 			
 			resultsetRowNumber = preparedstatementRowNumber.executeQuery();//쿼리문 실행
@@ -51,7 +171,7 @@ public class EmployeeScoreDao {
 			System.out.println(end + " : 06 end");
 			
 			if(searchWord.equals("")) {//searchWord 변수에 공백이 넘어왔을때 동작하는 쿼리문이다.
-				preparedStatementScore = connection.prepareStatement("SELECT es.employee_score_no, es.employee_no, e.employee_name, e.employee_age, es.score FROM employee_score es INNER JOIN employee e ON es.employee_no = e.employee_no ORDER BY es.employee_score_no ASC LIMIT ?,?");
+				preparedStatementScore = connection.prepareStatement(selectEmployeeAndScoredSql);
 				preparedStatementScore.setInt(1, startRow);
 				preparedStatementScore.setInt(2, pagePerRow);
 				System.out.println(resultsetScore + " : 07 preparedStatementScore 객체 생성 완료");
@@ -68,6 +188,8 @@ public class EmployeeScoreDao {
 				resultsetScore = preparedStatementScore.executeQuery();
 			}
 			
+			//employee, employeeScore객체에 resultset 테이블에 담긴 값을 담은 뒤 employeeAndScore에 두 객체의 주소값을 담는다. 
+			//그리고 list에 employeeAndScore의 주소값을 담는것을 더 이상 행이 없을때까지 반복한다.
 			while(resultsetScore.next()) {
 				Employee employee = new Employee();
 				employee.setEmployeeName(resultsetScore.getString(3));

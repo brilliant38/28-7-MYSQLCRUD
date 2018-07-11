@@ -6,20 +6,32 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 		<title>InsertMemberForm</title>
 		<style>
-			table {
-				width: 200px;
-				border: 1px solid #444444;
-				border-collapse: collapse;
+			.zui-table {
+			    border: solid 1px #DDEEEE;
+			    border-collapse: collapse;
+			    border-spacing: 0;
+			    font: normal 13px Arial, sans-serif;
 			}
-			th, td {
-				border: 1px solid #444444;
+			.zui-table thead th {
+			    background-color: #DDEFEF;
+			    border: solid 1px #DDEEEE;
+			    color: #336B6B;
+			    padding: 10px;
+			    text-align: left;
+			    text-shadow: 1px 1px 1px #fff;
+			}
+			.zui-table tbody td {
+			    border: solid 1px #DDEEEE;
+			    color: #333;
+			    padding: 10px;
+			    text-shadow: 1px 1px 1px #fff;
 			}
 		</style>
 	</head>
 	<body>
 		<h3>회원 가입</h3>
 		<form action="./InsertMemberAction.jsp" method="post">
-			<table>
+			<table class="zui-table">
 				<tr>
 					<th>이름</th>
 					<td><input type="text" name="name" size="17"></td>

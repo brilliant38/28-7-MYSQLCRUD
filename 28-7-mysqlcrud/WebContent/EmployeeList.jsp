@@ -32,12 +32,14 @@
 		</style>
 	</head>
 	<body>
+		<h3>직원 명부</h3>
 		<table class="zui-table">
 			<tr>
 				<th>no</th>
 				<th>name</th>
 				<th>age</th>
 				<th>주소입력</th>
+				<th>점수보기</th>
 				<th>삭제</th>
 				<th>수정</th>
 			</tr>
@@ -49,6 +51,7 @@
 			}    
  
 			int pagePerRow = 5;
+			
 			
 			Employee employee = new Employee();
 			
@@ -65,6 +68,7 @@
 					<td><a href="./EmployeeAddrList.jsp?no=<%=employee.getEmployeeNo()%>"><%=employee.getEmployeeName()%></a></td>
 					<td><%=employee.getEmployeeAge()%></td>
 					<td><a href="./InsertEmployeeAddrForm.jsp?no=<%=employee.getEmployeeNo()%>">주소입력</a></td>
+					<td><a href="./EmployeeAndScore.jsp?employeeNo=<%=employee.getEmployeeNo() %>">점수보기</a></td>
 					<td><a href="./DeleteEmployeeAction.jsp?no=<%=employee.getEmployeeNo()%>">삭제</a></td>
 					<td><a href="./UpdateEmployeeForm.jsp?no=<%=employee.getEmployeeNo()%>">수정</a></td>
 				</tr>
