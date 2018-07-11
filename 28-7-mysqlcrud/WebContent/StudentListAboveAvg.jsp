@@ -20,7 +20,7 @@
 		}
 		int PagePerRow =5;
 		
-	
+		
 		StudentScoreDao studentScoreDao = new StudentScoreDao();
 		int scoreAvg = studentScoreDao.selectScoreAvg();
 		

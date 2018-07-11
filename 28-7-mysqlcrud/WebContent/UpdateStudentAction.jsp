@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import = "service.StudentDao" %>
 <%@ page import = "service.Student" %>
 <!DOCTYPE html>
@@ -14,6 +14,7 @@
 		Student student = new Student();
 		
 		student.setStudent_no(Integer.parseInt(request.getParameter("no")));
+
 		student.setStudent_name(request.getParameter("name"));
 		student.setStudent_age(Integer.parseInt(request.getParameter("age")));
 		

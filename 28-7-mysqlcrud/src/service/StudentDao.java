@@ -159,7 +159,7 @@ public class StudentDao {
 
 	
 	
-	public void StudentDelete(String Sid) {
+	public void StudentDelete(int Sno) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -175,7 +175,7 @@ public class StudentDao {
 			conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
 			pstmt = conn.prepareStatement("DELETE FROM student WHERE Student_no=?");
 			System.out.println(pstmt + "<-- pstmt 1");
-			pstmt.setString(1, Sid);
+			pstmt.setInt(1, Sno);
 			pstmt.executeUpdate();
 			pstmt.close();
 			conn.close();

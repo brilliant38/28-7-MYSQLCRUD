@@ -49,8 +49,8 @@
 		<td><a href="./InsertStudentAddrForm.jsp">주소입력</a></td>
 		<td><a href="./DeleteStudentAction.jsp?no=<%=student.getStudent_no()%>">삭제칸</a></td>
 		<td><a href="./UpdateStudentForm.jsp?no=<%=student.getStudent_no()%>">수정칸</a></td>
-		<td></td>
-		<td></td>
+		<td><a href="./StudentAndScoreList.jsp?no=<%=student.getStudent_no() %>">점수보기</a></td>
+		<td><a href="./StudentListAboveAvg.jsp?no=<%=student.getStudent_no() %>">평균</a></td>
 		</tr>
 		<%
 		}
