@@ -8,5 +8,22 @@
 </head>
 <body>
 
+
+	<h1>林家涝仿</h1>
+	
+	<form action="./InsertStudentAction.jsp" method="post">
+
+		<tr>
+		<td>切积锅龋</td>
+		<td><input type="text" name ="no" size="18" value<%=request.getParameter("no") %>"readonly></td>
+		</tr>
+		<tr>
+		<td>林家</td>
+		<td><input type="text" name="address" size="17"></td>
+		</tr>
+		<tr>
+		<td colspan="2"><input type="submit" value="林家涝仿"></td>
+		</tr>
+	</form>
 </body>
 </html>
