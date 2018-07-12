@@ -1,177 +1,138 @@
-//* 2018.07.10 김준영*//
 package service;
 
 import java.sql.*;
-import java.util.ArrayList;
+import service.*;
+
 public class TeacherScoreDao {
 	
-
-public int selectScoreAvg() {
+	// 해당 교사의 점수를 삭제하는 메서드
+	// 교사를 특정하기 위해 teacherNo 변수 안의 값을 매개변수로 입력 받는다.
+	// 리턴 데이터는 없다.
+	public void deleteTeacherScore (int teacherNo) {
+		Connection conn = null;
+		PreparedStatement pstmtDeleteTeacherScore = null;
 		
-		// SELECT AVG(score) FROM teahcer_score;
-		Connection connection = null; 
-		PreparedStatement statement = null;
-		ResultSet resultSet = null;
-		int scoreAvg = 0;
+		// teacherList.jsp로 부터 teacherNo 값을 잘 전달 받았는지 테스트
+		System.out.println("teacherNo, teacherList.jsp => TeacherScoreDao.java " + teacherNo);
 		
-		try {
-			
-			Class.forName("com.mysql.jdbc.Driver");
-			String URL = "jdbc:mysql://localhost:3306/engineer?useCode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
-			
-			connection = DriverManager.getConnection(URL, dbUser, dbPass);
-			
-			statement = connection.prepareStatement("SELECT AVG(score) FROM teacher_score");
-			
-			resultSet = statement.executeQuery();
-			
-			if(resultSet.next()) {
-				scoreAvg = resultSet.getInt("AVG(score)");
-			}
-			
-		}catch(ClassNotFoundException ex) {
-			ex.printStackTrace();
-		}catch(SQLException ex){
-			ex.printStackTrace();
-		}finally{
-			if(statement != null)try{
-				statement.close(); 
-			}catch(SQLException ex){
-				ex.printStackTrace();
-			}
-			if(connection != null)try{
-				connection.close(); 
-			}catch(SQLException ex){
-				ex.printStackTrace();
-			}
-		}
-			
-		return scoreAvg;
-	}
-
-public ArrayList<TeacherAndScore> selectTeacherListAboveAvg(){
-	
-	Connection connection = null; 
-	PreparedStatement statement = null;
-	ResultSet resultSet = null;
-	
-	ArrayList<TeacherAndScore> arrayList = new ArrayList<TeacherAndScore>();
-	String sql = "SELECT ts.score, t.teacher_name, t.teacher_no FROM teacher_score ts INNER JOIN teacher t ON ts.teacher_no = t.teacher_no WHERE ts.score>=(select avg(score) from teacher_score) Order by ts.score DESC";
-	
-	try {
-		
-		Class.forName("com.mysql.jdbc.Driver");
-		String URL = "jdbc:mysql://localhost:3306/engineer?useCode=true&characterEncoding=euckr";
-		String dbUser = "java";
-		String dbPass = "java0000";
-		
-		connection = DriverManager.getConnection(URL, dbUser, dbPass);
-		
-		statement = connection.prepareStatement(sql);
-		resultSet = statement.executeQuery();
-		
-		while(resultSet.next()) {
-			
-			Teacher teacher = new Teacher();
-			teacher.setTeacherName(resultSet.getString("t.teacher_name"));
-			teacher.setTeacherNo(resultSet.getInt("t.teacher_no"));
-			
-			TeacherScore teacherScore = new TeacherScore();
-			teacherScore.setScore(resultSet.getInt("ts.score"));
-			
-			TeacherAndScore teacherAndScore = new TeacherAndScore();
-			teacherAndScore.setTeacher(teacher);
-			teacherAndScore.setTeacherScore(teacherScore);
-			
-			arrayList.add(teacherAndScore);
-			
-		}
-		
-	}catch(ClassNotFoundException ex) {
-		ex.printStackTrace();
-	}catch(SQLException ex){
-		ex.printStackTrace();
-	}finally{
-		if(statement != null)try{
-			statement.close(); 
-		}catch(SQLException ex){
-			ex.printStackTrace();
-		}
-		if(connection != null)try{
-			connection.close(); 
-		}catch(SQLException ex){
-			ex.printStackTrace();
-		}
-	}
-	return arrayList;
-}
-public ArrayList<TeacherAndScore> selectTeacherAndScored(int teacherNo) { //score list // 
-		
-		Connection connection = null; 
-		PreparedStatement statement = null;
-		ResultSet resultSet = null;
-		
-		ArrayList<TeacherAndScore> arraylist = new ArrayList<TeacherAndScore>();
-		String sql = "SELECT ts.teacher_score_no,ts.teacher_no,t.teacher_name,t.teacher_age,ts.score FROM teacher_score ts INNER JOIN teacher t ON t.teacher_no = ts.teacher_no WHERE t.teacher_no=?";
+		// teacher_score 테이블의 특정 레코드를 삭제하는 쿼리
+		String sqlDeleteTeacherScore = "DELETE FROM teacher_score WHERE teacher_no = ?";
 		
 		try {
-			
+			// mysql 드라이버 로딩
 			Class.forName("com.mysql.jdbc.Driver");
-			String URL = "jdbc:mysql://localhost:3306/engineer?useCode=true&characterEncoding=euckr";
-			String dbUser = "java";
-			String dbPass = "java0000";
 			
-			connection = DriverManager.getConnection(URL, dbUser, dbPass);
-
-			statement = connection.prepareStatement(sql);
-			statement.setInt(1, teacherNo);
+			// DB 연결 
+			String dbUrl = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
+			String dbUser = "root";
+			String dbPw = "java0000";
+			conn = DriverManager.getConnection(dbUrl,dbUser,dbPw);
 			
-			resultSet = statement.executeQuery();
+			// 위의 쿼리 실행 준비
+			pstmtDeleteTeacherScore = conn.prepareStatement(sqlDeleteTeacherScore);
 			
-			while(resultSet.next()){
-				
-				Teacher teacher = new Teacher();
-				teacher.setTeacherName(resultSet.getString("t.teacher_name"));
-				teacher.setTeacherAge(resultSet.getInt("t.teacher_age"));
-				
-				TeacherScore teacherScore = new TeacherScore();
-				teacherScore.setTeacherNo(resultSet.getInt("ts.teacher_no"));
-				teacherScore.setScore(resultSet.getInt("ts.score"));
-				
-				TeacherAndScore teacherAndScore = new TeacherAndScore();
-				teacherAndScore.setTeacher(teacher);
-				teacherAndScore.setTeacherScore(teacherScore);
-				
-				arraylist.add(teacherAndScore);
-				
-			}
-			// Class 클래스 객체에 forName 메서드를 호출하여 드라이버 로딩시 나올수 있는 프로그램 실행중 발생하는 문제적 상황을 예외처리합니다.
-			}catch(ClassNotFoundException ex) {
-				ex.printStackTrace();
-			/* DriverManager클래스객체에 getConnection 메서드를 호출
-			Connection 클래스 타입의 connection객체참조변수에 대입하고 DB연결 및 Connection클래스 객체의 prepareStatement 메서드에 쿼리문을 대입하고 호출하여
-			statement(PreparedStatement클래스객체)에 executeUpdate 메서드로 쿼리문 실행시 나올수 있는 프로그램 실행중 발생하는 문제적 상황을 예외처리합니다.
-			 */ 
-			}catch(SQLException ex){
-				ex.printStackTrace();
-			// 드라이버로딩, DB연결, 쿼리문 작성 및 실행이 끝나거나 혹은 작동이 안되었을때 종료해주기 위해 finally를 쓰고 if조건문으로 객체참조변수의 값이 null 이 아닐시 close 메서드로 종료시킵니다.
-			// 이때도 마찬가지로 예외처리를 해줍니다.
-			}finally{
-				if(statement != null)try{
-					statement.close(); 
-				}catch(SQLException ex){
-					ex.printStackTrace();
-				}
-				if(connection != null)try{
-					connection.close(); 
-				}catch(SQLException ex){
-					ex.printStackTrace();
+			// ? 에 값 대입
+			pstmtDeleteTeacherScore.setInt(1, teacherNo);
+			
+			// 쿼리 실행 및 수정된 레코드 갯수 출력
+			System.out.println("teacher_score 테이블에서 삭제된 레코드 수 : " + pstmtDeleteTeacherScore.executeUpdate());
+	
+		} catch (ClassNotFoundException classException) {
+			System.out.println("DB Driver 클래스를 찾을 수 없습니다. 커넥터가 있는지 확인하세요!");
+		} catch (SQLException sqlException) {
+			System.out.println("DB와 관련된 예외가 발생하였습니다!");
+			sqlException.printStackTrace();
+		} finally {
+			// 객체를 종료하는 부분
+			if(pstmtDeleteTeacherScore != null) {
+				try {
+					pstmtDeleteTeacherScore.close();
+				} catch (SQLException sqlException){
+					System.out.println("pstmtInsertTeacherAddress 객체 종료 중 예외 발생");
+					
+					// 예외가 발생한 부분을 출력해줌.
+					sqlException.printStackTrace();
 				}
 			}
-			return arraylist;
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException sqlException){
+					System.out.println("conn 객체 종료 중 예외 발생");
+					
+					// 예외가 발생한 부분을 출력해줌.
+					sqlException.printStackTrace();
+				}
+			}
+		}
 	}
+	
+	// teacher_score 테이블의 특정 레코드를 수정하는 메서드
+	// 특정 레코드를 가리키고 수정내용을 입력하기위해 매개변수로 teacherScore 객체의 참조값을 입력 받음
+	// 아무것도 리턴하지 않겠다
+	public void updateTeacherScore (TeacherScore teacherScore) {
+		Connection conn = null;
+		PreparedStatement pstmtUpdateTeacherScore = null;
+		
+		// updateTeacherScore.jsp로 부터 teacherScore 객체의 참조 값을 잘 전달 받았는지 테스트
+		System.out.println("teacherScore, updateTeacherScore.jsp => TeacherScoreDao.java " + teacherScore);
+		
+		// teacher_score 테이블의 특정 레코드를 수정하는 쿼리
+		String sqlUpdateTeacherScore = "UPDATE teacher_score SET score = ? WHERE teacher_no = ?";
+		
+		try {
+			// mysql 드라이버 로딩
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			// DB 연결 
+			String dbUrl = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
+			String dbUser = "root";
+			String dbPw = "java0000";
+			conn = DriverManager.getConnection(dbUrl,dbUser,dbPw);
+			
+			// 위의 쿼리 실행 준비
+			pstmtUpdateTeacherScore = conn.prepareStatement(sqlUpdateTeacherScore);
+			
+			// ? 에 값 대입
+			pstmtUpdateTeacherScore.setInt(1,teacherScore.getScore());
+			pstmtUpdateTeacherScore.setInt(2,teacherScore.getTeacherNo());
+			
+			// 쿼리 실행 및 수정된 레코드 갯수 출력
+			System.out.println("teacher_score 테이블에서 수정된 레코드 수 : " + pstmtUpdateTeacherScore.executeUpdate());
+	
+		} catch (ClassNotFoundException classException) {
+			System.out.println("DB Driver 클래스를 찾을 수 없습니다. 커넥터가 있는지 확인하세요!");
+		} catch (SQLException sqlException) {
+			System.out.println("DB와 관련된 예외가 발생하였습니다!");
+			sqlException.printStackTrace();
+		} finally {
+			// 객체를 종료하는 부분
+			if(pstmtUpdateTeacherScore != null) {
+				try {
+					pstmtUpdateTeacherScore.close();
+				} catch (SQLException sqlException){
+					System.out.println("pstmtInsertTeacherAddress 객체 종료 중 예외 발생");
+					
+					// 예외가 발생한 부분을 출력해줌.
+					sqlException.printStackTrace();
+				}
+			}
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException sqlException){
+					System.out.println("conn 객체 종료 중 예외 발생");
+					
+					// 예외가 발생한 부분을 출력해줌.
+					sqlException.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	// 특정 교사의 teacher 테이블과 teacher_score 테이블을 조인하여 조회하는 메서드
+	// 교사를 특정하기 위해 매개변수로 교사 번호를 입력받음
+	// VO를 통해 teacherScoreList.jsp로 전달하기 위해 teacherAndTeacherScore VO를 리턴
 	public TeacherAndScore selectTeacherAndTeacherScore(int teacherNo) {
 		Connection conn = null;
 		PreparedStatement pstmtSelectTeacherAndTeacherScore = null;
@@ -182,7 +143,7 @@ public ArrayList<TeacherAndScore> selectTeacherAndScored(int teacherNo) { //scor
 		System.out.println("teacherNo, teacherScoreList.jsp => TeacherScoreDao.java " + teacherNo);
 		
 		// teacher와 teacher_score 테이블에서  WHERE 조건에 해당하는 레코드를 내부 조인하여 조회하는 쿼리 
-		String sqlSelectTeacherAndTeacherScore = "SELECT t.teacher_no,t.teacher_name,t.teacher_age,ts.score_no,ts.score FROM teacher t INNER JOIN teacher_score ts WHERE t.teacher_no = ?";
+		String sqlSelectTeacherAndTeacherScore = "SELECT t.teacher_no,t.teacher_name,ts.score FROM teacher t INNER JOIN teacher_score ts on t.teacher_no = ts.teacher_no WHERE t.teacher_no = ?";
 		
 		try {
 			// mysql 드라이버 로딩
@@ -207,11 +168,9 @@ public ArrayList<TeacherAndScore> selectTeacherAndScored(int teacherNo) { //scor
 				Teacher teacher = new Teacher();
 				teacher.setTeacherNo(rsSelectTeacherAndTeacherScore.getInt("teacher_no"));
 				teacher.setTeacherName(rsSelectTeacherAndTeacherScore.getString("teacher_name"));
-				teacher.setTeacherAge(rsSelectTeacherAndTeacherScore.getInt("teacher_age"));
 				
 				TeacherScore teacherScore = new TeacherScore();
 				
-				teacherScore.setTeacherscoreNo(rsSelectTeacherAndTeacherScore.getInt("score_no"));
 				teacherScore.setScore(rsSelectTeacherAndTeacherScore.getInt("score"));
 				
 				teacherAndTeacherScore = new TeacherAndScore();
@@ -275,7 +234,7 @@ public ArrayList<TeacherAndScore> selectTeacherAndScored(int teacherNo) { //scor
 		// teacher_address 테이블에 레코드를 추가하는 쿼리
 		String sqlInsertTeacherScore = "INSERT INTO teacher_score(teacher_no,score) VALUES(?, ?)";
 		
-		int result = 0;
+		int result = 0; 
 		
 		try {
 			// mysql 드라이버 로딩
