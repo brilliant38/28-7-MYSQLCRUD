@@ -8,9 +8,34 @@ import java.util.ArrayList;
 
 public class StudentScoreDao {
 	public int selectScoreAvg() {
+		int avg = 0;
+		Connection conn =null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String driver = "com.mysql.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
+		String user = "root";
+		String password = "java0000";
+		
+		try {
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url, user,password);
+			pstmt = conn.prepareStatement("");
+			System.out.println(pstmt + "<-1 pstmt");
+			rs= pstmt.executeQuery();
+			
+			if(rs.next()) {
+				avg
+			}
+			
+		
 		return 0;
 		// SELECT AVG(score
 	}
+	
+	
+		
+	
 	public ArrayList<StudentAndScore> selectStudentListAboveAvg(int currentPage, int pagePerRow) {
 		ArrayList<StudentAndScore> list = new ArrayList<StudentAndScore>();
 		Connection conn = null;
