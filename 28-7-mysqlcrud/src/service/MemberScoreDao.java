@@ -20,6 +20,48 @@ public class MemberScoreDao {
 	 *	3.
 	*/
 	
+
+	/*Action페이지에서 넘어온 주소값을 참조하여, Member_Score테이블에 1행의 회원번호와 점수를 추가하는 메소드.*/ 
+	public void insertMemeberScore(MemberScore memberScore) {
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String driver = "com.mysql.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
+		String databaseUser = "root";
+		String password = "java0000";
+		String insertMemeberScoreSql = "INSERT INTO member_score (member_no,score) VALUES (?,?)";
+		
+		try {
+			Class.forName(driver);
+			connection = DriverManager.getConnection(url, databaseUser, password);
+			preparedStatement = connection.prepareStatement(insertMemeberScoreSql);
+			preparedStatement.setInt(1, memberScore.getMemberNo());
+			preparedStatement.setInt(2, memberScore.getScore());
+			
+			preparedStatement.executeUpdate();
+			
+			
+		} catch (Exception e){
+			e.printStackTrace();
+			
+		} finally {
+			
+			try {
+				preparedStatement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
 	public int selectScoreAverage() {
 		int average = 0;
 		// SELECT LEFT(AVG(score),2) Average FROM member_score
@@ -182,10 +224,7 @@ public class MemberScoreDao {
 		return list;
 	}
 	
-	
-	public ArrayList<MemberAndScore> selectMemberAndScored(int currentPage, int pagePerRow, String searchWord) {
-		ArrayList<MemberAndScore> list = new ArrayList<MemberAndScore>(); 
-		
+	public ArrayList<MemberAndScore> searchMemberAndScored() {
 		Connection connection = null;
 		PreparedStatement preparedStatementScore = null;
 		PreparedStatement preparedstatementRowNumber = null;
@@ -240,29 +279,42 @@ public class MemberScoreDao {
 				
 				resultsetScore = preparedStatementScore.executeQuery();
 			}
+	}
+	
+	//회원 번호를 입력받아서 회원의 점수 테이블을 리턴해주는 메소드
+	public ArrayList<MemberScore> selectMemberAndScored(int no) {
+		ArrayList<MemberScore> list = new ArrayList<MemberScore>();
+		Connection connection = null;
+		PreparedStatement preparedStatementScore = null;
+		ResultSet resultsetScore = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
 			
-			System.out.println(resultsetScore + " : 08 resultsetScore 객체 생성 완료");
+			String jdbcDriver = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
+			String dbUser = "root";
+			String dbPass = "java0000";
+			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
+			System.out.println(connection + " : Connection 객체 생성 완료");
+			
+			preparedStatementScore = connection.prepareStatement("SELECT score FROM member_score WHERE member_no = ? ORDER BY score DESC");
+			preparedStatementScore.setInt(1, no);
+			System.out.println(resultsetScore + " : preparedStatementScore 객체 생성 완료");
+				
+			resultsetScore = preparedStatementScore.executeQuery();
+			
+			
+			System.out.println(resultsetScore + " : resultsetScore 객체 생성 완료");
 			
 			while(resultsetScore.next()) {
-				Member member = new Member();
-				
-				member.setMemberName(resultsetScore.getString(3));
-				member.setMemberAge(resultsetScore.getInt(4));
-				member.setRowNumber(rowNumber);
 				
 				MemberScore memberScore = new MemberScore();
-				memberScore.setMemberNo(resultsetScore.getInt(2));
-				memberScore.setMemberScoreNo(resultsetScore.getInt(1));
-				memberScore.setScore(resultsetScore.getInt(5));
+				memberScore.setScore(resultsetScore.getInt(1));
 				
-				MemberAndScore memberAndScore = new MemberAndScore();
-				memberAndScore.setMember(member);
-				memberAndScore.setMemberScore(memberScore);
-				
-				list.add(memberAndScore);
+				list.add(memberScore);
 			}
 			
-			System.out.println(list + " : 09 list 객체 생성 완료");
+			System.out.println(list + " : list 객체 생성 완료");
 			
 		} catch (ClassNotFoundException e) {	//클래스 예외처리 작성
 			System.out.println("컴파일된 자바 클래스 파일을 찾을 수 없는 문제");
@@ -296,8 +348,52 @@ public class MemberScoreDao {
 		return list;
 	}
 	
-	public void insertMemeberAndScored() {
-		
-	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

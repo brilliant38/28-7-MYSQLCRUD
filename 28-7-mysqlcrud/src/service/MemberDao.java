@@ -24,6 +24,86 @@ public class MemberDao {
 	 * like '%단어%'로 검색해야한다.
 	*/
 	
+	public ArrayList<Member> searchMemberList(int currentPage, int pagePerRow, String searchWord) {
+		ArrayList<Member> searchList = new ArrayList<Member>();
+		
+		Connection connection = null;
+		PreparedStatement preparedstatementRowNumber = null;
+		PreparedStatement preparedstatementSearch = null;
+		ResultSet resultsetRowNumber = null;
+		ResultSet resultsetSearch = null;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");	//Database 연결
+			
+			String dataBaseAddress = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
+			String dataBaseID = "root";
+			String DataBasePW = "java0000";
+			System.out.println(dataBaseAddress + " : dataBaseAddress");
+			
+			connection = DriverManager.getConnection(dataBaseAddress, dataBaseID, DataBasePW);
+			System.out.println(connection + " : 01 connection");
+			
+			preparedstatementRowNumber = connection.prepareStatement("SELECT count(*) FROM member"); //변수에 저장된 쿼리문 입력
+			System.out.println(preparedstatementRowNumber + " : 02 preparedstatementRowNumber");
+			
+			resultsetRowNumber = preparedstatementRowNumber.executeQuery();//쿼리문 실행
+			System.out.println(resultsetRowNumber + " : 03 resultsetRowNumber");
+			
+			if(resultsetRowNumber.next()) {
+				resultsetRowNumber.getInt(1); //총 행의 갯수 출력
+			}
+			
+			int rowNumber = resultsetRowNumber.getInt(1);
+			System.out.println(rowNumber + " : 04 rowNumber");
+			
+			int startRow = (currentPage -1) * pagePerRow; // currentPage, pagePerRow를 이용하여 구한다.
+			System.out.println(startRow + " : 05 startRow");
+			
+			int end = startRow + (pagePerRow - 1); // end값이 전체 페이지 갯수를 초과하면 페이지를 표시할 수 없으므로 예외가 출력된다.
+			if (end > pagePerRow-1) { //end의 값이 총 행의 갯수 -1 보다 크면 
+				end = pagePerRow; // end의 값을 총 행의 갯수와 같게 만든다. = 배열 초과 금지.
+			}
+			System.out.println(end + " : 06 end");
+			
+			if(searchWord.equals("")) {//searchWord 변수에 공백이 넘어왔을때 동작하는 쿼리문이다.
+				preparedstatementSearch = connection.prepareStatement("SELECT member_no,member_name,member_age FROM member ORDER BY member_no DESC LIMIT ?,?");
+				preparedstatementSearch.setInt(1, startRow);
+				preparedstatementSearch.setInt(2, pagePerRow);
+				System.out.println(preparedstatementSearch + " : 07 preparedstatementSearch 객체 생성 완료");
+				
+				resultsetSearch = preparedstatementSearch.executeQuery();
+			
+			} else {//searchWord 변수에 값이 입력되었을때 동작되는 쿼리문이다.
+				preparedstatementSearch = connection.prepareStatement("SELECT member_no,member_name,member_age FROM member WHERE member_name LIKE ? ORDER BY member_no DESC LIMIT ?,?");
+				preparedstatementSearch.setString(1, "%"+searchWord+"%");
+				preparedstatementSearch.setInt(2, startRow);
+				preparedstatementSearch.setInt(3, pagePerRow);
+				System.out.println(preparedstatementSearch + " : 07 preparedstatementSearch 객체 생성 완료");
+				
+				resultsetSearch = preparedstatementSearch.executeQuery();
+			}
+			
+			while(resultsetSearch.next()) {
+				Member member = new Member();
+				member.setMemberAge(resultsetSearch.getInt(3));
+				member.setMemberName(resultsetSearch.getString(2));
+				member.setMemberNo(resultsetSearch.getInt(1));
+				member.setRowNumber(rowNumber);
+				member.setSearchWord(searchWord);
+				searchList.add(member);
+			}
+			
+		} catch (Exception e){
+			e.printStackTrace();
+			
+		} finally {
+			
+		}
+		
+		return searchList;
+	}
+	
 	
 	public void updateMember(Member member) {
 		
