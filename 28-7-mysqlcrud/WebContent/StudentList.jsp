@@ -44,13 +44,13 @@
 %>
 	<tr>
 		<td><%=student.getStudent_no() %></td> 
-		<td><%=student.getStudent_name()%></td>
+		<td><a href="./StudentAddrList.jsp?no=<%=student.getStudent_no()%>"><%=student.getStudent_name()%></a></td>
 		<td><%=student.getStudent_age()%></td>
 		<td><a href="./InsertStudentAddrForm.jsp">주소입력</a></td>
 		<td><a href="./DeleteStudentAction.jsp?no=<%=student.getStudent_no()%>">삭제칸</a></td>
 		<td><a href="./UpdateStudentForm.jsp?no=<%=student.getStudent_no()%>">수정칸</a></td>
-		<td><a href="./StudentAndScoreList.jsp?no=<%=student.getStudent_no() %>">점수보기</a></td>
-		<td><a href="./StudentListAboveAvg.jsp?no=<%=student.getStudent_no() %>">평균</a></td>
+		<td><a href="./InsertStudentForm.jsp?no=<%=student.getStudent_no() %>">학생등륵</a></td>
+		<td><a href="./StudentAndScoreList.jsp?no=<%=student.getStudent_no() %>">점수</a></td>
 		</tr>
 		<%
 		}

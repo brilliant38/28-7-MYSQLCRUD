@@ -173,7 +173,7 @@ public class StudentDao {
 			String dbPass = "java0000"; // 드라이버 pw
 			
 			conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
-			pstmt = conn.prepareStatement("DELETE FROM student WHERE Student_no=?");
+			pstmt = conn.prepareStatement("DELETE FROM student WHERE student_no=?");
 			System.out.println(pstmt + "<-- pstmt 1");
 			pstmt.setInt(1, Sno);
 			pstmt.executeUpdate();
