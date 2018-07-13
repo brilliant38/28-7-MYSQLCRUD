@@ -8,36 +8,12 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 		<title>UpdateMemberForm</title>
-		<style>
-			#customers {
-			    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-			    border-collapse: collapse;
-			    width: 500px;
-			}
-			
-			#customers td, #customers th {
-			    border: 1px solid #ddd;
-			    padding: 8px;
-			}
-			
-			#customers tr:nth-child(even){background-color: #f2f2f2;}
-			
-			#customers tr:hover {background-color: #ddd;}
-			
-			#customers th {
-			    padding-top: 12px;
-			    padding-bottom: 12px;
-			    text-align: left;
-			    background-color: #4CAF50;
-			    color: white;
-			}
-
-		</style>
 	</head>
 	<body>
-		<h3>회원정보수정</h3>
+		<h1>Update Member</h1>
+		<br><br><br>
 		<form action="./UpdateMemberAction.jsp" method="post">
-			<table id="customers">
+			<table border="1">
 			<%
 		        request.setCharacterEncoding("euc-kr");
 				
@@ -53,29 +29,27 @@
 				
 			%>
 				<tr>
-					<th>이름</th>
-					<td><input type="text" name="name" size="17" value="<%=member.getMemberName()%>"></td>
+					<td>회원 번호 : </td>
+					<td><input type="text" name="name" value="<%=member.getMemberName()%>"></td>
 				</tr>
 				<tr>
-					<th>나이</th>
-					<td><input type="text" name="age" size="17" value="<%=member.getMemberAge()%>"></td>
+					<td>회원 이름 : </td>
+					<td><input type="text" name="age"  value="<%=member.getMemberAge()%>"></td>
+				</tr>
+				<tr>
+					<td>회원 나이 : </td>
+					<td><input type="text" name="age"  value="<%=member.getMemberAge()%>"></td>
 				</tr>
 				<tr>
 					<td colspan="2">
-						<input type="submit" value="회원정보수정">
-						<span>
-							<input type="hidden" name="no" value="<%=memberNo %>">
-						</span>
+						<input type="submit" value="수정">
+						<input type="hidden" name="no" value="<%=memberNo %>">
 					</td>
 				</tr>
 				
 			</table>
+			<br>
+				<a href="./MemberList.jsp">MemberList로 이동</a>
 		</form>
-		<!-- <form>
-			<div>
-				이름 :
-				<input type="text" name="searchWord">
-			</div>
-		</form> -->
 	</body>
 </html>

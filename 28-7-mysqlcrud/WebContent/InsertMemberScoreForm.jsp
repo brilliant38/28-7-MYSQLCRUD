@@ -8,30 +8,6 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 		<title>Insert Member Score</title>
-		<style>
-			#customers {
-			    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-			    border-collapse: collapse;
-			    width: 500px;
-			}
-			
-			#customers td, #customers th {
-			    border: 1px solid #ddd;
-			    padding: 8px;
-			}
-			
-			#customers tr:nth-child(even){background-color: #f2f2f2;}
-			
-			#customers tr:hover {background-color: #ddd;}
-			
-			#customers th {
-			    padding-top: 12px;
-			    padding-bottom: 12px;
-			    text-align: left;
-			    background-color: #4CAF50;
-			    color: white;
-			}
-		</style>
 	</head>
 	<body>
 		<%
@@ -40,7 +16,7 @@
 			
 		%>
 		<form action="./InsertMemberScoreAction.jsp" method="post">
-			<table id="customers">
+			<table border="1">
 				<tr>
 					<th>회원 번호</th>
 					<td><input type="text" name="no" value="<%=member.getMemberNo() %>" readonly></td>

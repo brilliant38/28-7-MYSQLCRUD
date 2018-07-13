@@ -8,44 +8,9 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 		<title>memberList</title>
-		<style>
-			#customers {
-			    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-			    border-collapse: collapse;
-			    width: 500px;
-			}
-			
-			#customers td, #customers th {
-			    border: 1px solid #ddd;
-			    padding: 8px;
-			}
-			
-			#customers tr:nth-child(even){background-color: #f2f2f2;}
-			
-			#customers tr:hover {background-color: #ddd;}
-			
-			#customers th {
-			    padding-top: 12px;
-			    padding-bottom: 12px;
-			    text-align: left;
-			    background-color: #4CAF50;
-			    color: white;
-			}
-		</style>
 	</head>
 	<body>
-		<h3>MemberList</h3>
-		<table id="customers">
-			<tr>
-				<th>no</th>
-				<th>name</th>
-				<th>age</th>
-				<th>주소입력</th>
-				<th>점수입력</th>
-				<th>점수확인</th>
-				<th>삭제</th>
-				<th>수정</th>
-			</tr>
+		
 		<%	
 			request.setCharacterEncoding("euc-kr");
 			int currentPage = 1;
@@ -54,6 +19,7 @@
 			}    
  
 			int pagePerRow = 5;
+			
 			
 			String searchWord = request.getParameter("searchWord");
 			System.out.println(searchWord + " : 01 searchWord check");
@@ -66,10 +32,35 @@
 			System.out.println(searchList + " : 03 searchList check");
 			
 			int RowNumber = list.get(0).getRowNumber();
+			
+			int lastPage = ((RowNumber-1) / pagePerRow) +1 ; // rowNumber-1의 값과 페이지당 행의 수와의 몫이 마지막 페이지의 넘버.
+			
 			if(searchList.size() > 0) {
 				RowNumber = searchList.get(0).getRowNumber();
 			}
-			
+		%>
+		<h1>Member List</h1>
+		<br>
+		<form action="./MemberList.jsp" method="post">
+			<div>
+				이름 :
+				<input type="text" name="searchWord">
+				<button type="submit">검색</button>
+			</div>
+		</form>
+		<table border="1">
+			<tr>
+				<th>회원 번호</th>
+				<th>회원 이름</th>
+				<th>회원 나이</th>
+				<th>주소 입력</th>
+				<th>점수 입력</th>
+				<th>점수 보기</th>
+				<th>수정</th>
+				<th>삭제</th>
+			</tr>
+			<br><br>
+		<%
 			if (searchList.size() == 0) {
 				for(int i=0; i<list.size(); i++) {
 		%>
@@ -77,11 +68,11 @@
 						<td><%=list.get(i).getMemberNo()%></td>
 						<td><a href="./MemberAddrList.jsp?no=<%=list.get(i).getMemberNo()%>"><%=list.get(i).getMemberName()%></a></td>
 						<td><%=list.get(i).getMemberAge()%></td>
-						<td><a href="./InsertMemberAddrForm.jsp?no=<%=list.get(i).getMemberNo()%>">주소입력</a></td>
-						<td><a href="./InsertMemberScoreForm.jsp?no=<%=list.get(i).getMemberNo()%>">점수입력</a></td>
-						<td><a href="./MemberAndPersonalScore.jsp?no=<%=list.get(i).getMemberNo()%>">점수확인</a></td>
-						<td><a href="./DeleteMemberAction.jsp?no=<%=list.get(i).getMemberNo()%>">삭제</a></td>
+						<td><a href="./InsertMemberAddrForm.jsp?no=<%=list.get(i).getMemberNo()%>">주소 입력</a></td>
+						<td><a href="./InsertMemberScoreForm.jsp?no=<%=list.get(i).getMemberNo()%>">점수 입력</a></td>
+						<td><a href="./MemberScoreList.jsp?no=<%=list.get(i).getMemberNo()%>">점수 보기</a></td>
 						<td><a href="./UpdateMemberForm.jsp?no=<%=list.get(i).getMemberNo()%>">수정</a></td>
+						<td><a href="./DeleteMemberAction.jsp?no=<%=list.get(i).getMemberNo()%>">삭제</a></td>
 					</tr>
 		<%
 				}
@@ -92,63 +83,40 @@
 					<td><%=searchList.get(i).getMemberNo()%></td>
 					<td><a href="./MemberAddrList.jsp?no=<%=searchList.get(i).getMemberNo()%>"><%=searchList.get(i).getMemberName()%></a></td>
 					<td><%=searchList.get(i).getMemberAge()%></td>
-					<td><a href="./InsertMemberAddrForm.jsp?no=<%=searchList.get(i).getMemberNo()%>">주소입력</a></td>
-					<td><a href="./InsertMemberScoreForm.jsp?no=<%=searchList.get(i).getMemberNo()%>">점수입력</a></td>
-					<td><a href="./MemberAndPersonalScore.jsp?no=<%=searchList.get(i).getMemberNo()%>">점수확인</a></td>
-					<td><a href="./DeleteMemberAction.jsp?no=<%=searchList.get(i).getMemberNo()%>">삭제</a></td>
+					<td><a href="./InsertMemberAddrForm.jsp?no=<%=searchList.get(i).getMemberNo()%>">주소 입력</a></td>
+					<td><a href="./InsertMemberScoreForm.jsp?no=<%=searchList.get(i).getMemberNo()%>">점수 입력</a></td>
+					<td><a href="./MemberScoreList.jsp?no=<%=searchList.get(i).getMemberNo()%>">점수 보기</a></td>
 					<td><a href="./UpdateMemberForm.jsp?no=<%=searchList.get(i).getMemberNo()%>">수정</a></td>
+					<td><a href="./DeleteMemberAction.jsp?no=<%=searchList.get(i).getMemberNo()%>">삭제</a></td>
 				</tr>
 		<%
 				}
 			}
 		%>
 		</table>
-		<form action="./MemberList.jsp" method="post">
-			<div>
-				이름 :
-				<input type="text" name="searchWord">
-				<button type="submit">회원검색</button>
-			</div>
-		</form>
+		<br>
+		<div>
+			<a href="./InsertMemberForm.jsp">Member 정보 입력</a>
+		</div>
+		<br><br>
+		<span><%=currentPage%> / <%=lastPage %></span><br><br>
 		<%
 			if(currentPage>1) { //currentPage 값이 1보다 클때만 실행
-				if(searchList.size() == 0) {
 		%>
-					<a href="./MemberList.jsp?currentPage=<%=currentPage-1%>">이전</a> <!-- 이전 페이지 버튼 클릭시 "currentPage"변수로 currentPage-1의 값을 전송 --> 
-		<%
-				} else if (searchList.size() > 0) {
-		%>
-					<a href="./MemberList.jsp?currentPage=<%=currentPage-1%>&searchWord=<%=searchList.get(0).getSearchWord()%>">이전</a> <!-- 이전 페이지 버튼 클릭시 "currentPage"변수로 currentPage-1의 값을 전송 -->
-		<%
-				}
-			}
-			int lastPage = ((RowNumber-1) / pagePerRow) +1 ; // rowNumber-1의 값과 페이지당 행의 수와의 몫이 마지막 페이지의 넘버.
-			
-			
-			for(int i=1; i<lastPage; i++) {
-		%>
-				<a href="./MemberList.jsp?currentPage=<%=i%>">[<%=i%>]</a>
+				<a href="./MemberList.jsp?currentPage=<%=currentPage-1%>">이전</a> <!-- 이전 페이지 버튼 클릭시 "currentPage"변수로 currentPage-1의 값을 전송 --> 
 		<%
 			}
-			
+		
 			if(currentPage<lastPage) { //현재 페이지 넘버가 마지막 페이지 넘버보다 작아졌을때만 실행.
-				if(searchList.size() == 0) {
 		%>
-					<a href="./MemberList.jsp?currentPage=<%=currentPage+1%>">다음</a> <!-- 다음 페이지 버튼 클릭시 "currentPage"변수로 currentPage+1의 값을 전송 -->
+				<a href="./MemberList.jsp?currentPage=<%=currentPage+1%>">다음</a> <!-- 다음 페이지 버튼 클릭시 "currentPage"변수로 currentPage+1의 값을 전송 -->
 		<%
-				} else if (searchList.size() > 0) {
-		%>
-					<a href="./MemberList.jsp?currentPage=<%=currentPage+1%>&searchWord=<%=searchList.get(0).getSearchWord()%>">다음</a> <!-- 다음 페이지 버튼 클릭시 "currentPage"변수로 currentPage+1의 값을 전송 -->
-		<%
-				}
 			}
 		%>
-		<br><br>
+		<br>
 		<div>
-		<a href = "./index.jsp">메인화면으로..</a>
+		<a href = "./index.jsp">메인화면</a>
 		</div>
-		<div>
-		<a href="./InsertMemberForm.jsp">회원가입</a>
-		</div>
+		
 	</body>
 </html>

@@ -7,59 +7,40 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-		<title>MemberAddrList</title>
-		<style>
-			#customers {
-			    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-			    border-collapse: collapse;
-			    width: 500px;
-			}
-			
-			#customers td, #customers th {
-			    border: 1px solid #ddd;
-			    padding: 8px;
-			}
-			
-			#customers tr:nth-child(even){background-color: #f2f2f2;}
-			
-			#customers tr:hover {background-color: #ddd;}
-			
-			#customers th {
-			    padding-top: 12px;
-			    padding-bottom: 12px;
-			    text-align: left;
-			    background-color: #4CAF50;
-			    color: white;
-			}
-		</style>
+		<title>Member Address List</title>
 	</head>
 	<body>
-		<h3>직원 주소</h3>
-		<table id="customers">
+		<h1>Member Address</h1>
+		<br><br><br>
+		<table border="1">
 			<tr>
-				<th>주소</th>
+				<th>주소 번호</th>
+				<th>회원 번호</th>
+				<th>회원 주소</th>
 			</tr>
 		<%
 	        request.setCharacterEncoding("euc-kr");
 			
 			int memberNo = Integer.parseInt(request.getParameter("no"));
-						
+			
 			MemberAddr memberaddr = new MemberAddr();
 			
 			MemberAddrDao memberAddrDao = new MemberAddrDao();
-			ArrayList<MemberAddr> list = memberAddrDao.selectMemberAddrByPage(memberNo);
-			System.out.println(list + " : 01 list check");
+			ArrayList<MemberAddr> arrayListMemberAddr = memberAddrDao.selectMemberAddrByPage(memberNo);
+			System.out.println(arrayListMemberAddr + " : 01 arrayListMemberAddr check");
 			
-			
-			for(int i=0; i<list.size(); i++) {
-				memberaddr = list.get(i);
+			for(int i=0; i<arrayListMemberAddr.size(); i++) {
 		%>
 				<tr>
-					<td><%=memberaddr.getMemberAddrContent()%></td>
+					<td><%=arrayListMemberAddr.get(i).getMemberAddrNo()%></td>
+					<td><%=arrayListMemberAddr.get(i).getMemberNo()%></td>
+					<td><%=arrayListMemberAddr.get(i).getMemberAddrContent()%></td>
 				</tr>
 		<%
 			}
 		%>
 		</table>
+		<br>
+		<a href = "./MemberList.jsp">목록으로</a>
 	</body>
 </html>

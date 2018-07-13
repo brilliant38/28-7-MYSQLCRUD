@@ -6,33 +6,9 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 		<title>MemberListAboveAverage</title>
-		<style>
-			#customers {
-			    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-			    border-collapse: collapse;
-			    width: 500px;
-			}
-			
-			#customers td, #customers th {
-			    border: 1px solid #ddd;
-			    padding: 8px;
-			}
-			
-			#customers tr:nth-child(even){background-color: #f2f2f2;}
-			
-			#customers tr:hover {background-color: #ddd;}
-			
-			#customers th {
-			    padding-top: 12px;
-			    padding-bottom: 12px;
-			    text-align: left;
-			    background-color: #4CAF50;
-			    color: white;
-			}
-		</style>
 	</head>
 	<body>
-		<h3>MemberListAboveAverage</h3>
+		<h3>Member List Above Average</h3>
 		<%
 			
 			int currentPage = 1;
@@ -51,7 +27,7 @@
 		<div>
 			평균 : <%=scoreAverage %>
 		</div>
-		<table id="customers">
+		<table border="1">
 			<thead>
 				<th>Member_No</th>
 				<th>Member_Name</th>

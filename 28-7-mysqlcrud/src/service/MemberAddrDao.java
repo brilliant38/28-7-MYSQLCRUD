@@ -28,7 +28,7 @@ public class MemberAddrDao {
 			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
 			System.out.println(connection + " : Connection 객체 생성 완료");
 			
-			preparedStatementAddress = connection.prepareStatement("SELECT member_addr_content FROM member_addr WHERE member_no=?");
+			preparedStatementAddress = connection.prepareStatement("SELECT member_addr_no,member_no,member_addr_content FROM member_addr WHERE member_no=?");
 			preparedStatementAddress.setInt(1, memberNo);
 			
 			resultsetAddress = preparedStatementAddress.executeQuery();
@@ -38,7 +38,9 @@ public class MemberAddrDao {
 				//주소를 저장해줄 객체 생성
 				MemberAddr memberaddr = new MemberAddr();
 				//객체에 주소값 저장
-				memberaddr.setMemberAddrContent(resultsetAddress.getString(1));
+				memberaddr.setMemberAddrNo(resultsetAddress.getInt(1));
+				memberaddr.setMemberNo(resultsetAddress.getInt(2));
+				memberaddr.setMemberAddrContent(resultsetAddress.getString(3));
 				//객체의 주소값을 리스트의 마지막 인덱스에 추가
 				address.add(memberaddr);
 			}
