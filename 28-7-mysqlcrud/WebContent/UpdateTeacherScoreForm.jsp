@@ -23,7 +23,7 @@
 					TeacherAndScore teacherAndTeacherScore = teacherScoreDao.selectTeacherAndTeacherScore(teacherNo);
 				%>
 				<h1>Update TeacherScore</h1>
-				<form action="<%= request.getContextPath() %>./UpdateTeacherScoreAction.jsp" method="post"> 
+				<form action="<%= request.getContextPath() %>./teacher/UpdateTeacherScoreAction.jsp" method="post"> 
 					<table border="1">
 						<tr>
 							<td>교사 번호 : </td>

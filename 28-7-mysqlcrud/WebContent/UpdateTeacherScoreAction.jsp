@@ -36,7 +36,7 @@
 			teacherScoreDao.updateTeacherScore(teacherScore);
 			
 			// 페이지 이동
-			response.sendRedirect(request.getContextPath() + "./TeacherScoreList.jsp?teacherNo=" + teacherNo);
+			response.sendRedirect(request.getContextPath() + "./teacher/TeacherScoreList.jsp?teacherNo=" + teacherNo);
 		%>
 	</body>
 </html>

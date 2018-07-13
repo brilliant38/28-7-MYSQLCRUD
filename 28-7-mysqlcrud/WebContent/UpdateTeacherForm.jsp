@@ -26,7 +26,7 @@
 				%>
 				<h1>Update Teacher</h1>
 				<br><br><br>
-				<form action="<%= request.getContextPath() %>./UpdateTeacherAction.jsp" method="post"> 
+				<form action="<%= request.getContextPath() %>./teacher/UpdateTeacherAction.jsp" method="post"> 
 					<table border="1">
 						<tr>
 							<td>교사 번호 : </td>
@@ -46,7 +46,7 @@
 					</table>
 				</form>
 				<br>
-				<a href="<%= request.getContextPath() %>./TeacherList.jsp">teacherList로 이동</a>
+				<a href="<%= request.getContextPath() %>./teacher/TeacherList.jsp">teacherList로 이동</a>
 			</div>
 		</div>
 

@@ -33,7 +33,7 @@
 					</table>
 				</form>
 				<br>
-				<a href="<%= request.getContextPath() %>./TeacherList.jsp">teacherList로 이동</a>
+				<a href="<%= request.getContextPath() %>./teacher/TeacherList.jsp">teacherList로 이동</a>
 	
 	</body>
 </html>

@@ -33,7 +33,7 @@
 			teacherScoreDao.insertTeacherScore(teacherScore);
 			
 			// 페이지 이동
-			response.sendRedirect(request.getContextPath() + "./TeacherList.jsp");
+			response.sendRedirect(request.getContextPath() + "./teacher/TeacherList.jsp");
 		%>
 	</body>
 </html>

@@ -33,7 +33,7 @@
 			teacherAddrDao.insertTeacherAddress(teacherAddr);
 			
 			// 페이지 이동
-			response.sendRedirect(request.getContextPath() + "./TeacherAddrList.jsp?teacherNo=" + teacherNo);
+			response.sendRedirect(request.getContextPath() + "./teacher/TeacherAddrList.jsp?teacherNo=" + teacherNo);
 		%>
 	</body>
 </html>

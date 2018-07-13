@@ -28,7 +28,7 @@
 		// TeacherDao 클래스 객체내에 insertTeacher 메서드에 teacher 객체참조변수에 담긴 주소값을 대입해서 호출합니다.
 		teacherDao.insertTeacher(teacher);
 		
-		response.sendRedirect(request.getContextPath()+"./TeacherList.jsp");
+		response.sendRedirect(request.getContextPath()+"./teacher/TeacherList.jsp");
 	 %>
 	</body>
 </html>

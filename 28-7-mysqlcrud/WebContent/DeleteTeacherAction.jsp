@@ -17,7 +17,7 @@
 			TeacherDao teacherdao = new TeacherDao();
 			teacherdao.deleteTeacher(teacherNo); // 회원번호 입력하여 회원 정보 행 1줄 삭제 메소드 호출
 			
-			response.sendRedirect("./TeacherList.jsp"); // List 페이지로 복귀
+			response.sendRedirect("./teacher/TeacherList.jsp"); // List 페이지로 복귀
 		%>
 	</body>
 </html>
