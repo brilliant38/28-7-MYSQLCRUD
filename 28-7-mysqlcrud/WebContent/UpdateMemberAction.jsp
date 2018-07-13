@@ -21,7 +21,7 @@
 			MemberDao memberdao = new MemberDao();
 			memberdao.updateMember(member);
 			
-			response.sendRedirect("./MemberList.jsp");
+			response.sendRedirect("./member/MemberList.jsp");
 		%>
 	</body>
 </html>

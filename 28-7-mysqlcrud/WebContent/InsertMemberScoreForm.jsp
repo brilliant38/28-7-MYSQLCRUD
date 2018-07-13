@@ -17,7 +17,7 @@
 			member.setMemberNo(Integer.parseInt(request.getParameter("no")));
 			
 		%>
-		<form action="./InsertMemberScoreAction.jsp" method="post">
+		<form action="./member/InsertMemberScoreAction.jsp" method="post">
 			<table border="1">
 				<tr>
 					<td>점수 : </td>
@@ -32,6 +32,6 @@
 			</table>
 		</form>
 		<br>
-		<a href="./MemberList.jsp">MemberList로 이동</a>
+		<a href="./member/MemberList.jsp">MemberList로 이동</a>
 	</body>
 </html>

@@ -16,7 +16,7 @@
 			MemberDao memberdao = new MemberDao();
 			memberdao.deleteMember(memberNo); // 회원번호 입력하여 회원 정보 행 1줄 삭제 메소드 호출
 			
-			response.sendRedirect("./MemberList.jsp"); // List 페이지로 복귀
+			response.sendRedirect("./member/MemberList.jsp"); // List 페이지로 복귀
 		%>
 	</body>
 </html>

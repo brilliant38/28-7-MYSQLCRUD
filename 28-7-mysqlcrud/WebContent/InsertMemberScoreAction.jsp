@@ -17,7 +17,7 @@
 			MemberScoreDao memberScoreDao = new MemberScoreDao();
 			memberScoreDao.insertMemberScore(memberScore);
 			
-			response.sendRedirect("./MemberList.jsp");
+			response.sendRedirect("./member/MemberList.jsp");
 		%>
 	</body>
 </html>

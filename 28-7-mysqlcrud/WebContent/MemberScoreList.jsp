@@ -39,6 +39,6 @@ MemberList.jsp에서 회원 번호를 받아 개인 점수를 출력하는 페이지. -->
 			</tr>
 		</table>
 		<br>
-		<a href="./MemberList.jsp">목록으로</a>
+		<a href="./member/MemberList.jsp">목록으로</a>
 	</body>
 </html>

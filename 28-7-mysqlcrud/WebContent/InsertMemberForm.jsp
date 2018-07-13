@@ -7,7 +7,7 @@
 		<title>InsertMemberForm</title>
 	</head>
 	<body>
-		<form action="./InsertMemberAction.jsp" method="post">
+		<form action="./member/InsertMemberAction.jsp" method="post">
 			<h2>Member 정보 입력</h2>
 			<div>
 				이름 : <input type="text" name="name" size="10px"> 

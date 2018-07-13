@@ -56,7 +56,7 @@
 		<%
 			if(currentPage > 1) {
 		%>
-				<a href="./EmployeeListAboveAverage.jsp?currentPage=<%=currentPage-1 %>">이전</a>
+				<a href="./employee/EmployeeListAboveAverage.jsp?currentPage=<%=currentPage-1 %>">이전</a>
 		<%
 			}
 			// 마지막 페이지의 값은 고정. ex) 행의 갯수가 53개일때 페이지당 보여줄 행의 갯수가 5개라면 마지막 페이지의 숫자는 
@@ -68,7 +68,7 @@
 			}
 			if(currentPage<lastPage) {
 		%>
-				<a href="./EmployeeListAboveAverage.jsp?currentPage=<%=currentPage+1 %>">다음</a>
+				<a href="./employee/EmployeeListAboveAverage.jsp?currentPage=<%=currentPage+1 %>">다음</a>
 		<%		
 			}
 		%>

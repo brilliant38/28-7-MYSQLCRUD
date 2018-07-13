@@ -18,7 +18,7 @@
 	</head>
 	<body>
 		<h3>회원 가입</h3>
-		<form action="./InsertEmployeeAction.jsp" method="post">
+		<form action="./employee/InsertEmployeeAction.jsp" method="post">
 			<table>
 				<tr>
 					<th>이름</th>

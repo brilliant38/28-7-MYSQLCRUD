@@ -41,7 +41,7 @@
 		%>
 		<h1>Member List</h1>
 		<br>
-		<form action="./MemberList.jsp" method="post">
+		<form action="./member/MemberList.jsp" method="post">
 			<div>
 				이름 :
 				<input type="text" name="searchWord">
@@ -67,13 +67,13 @@
 		%>
 					<tr>
 						<td><%=list.get(i).getMemberNo()%></td>
-						<td><a href="./MemberAddrList.jsp?no=<%=list.get(i).getMemberNo()%>"><%=list.get(i).getMemberName()%></a></td>
+						<td><a href="./member/MemberAddrList.jsp?no=<%=list.get(i).getMemberNo()%>"><%=list.get(i).getMemberName()%></a></td>
 						<td><%=list.get(i).getMemberAge()%></td>
-						<td><a href="./InsertMemberAddrForm.jsp?no=<%=list.get(i).getMemberNo()%>">주소 입력</a></td>
-						<td><a href="./InsertMemberScoreForm.jsp?no=<%=list.get(i).getMemberNo()%>">점수 입력</a></td>
-						<td><a href="./MemberScoreList.jsp?no=<%=list.get(i).getMemberNo()%>">점수 보기</a></td>
-						<td><a href="./UpdateMemberForm.jsp?no=<%=list.get(i).getMemberNo()%>">수정</a></td>
-						<td><a href="./DeleteMemberAction.jsp?no=<%=list.get(i).getMemberNo()%>">삭제</a></td>
+						<td><a href="./member/InsertMemberAddrForm.jsp?no=<%=list.get(i).getMemberNo()%>">주소 입력</a></td>
+						<td><a href="./member/InsertMemberScoreForm.jsp?no=<%=list.get(i).getMemberNo()%>">점수 입력</a></td>
+						<td><a href="./member/MemberScoreList.jsp?no=<%=list.get(i).getMemberNo()%>">점수 보기</a></td>
+						<td><a href="./member/UpdateMemberForm.jsp?no=<%=list.get(i).getMemberNo()%>">수정</a></td>
+						<td><a href="./member/DeleteMemberAction.jsp?no=<%=list.get(i).getMemberNo()%>">삭제</a></td>
 					</tr>
 		<%
 				}
@@ -82,13 +82,13 @@
 		%>
 					<tr>
 						<td><%=searchList.get(p).getMemberNo()%></td>
-						<td><a href="./MemberAddrList.jsp?no=<%=searchList.get(p).getMemberNo()%>"><%=searchList.get(p).getMemberName()%></a></td>
+						<td><a href="./member/MemberAddrList.jsp?no=<%=searchList.get(p).getMemberNo()%>"><%=searchList.get(p).getMemberName()%></a></td>
 						<td><%=searchList.get(p).getMemberAge()%></td>
-						<td><a href="./InsertMemberAddrForm.jsp?no=<%=searchList.get(p).getMemberNo()%>">주소 입력</a></td>
-						<td><a href="./InsertMemberScoreForm.jsp?no=<%=searchList.get(p).getMemberNo()%>">점수 입력</a></td>
-						<td><a href="./MemberScoreList.jsp?no=<%=searchList.get(p).getMemberNo()%>">점수 보기</a></td>
-						<td><a href="./UpdateMemberForm.jsp?no=<%=searchList.get(p).getMemberNo()%>">수정</a></td>
-						<td><a href="./DeleteMemberAction.jsp?no=<%=searchList.get(p).getMemberNo()%>">삭제</a></td>
+						<td><a href="./member/InsertMemberAddrForm.jsp?no=<%=searchList.get(p).getMemberNo()%>">주소 입력</a></td>
+						<td><a href="./member/InsertMemberScoreForm.jsp?no=<%=searchList.get(p).getMemberNo()%>">점수 입력</a></td>
+						<td><a href="./member/MemberScoreList.jsp?no=<%=searchList.get(p).getMemberNo()%>">점수 보기</a></td>
+						<td><a href="./member/UpdateMemberForm.jsp?no=<%=searchList.get(p).getMemberNo()%>">수정</a></td>
+						<td><a href="./member/DeleteMemberAction.jsp?no=<%=searchList.get(p).getMemberNo()%>">삭제</a></td>
 					</tr>
 		<%
 				}
@@ -97,20 +97,20 @@
 		</table>
 		<br>
 		<div>
-			<a href="./InsertMemberForm.jsp">Member 정보 입력</a>
+			<a href="./member/InsertMemberForm.jsp">Member 정보 입력</a>
 		</div>
 		<br><br>
 		<span><%=currentPage%> / <%=lastPage %></span><br><br>
 		<%
 			if(currentPage>1) { //currentPage 값이 1보다 클때만 실행
 		%>
-				<a href="./MemberList.jsp?currentPage=<%=currentPage-1%>">이전</a> <!-- 이전 페이지 버튼 클릭시 "currentPage"변수로 currentPage-1의 값을 전송 --> 
+				<a href="./member/MemberList.jsp?currentPage=<%=currentPage-1%>">이전</a> <!-- 이전 페이지 버튼 클릭시 "currentPage"변수로 currentPage-1의 값을 전송 --> 
 		<%
 			}
 		
 			if(currentPage<lastPage) { //현재 페이지 넘버가 마지막 페이지 넘버보다 작아졌을때만 실행.
 		%>
-				<a href="./MemberList.jsp?currentPage=<%=currentPage+1%>">다음</a> <!-- 다음 페이지 버튼 클릭시 "currentPage"변수로 currentPage+1의 값을 전송 -->
+				<a href="./member/MemberList.jsp?currentPage=<%=currentPage+1%>">다음</a> <!-- 다음 페이지 버튼 클릭시 "currentPage"변수로 currentPage+1의 값을 전송 -->
 		<%
 			}
 		%>

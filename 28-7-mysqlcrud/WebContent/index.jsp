@@ -9,16 +9,16 @@
 	<body>
 		<h1>index</h1>
 		<ul>
-			<li><a href="./MemberList.jsp">MemberList</a></li>
-			<li><a href="./Studentlist.jsp">StudentList</a></li>
-			<li><a href="./TeacherList.jsp">TeacherList</a></li>
-			<li><a href="./EmployeeList.jsp">EmployeeList</a></li>
+			<li><a href="./member/MemberList.jsp">MemberList</a></li>
+			<li><a href="./student/Studentlist.jsp">StudentList</a></li>
+			<li><a href="./teacher/TeacherList.jsp">TeacherList</a></li>
+			<li><a href="./employee/EmployeeList.jsp">EmployeeList</a></li>
 		</ul>
 		<ul>
-			<li><a href="./MemberListAboveAverage.jsp">MemberListAboveAverage</a></li>
-			<li><a href="./StudentListAboveAverage.jsp">StudentListAboveAverage</a></li>
-			<li><a href="./TeacherListAboveAverage.jsp">TeacherListAboveAverage</a></li>
-			<li><a href="./EmployeeListAboveAverage.jsp">EmployeeListAboveAverage</a></li>
+			<li><a href="./member/MemberListAboveAverage.jsp">MemberListAboveAverage</a></li>
+			<li><a href="./student/StudentListAboveAverage.jsp">StudentListAboveAverage</a></li>
+			<li><a href="./teacher/TeacherListAboveAverage.jsp">TeacherListAboveAverage</a></li>
+			<li><a href="./employee/EmployeeListAboveAverage.jsp">EmployeeListAboveAverage</a></li>
 		</ul>
 	</body>
 </html>

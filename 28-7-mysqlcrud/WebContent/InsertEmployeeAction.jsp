@@ -26,7 +26,7 @@
 			int result = employeedao.insertEmployee(employee);
 			System.out.println("DB에 고용인 한명이 추가되었습니다.");
 			
-			response.sendRedirect("./InsertEmployeeForm.jsp"); //memberInsert.jsp 페이지로 리다이렉트
+			response.sendRedirect("./employee/InsertEmployeeForm.jsp"); //memberInsert.jsp 페이지로 리다이렉트
 		%>
 	</body>
 </html>

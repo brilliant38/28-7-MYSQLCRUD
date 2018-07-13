@@ -13,7 +13,7 @@
 			employee.setEmployeeNo(Integer.parseInt(request.getParameter("no")));
 			
 		%>
-		<form action="./InsertEmployeeScoreAction.jsp" method="post">
+		<form action="./employee/InsertEmployeeScoreAction.jsp" method="post">
 			<table border="1">
 				<tr>
 					<td>Á¡¼ö : </td>

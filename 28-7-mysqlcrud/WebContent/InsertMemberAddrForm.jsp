@@ -9,7 +9,7 @@
 	<body>
 		<h1>Member Address</h1>
 		<br><br><br>
-		<form action="./InsertMemberAddrAction.jsp" method="post">
+		<form action="./member/InsertMemberAddrAction.jsp" method="post">
 			<table border="1">
 				<tr>
 					<td>주소 : </td>
@@ -24,7 +24,7 @@
 			</table>
 		</form>
 		<br>
-		<a href="./MemberList.jsp">MemberList로 이동
+		<a href="./member/MemberList.jsp">MemberList로 이동
 		</a>
 	</body>
 </html>

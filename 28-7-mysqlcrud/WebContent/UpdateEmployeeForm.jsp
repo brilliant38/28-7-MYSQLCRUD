@@ -48,6 +48,6 @@
 			</table>
 		</form>
 		<br>
-		<a href="./EmployeeList.jsp">EmployeeList로 이동</a>
+		<a href="./employee/EmployeeList.jsp">EmployeeList로 이동</a>
 	</body>
 </html>
