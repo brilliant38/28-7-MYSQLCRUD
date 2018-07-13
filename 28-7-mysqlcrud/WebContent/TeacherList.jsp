@@ -55,7 +55,7 @@
 				%>
 				<h1>Teacher List</h1><br>
 				<div id="buttonForSearch">
-					<form action="<%= request.getContextPath() %>/TeacherList.jsp" method="post">
+					<form action="<%= request.getContextPath() %>./TeacherList.jsp" method="post">
 						<label>이름 :  
 							<input type="text" name="searchValue">
 						</label>
@@ -92,7 +92,7 @@
 									// 해당 교사의 주소 정보가 존재한다면
 									if(arrayListTeacherAddr.size() != 0){
 								%>
-										<td><a title="주소 보기" class="buttonToShowAddress" href="<%= request.getContextPath() %>/TeacherAddrList.jsp?teacherNo=<%= teacher.getTeacherNo() %>"><%= teacher.getTeacherName() %></a></td>
+										<td><a title="주소 보기" class="buttonToShowAddress" href="<%= request.getContextPath() %>./TeacherAddrList.jsp?teacherNo=<%= teacher.getTeacherNo() %>"><%= teacher.getTeacherName() %></a></td>
 								<%	
 									// 그 외
 									} else {
@@ -102,25 +102,25 @@
 									}
 								%>
 								<td><%= teacher.getTeacherAge() %></td>
-								<td><a title="주소 추가" class="buttonToInsertAddress" href="<%= request.getContextPath() %>/InsertTeacherAddrForm.jsp?teacherNo=<%= teacher.getTeacherNo() %>">주소 추가</a></td>
+								<td><a title="주소 추가" class="buttonToInsertAddress" href="<%= request.getContextPath() %>./InsertTeacherAddrForm.jsp?teacherNo=<%= teacher.getTeacherNo() %>">주소 추가</a></td>
 								<%
 									// 해당하는 교사의 점수가 존재하지 않는다면 점수 입력 버튼을 보여줌
 									TeacherAndScore teacherAndTeacherScore = teacherScoreDao.selectTeacherAndTeacherScore(teacher.getTeacherNo());
 									if(teacherAndTeacherScore == null){
 								%>
-										<td><a title="점수 입력" class="buttonToInsertScore" href="<%= request.getContextPath() %>/InsertTeacherScoreForm.jsp?teacherNo=<%= teacher.getTeacherNo() %>"> 점수입력</a></td>
+										<td><a title="점수 입력" class="buttonToInsertScore" href="<%= request.getContextPath() %>./InsertTeacherScoreForm.jsp?teacherNo=<%= teacher.getTeacherNo() %>"> 점수입력</a></td>
 										<td></td>
 								<%
 							
 									} else {
 								%>
 										<td></td>
-										<td><a title="점수 확인" class="buttonToShowScore" href="<%= request.getContextPath() %>/TeacherScoreList.jsp?teacherNo=<%= teacher.getTeacherNo() %>">점수보기</a></td>
+										<td><a title="점수 확인" class="buttonToShowScore" href="<%= request.getContextPath() %>./TeacherScoreList.jsp?teacherNo=<%= teacher.getTeacherNo() %>">점수보기</a></td>
 								<%
 									}
 								%>
-								<td><a title="교사 정보 수정" class="buttonToUpdateEntity" href="<%= request.getContextPath() %>/UpdateTeacherForm.jsp?teacherNo=<%= teacher.getTeacherNo() %>">수정</a></td>
-								<td><a title="교사 정보 삭제" class="buttonToDeleteEntity" href="<%= request.getContextPath() %>/DeleteTeacherAction.jsp?teacherNo=<%= teacher.getTeacherNo() %>">삭제</a></td>
+								<td><a title="교사 정보 수정" class="buttonToUpdateEntity" href="<%= request.getContextPath() %>./UpdateTeacherForm.jsp?teacherNo=<%= teacher.getTeacherNo() %>">수정</a></td>
+								<td><a title="교사 정보 삭제" class="buttonToDeleteEntity" href="<%= request.getContextPath() %>./DeleteTeacherAction.jsp?teacherNo=<%= teacher.getTeacherNo() %>">삭제</a></td>
 							</tr>
 					<% 
 						}
@@ -128,7 +128,7 @@
 				</table>
 				<br>
 				<div id="addEntity">
-					<a id="buttonToAddEntity" href="<%= request.getContextPath() %>/InsertTeacherForm.jsp">TeaCher 정보 입력</a>
+					<a id="buttonToAddEntity" href="<%= request.getContextPath() %>./InsertTeacherForm.jsp">TeaCher 정보 입력</a>
 				</div>
 				<br><br>
 				<div id="page">
@@ -139,7 +139,7 @@
 					<%
 						if(currentPage > 1){
 					%>
-							<a id="buttonToPrevPage" href="<%= request.getContextPath() %>/TeacherList.jsp?currentPage=<%= currentPage - 1 %>&searchValue=<%= searchValue %>">&lt; 이전</a>
+							<a id="buttonToPrevPage" href="<%= request.getContextPath() %>./TeacherList.jsp?currentPage=<%= currentPage - 1 %>&searchValue=<%= searchValue %>">&lt; 이전</a>
 					<%
 						} else {
 					%>
@@ -148,7 +148,7 @@
 						}
 						if(currentPage < lastPage){
 					%>
-							<a id="buttonToNextPage" href="<%= request.getContextPath() %>/TeacherList.jsp?currentPage=<%= currentPage + 1 %>&searchValue=<%= searchValue %>">다음 &gt;</a>
+							<a id="buttonToNextPage" href="<%= request.getContextPath() %>./TeacherList.jsp?currentPage=<%= currentPage + 1 %>&searchValue=<%= searchValue %>">다음 &gt;</a>
 					<%
 						} else {
 					%>

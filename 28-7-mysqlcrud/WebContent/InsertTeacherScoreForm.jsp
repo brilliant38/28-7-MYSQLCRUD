@@ -12,7 +12,7 @@
 	
 				<h1>Teacher Score</h1>
 				<br><br><br>
-				<form action="<%= request.getContextPath() %>/InsertTeacherScoreAction.jsp" method="post">
+				<form action="<%= request.getContextPath() %>./InsertTeacherScoreAction.jsp" method="post">
 					<table border="1">
 						<tr>
 							<td>점수 : </td>
@@ -32,7 +32,7 @@
 					</table>
 				</form>
 				<br>
-				<a href="<%= request.getContextPath() %>/TeacherList.jsp">teacherList로 이동</a>
+				<a href="<%= request.getContextPath() %>./TeacherList.jsp">teacherList로 이동</a>
 	
 		
 	</body>
