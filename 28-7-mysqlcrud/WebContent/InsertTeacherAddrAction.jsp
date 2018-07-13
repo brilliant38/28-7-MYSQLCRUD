@@ -1,5 +1,5 @@
 <!-- 2018.07.09 ±èÁØ¿µ-->
-<!-- InsertTeacher AddrAction -->
+
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import="service.*" %>
 <!DOCTYPE html>

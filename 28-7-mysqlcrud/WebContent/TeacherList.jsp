@@ -1,5 +1,5 @@
 <!-- 2018.07.10 김준영-->
-<!-- TeacherList  --> 
+
 
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import="java.util.ArrayList" %>
@@ -156,7 +156,9 @@
 					<%
 						}
 					%>
+				
 				</div>
+				<a href="./index.jsp">메인화면으로</a>
 	
 	</body>
 </html>

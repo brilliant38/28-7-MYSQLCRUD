@@ -1,5 +1,5 @@
 <!-- 2018-07-01 ±èÁØ¿µ -->
-<!-- teacherAction insert -->
+
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 
 <%@ page import = "service.TeacherDao" %>

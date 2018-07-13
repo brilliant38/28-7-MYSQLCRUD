@@ -1,5 +1,5 @@
 <!-- 2018-07-01 ±èÁØ¿µ -->
-<!-- Teacher insert Form  -->
+
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>

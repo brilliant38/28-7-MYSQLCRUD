@@ -1,5 +1,5 @@
 <!-- 2018.07.10 ±èÁØ¿µ-->
-<!-- Insert Teacher Score Action -->
+
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import="service.*" %>
 <!DOCTYPE html>

@@ -7,6 +7,7 @@ import java.sql.*;
 import service.*;
 
 
+
 public class TeacherDao {
 	
 	/*CREATE TABLE `teacher` (
@@ -181,7 +182,7 @@ public int lastPageTeacher(int rowPerPage , String searchWord) {
 			
 			Class.forName("com.mysql.jdbc.Driver");
 			
-			String URL = "jdbc:mysql://localhost:3306/enginerr?useCode=true&characterEncoding=euckr";
+			String URL = "jdbc:mysql://localhost:3306/engineer?useCode=true&characterEncoding=euckr";
 			String dbUser = "java";
 			String dbPass = "java0000";
 			String sql = "SELECT COUNT(teacher_no) FROM teacher";
@@ -231,61 +232,48 @@ public int lastPageTeacher(int rowPerPage , String searchWord) {
 	// 매개변수는 교사번호를 입력받음. 특정 레코드를 가리키기 위함
 	// 리턴 데이터 타입은 없다.
 public void deleteTeacher(int teacherNo) {
-	Connection conn = null;
-	PreparedStatement pstmtDeleteTeacher = null;
-	
-	// teacherList.jsp로 부터 teacherNo값을 잘 전달 받았는지 테스트
-	System.out.println("teacherNo, teacherList.jsp => TeacherDao.java " + teacherNo);
-	
-	// teacher 테이블의 특정 레코드를 삭제하는 쿼리
-	String sqlDeleteTeacher = "DELETE FROM teacher WHERE teacher_no = ?";
+	Connection connection = null;
+	PreparedStatement preparedstatementDeleteTeacher = null;
 	
 	try {
-		// mysql 드라이버 로딩
-		Class.forName("com.mysql.jdbc.Driver");
+		Class.forName("com.mysql.jdbc.Driver");	//Database 연결
 		
-		// DB 연결 
-		String dbUrl = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
-		String dbUser = "root";
-		String dbPw = "java0000";
-		conn = DriverManager.getConnection(dbUrl,dbUser,dbPw);
-	
-		// 위의 쿼리 준비
-		pstmtDeleteTeacher = conn.prepareStatement(sqlDeleteTeacher);
+		String dataBaseAddress = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
+		String dataBaseID = "root";
+		String DataBasePW = "java0000";
+		System.out.println(dataBaseAddress + " : dataBaseAddress");
 		
-		// ?에 값 대입
-		pstmtDeleteTeacher.setInt(1, teacherNo);
+		connection = DriverManager.getConnection(dataBaseAddress, dataBaseID, DataBasePW);
+		System.out.println(connection + " : 01 connection");
 		
-		// 위의 쿼리 실행 및 삭제된 레코드의 수 출력
-		System.out.println("삭제된 레코드의 수 : " + pstmtDeleteTeacher.executeUpdate());
-	} catch (ClassNotFoundException classException) {
-		System.out.println("DB Driver 클래스를 찾을 수 없습니다. 커넥터가 존재하는지 확인 해주세요!");
-	} catch (SQLException sqlException) {
-		System.out.println("DB와 관련된 예외가 발생하였습니다!");
-		sqlException.printStackTrace();
+		preparedstatementDeleteTeacher = connection.prepareStatement("delete from teacher where teacher_no = ?"); //변수에 저장된 쿼리문 입력
+		preparedstatementDeleteTeacher.setInt(1, teacherNo);
+		System.out.println(preparedstatementDeleteTeacher + " : 02 preparedstatementDeleteTeacher");
+		
+		preparedstatementDeleteTeacher.executeUpdate();
+		
+		
+	} catch (ClassNotFoundException e) {
+		System.out.println("클래스 파일을 찾을 수 없습니다.");
+		e.printStackTrace();
+	} catch (SQLException e) {
+		System.out.println("쿼리문장이 잘못 되었습니다.");
+		e.printStackTrace();
 	} finally {
-		// 객체를 종료하는 부분
-		if(pstmtDeleteTeacher != null) {
-			try {
-				pstmtDeleteTeacher.close();
-			} catch (SQLException sqlException){
-				System.out.println("pstmt1 객체 종료 중 예외 발생");
-				
-				// 예외가 발생한 부분을 출력해줌.
-				sqlException.printStackTrace();
-			}
+		try {
+			preparedstatementDeleteTeacher.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		if(conn != null) {
-			try {
-				conn.close();
-			} catch (SQLException sqlException){
-				System.out.println("conn 객체 종료 중 예외 발생");
-				
-				// 예외가 발생한 부분을 출력해줌.
-				sqlException.printStackTrace();
-			}
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+		
 	}
+	
+
 }
 	// teacherList의 마지막 페이지를 구하기 위해 레코드의 총 갯수를 조회하는 메서드
 	// 매개변수는 검색어에 따라 총 레코드 수가 달라지기 때문에 searchValue를 입력 받음

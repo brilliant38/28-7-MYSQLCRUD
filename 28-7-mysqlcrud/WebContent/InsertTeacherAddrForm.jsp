@@ -1,6 +1,6 @@
 <!-- 2018-07-01 ±èÁØ¿µ -->
-<!-- TeacherAddr insert Form -->
-<!-- ÁÖ¼Ò µî·Ï Æû -->
+
+
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>

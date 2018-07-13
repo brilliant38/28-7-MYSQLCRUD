@@ -1,13 +1,179 @@
+/*2018-07-13 김준영*/
 package service;
 
 import java.sql.*;
-import service.*;
+import java.util.ArrayList;
+
+
 
 public class TeacherScoreDao {
 	
 	// 해당 교사의 점수를 삭제하는 메서드
 	// 교사를 특정하기 위해 teacherNo 변수 안의 값을 매개변수로 입력 받는다.
 	// 리턴 데이터는 없다.
+	
+	public int selectScoreAverage() {
+		int average = 0;
+		// SELECT LEFT(AVG(score),2) Average FROM teacher_score
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		String driver = "com.mysql.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
+		String databaseUser = "root";
+		String password = "java0000";
+		String selectScoreAverageSql = "SELECT LEFT(AVG(score),2) Average FROM teacher_score";
+		
+		try {
+			Class.forName(driver);
+			connection = DriverManager.getConnection(url, databaseUser, password);
+			preparedStatement = connection.prepareStatement(selectScoreAverageSql);
+			
+			resultSet = preparedStatement.executeQuery();
+			
+			if(resultSet.next()) {
+				average = resultSet.getInt(1);
+			}
+			
+		} catch (Exception e){
+			e.printStackTrace();
+			
+		} finally {
+			
+			try {
+				resultSet.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			try {
+				preparedStatement.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		System.out.println(average + " : average called");
+		
+		return average;
+	}
+	public ArrayList<TeacherAndScore> selectTeacherListAboveAverage(int currentPage, int pagePerRow) {
+		ArrayList<TeacherAndScore> list = new ArrayList<TeacherAndScore>(); //JSP 페이지에서 JAVA 표준 API의 배열로 리턴하기 위해서 사용
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		PreparedStatement preparedstatementRowNumber = null;
+		ResultSet resultSet = null;
+		ResultSet resultsetRowNumber = null;
+		String driver = "com.mysql.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
+		String databaseUser = "root";
+		String password = "java0000";
+		String selectTeacherListAboveAverageSql = "SELECT t.teacher_no,ts.score,t.teacher_name FROM teacher_score ts INNER JOIN teacher t ON t.teacher_no = ts.teacher_no WHERE ts.score>=(SELECT AVG(score) FROM teacher_score) ORDER BY ts.score DESC LIMIT ?,?";
+		
+		try {
+			/*
+				SELECT ts.score,t.teacher_name
+				FROM teacher_score ts INNER JOIN teacher t
+				ON t.teacher_no = ts.teacher_no 양 컬럼의 값이 같은 것만
+				WHERE ts.score>=(
+								SELECT AVG(score) FROM teacher_score
+							)
+				ORDER BY ts.score DESC 높은 점수부터 내림차순으로 정렬
+				LIMIT ?,?
+			 */
+			
+			//데이터 베이스 연결
+			Class.forName(driver);
+			
+			connection = DriverManager.getConnection(url, databaseUser, password);
+			
+			//전체 행 갯수 구하기
+			preparedstatementRowNumber = connection.prepareStatement("SELECT COUNT(*)FROM teacher t INNER JOIN teacher_score ts ON t.teacher_no = ts.teacher_no WHERE score>=(SELECT AVG(score) FROM teacher_score)");
+			System.out.println(preparedstatementRowNumber + " : 02 preparedstatementRowNumber");
+			
+			resultsetRowNumber = preparedstatementRowNumber.executeQuery();//쿼리문 실행
+			System.out.println(resultsetRowNumber + " : 03 resultsetRowNumber");
+			
+			if(resultsetRowNumber.next()) {
+				resultsetRowNumber.getInt(1); //총 행의 갯수 출력
+			}
+			//총 행의 갯수 저장
+			int rowNumber = resultsetRowNumber.getInt(1);
+			System.out.println(rowNumber + " : 04 rowNumber");
+			
+			//각 페이지 시작행의 번호(~번 행부터)
+			int startRow = (currentPage - 1) * pagePerRow;
+			System.out.println(startRow + " : 05 startRow");
+			
+			int end = startRow + (pagePerRow - 1); // end값이 전체 페이지 갯수를 초과하면 페이지를 표시할 수 없으므로 예외가 출력된다.
+			if (end > pagePerRow-1) { //end의 값이 총 행의 갯수 -1 보다 크면 
+				end = pagePerRow; // end의 값을 총 행의 갯수와 같게 만든다. = 배열 초과 금지.
+			}
+			System.out.println(end + " : 06 end");
+			
+			preparedStatement = connection.prepareStatement(selectTeacherListAboveAverageSql);
+			preparedStatement.setInt(1, startRow);
+			preparedStatement.setInt(2, pagePerRow);
+			System.out.println(preparedStatement + " : 07 preparedStatement 객체 생성 완료");
+			
+			resultSet = preparedStatement.executeQuery();
+			System.out.println(resultSet + " : 08 resultSet");
+			
+			while(resultSet.next()) {
+				Teacher teacher = new Teacher();
+				teacher.setTeacherNo(resultSet.getInt(1));
+				teacher.setTeacherName(resultSet.getString(3));
+				teacher.setRowNumber(rowNumber);
+				
+				TeacherScore teacherScore = new TeacherScore();
+				teacherScore.setScore(resultSet.getInt(2));
+				
+				TeacherAndScore teacherAndScore = new TeacherAndScore();
+				teacherAndScore.setTeacher(teacher);
+				teacherAndScore.setTeacherScore(teacherScore);
+				
+				list.add(teacherAndScore);
+			}
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("클래스 파일을 찾을 수 없습니다.");
+			e.printStackTrace();
+		} catch (SQLException e) {
+			System.out.println("쿼리문장이 잘못 되었습니다.");
+			e.printStackTrace();
+		} finally {
+			
+			try {
+				resultSet.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				preparedStatement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		return list;
+	}
+	
+	
 	public void deleteTeacherScore (int teacherNo) {
 		Connection conn = null;
 		PreparedStatement pstmtDeleteTeacherScore = null;

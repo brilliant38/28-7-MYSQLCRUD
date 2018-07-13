@@ -1,5 +1,5 @@
 <!-- 2018.07.09 김준영-->
-<!-- Teacher AddrList Action -->
+
 
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import="java.util.ArrayList" %>
@@ -33,8 +33,7 @@
 							<th style="width:70px">주소 번호</th>
 							<th>교사 번호</th>
 							<th>교사 주소</th>
-							<th>수정</th>
-							<th>삭제</th>
+					
 						</tr>
 					</thead>
 						<%
@@ -45,8 +44,7 @@
 								<td><%= arrayListTeacherAddr.get(i).getTeacherAddrNo() %></td>
 							<td><%= arrayListTeacherAddr.get(i).getTeacherNo() %></td>
 							<td><%= arrayListTeacherAddr.get(i).getTeacherAddrContent() %></td>
-							<td><a class="buttonToUpdateEntity" href="<%= request.getContextPath() %>/UpdateTeacherAddrForm.jsp?teacherAddressNo=<%= arrayListTeacherAddr.get(i).getTeacherAddrNo() %>">수정</a></td>
-							<td><a class="buttonToDeleteEntity" href="<%= request.getContextPath() %>/DeleteTeacherAddrAction.jsp?teacherAddressNo=<%= arrayListTeacherAddr.get(i).getTeacherAddrNo() %>">삭제</a></td>
+
 						</tr>
 					<%
 						}

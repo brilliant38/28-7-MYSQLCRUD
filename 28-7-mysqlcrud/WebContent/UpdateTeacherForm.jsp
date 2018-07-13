@@ -6,7 +6,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 		<title>Update Teacher Form</title>
-		<link rel="stylesheet" href="<%= request.getContextPath() %>/style/indexCss.css">
+		
 	</head>
 	<body>
 	
