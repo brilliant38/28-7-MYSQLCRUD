@@ -15,7 +15,7 @@
 		int student_no = Integer.parseInt(request.getParameter("no"));
 		
 		StudentDao dao = new StudentDao();
-		ArrayList<Student> stu = dao.updateForSelectMember(student_no);
+		ArrayList<Student> stu = dao.updateForSelectStudent(student_no);
 		System.out.println(stu+"<--s");
 	
 	%>
