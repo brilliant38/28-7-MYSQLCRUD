@@ -22,7 +22,7 @@ public class MemberScoreDao {
 	
 
 	/*Action페이지에서 넘어온 주소값을 참조하여, Member_Score테이블에 1행의 회원번호와 점수를 추가하는 메소드.*/ 
-	public void insertMemeberScore(MemberScore memberScore) {
+	public void insertMemberScore(MemberScore memberScore) {
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;

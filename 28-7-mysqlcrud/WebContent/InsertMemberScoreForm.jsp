@@ -10,6 +10,8 @@
 		<title>Insert Member Score</title>
 	</head>
 	<body>
+		<h1>Member Score</h1>
+		<br><br><br>
 		<%
 			Member member = new Member();
 			member.setMemberNo(Integer.parseInt(request.getParameter("no")));
@@ -18,17 +20,18 @@
 		<form action="./InsertMemberScoreAction.jsp" method="post">
 			<table border="1">
 				<tr>
-					<th>회원 번호</th>
-					<td><input type="text" name="no" value="<%=member.getMemberNo() %>" readonly></td>
-				</tr>
-				<tr>
-					<th>회원 점수</th>
+					<td>점수 : </td>
 					<td><input type="text" name="score"></td>
 				</tr>
 				<tr>
-					<td colspan="2"><input type="submit" value="회원점수입력"></td>
+					<td colspan="2">
+						<input type="hidden" name="no" value="<%= member.getMemberNo() %>">
+						<input type="submit" value="등록">
+					</td>
 				</tr>
 			</table>
 		</form>
+		<br>
+		<a href="./MemberList.jsp">MemberList로 이동</a>
 	</body>
 </html>

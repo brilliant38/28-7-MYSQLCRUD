@@ -48,6 +48,7 @@
 				<button type="submit">검색</button>
 			</div>
 		</form>
+		<br><br>
 		<table border="1">
 			<tr>
 				<th>회원 번호</th>
@@ -59,7 +60,7 @@
 				<th>수정</th>
 				<th>삭제</th>
 			</tr>
-			<br><br>
+			
 		<%
 			if (searchList.size() == 0) {
 				for(int i=0; i<list.size(); i++) {
@@ -77,18 +78,18 @@
 		<%
 				}
 			} else if (searchList.size() > 0) {
-				for (int i=0; i<searchList.size(); i++) {
+				for (int p=0; p<searchList.size(); p++) {
 		%>
-				<tr>
-					<td><%=searchList.get(i).getMemberNo()%></td>
-					<td><a href="./MemberAddrList.jsp?no=<%=searchList.get(i).getMemberNo()%>"><%=searchList.get(i).getMemberName()%></a></td>
-					<td><%=searchList.get(i).getMemberAge()%></td>
-					<td><a href="./InsertMemberAddrForm.jsp?no=<%=searchList.get(i).getMemberNo()%>">주소 입력</a></td>
-					<td><a href="./InsertMemberScoreForm.jsp?no=<%=searchList.get(i).getMemberNo()%>">점수 입력</a></td>
-					<td><a href="./MemberScoreList.jsp?no=<%=searchList.get(i).getMemberNo()%>">점수 보기</a></td>
-					<td><a href="./UpdateMemberForm.jsp?no=<%=searchList.get(i).getMemberNo()%>">수정</a></td>
-					<td><a href="./DeleteMemberAction.jsp?no=<%=searchList.get(i).getMemberNo()%>">삭제</a></td>
-				</tr>
+					<tr>
+						<td><%=searchList.get(p).getMemberNo()%></td>
+						<td><a href="./MemberAddrList.jsp?no=<%=searchList.get(p).getMemberNo()%>"><%=searchList.get(p).getMemberName()%></a></td>
+						<td><%=searchList.get(p).getMemberAge()%></td>
+						<td><a href="./InsertMemberAddrForm.jsp?no=<%=searchList.get(p).getMemberNo()%>">주소 입력</a></td>
+						<td><a href="./InsertMemberScoreForm.jsp?no=<%=searchList.get(p).getMemberNo()%>">점수 입력</a></td>
+						<td><a href="./MemberScoreList.jsp?no=<%=searchList.get(p).getMemberNo()%>">점수 보기</a></td>
+						<td><a href="./UpdateMemberForm.jsp?no=<%=searchList.get(p).getMemberNo()%>">수정</a></td>
+						<td><a href="./DeleteMemberAction.jsp?no=<%=searchList.get(p).getMemberNo()%>">삭제</a></td>
+					</tr>
 		<%
 				}
 			}

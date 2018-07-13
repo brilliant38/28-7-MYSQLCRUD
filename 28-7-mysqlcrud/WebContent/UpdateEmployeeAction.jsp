@@ -18,6 +18,8 @@
 			employee.setEmployeeName(request.getParameter("name"));
 			employee.setEmployeeAge(Integer.parseInt(request.getParameter("age")));
 			
+			System.out.println(employee.getEmployeeAge() + " : 받아온 나이 값 확인");
+			
 			EmployeeDao employeeDao = new EmployeeDao();
 			employeeDao.updateEmployee(employee);
 			

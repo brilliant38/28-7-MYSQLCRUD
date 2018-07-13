@@ -8,30 +8,9 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 		<title>EmployeeListAboveAverage</title>
-		<style>
-			.zui-table {
-			    border: solid 1px #DDEEEE;
-			    border-collapse: collapse;
-			    border-spacing: 0;
-			    font: normal 13px Arial, sans-serif;
-			}
-			.zui-table thead th {
-			    background-color: #DDEFEF;
-			    border: solid 1px #DDEEEE;
-			    color: #336B6B;
-			    padding: 10px;
-			    text-align: left;
-			    text-shadow: 1px 1px 1px #fff;
-			}
-			.zui-table tbody td {
-			    border: solid 1px #DDEEEE;
-			    color: #333;
-			    padding: 10px;
-			    text-shadow: 1px 1px 1px #fff;
-			}
-		</style>
 	</head>
 	<body>
+		<h3>Employee List Above Average</h3>
 		<%	
 			request.setCharacterEncoding("euc-kr");
 			String searchWord = request.getParameter("searchWord");
@@ -54,20 +33,20 @@
 		<div>
 			평균 : <%=AverageScore %>
 		</div>
-		<table class="zui-table">
-			<tr>
-				<th>이름</th>
-				<th>나이</th>
-				<th>번호</th>
-				<th>점수</th>
-			</tr>
+		<table border="1">
+			<thead>
+				<tr>
+					<th>Employee_No</th>
+					<th>Employee_Name</th>
+					<th>Employee_Score</th>
+				</tr>
+			</thead>
 			<%
 				for(int i=0; i<list.size(); i++) {
 			%>
 					<tr>
-						<td><%=list.get(i).getEmployee().getEmployeeName() %></td>
-						<td><%=list.get(i).getEmployee().getEmployeeAge() %></td>
 						<td><%=list.get(i).getEmployeeScore().getEmployeeNo() %></td>
+						<td><%=list.get(i).getEmployee().getEmployeeName() %></td>
 						<td><%=list.get(i).getEmployeeScore().getScore() %></td>
 					</tr>
 			<% 
@@ -93,15 +72,10 @@
 		<%		
 			}
 		%>
-		<form action="./EmployeeListAboveAverage.jsp" method="post">
-			<div>
-				이름으로 검색 : <input type="text" name="searchWord">
-			</div>
-			<br>
-			<div>
-			<a href = "./index.jsp">메인화면으로..</a>
-			</div>
-		</form>
+		<br><br>
+		<div>
+			<a href = "./index.jsp">메인화면</a>
+		</div>
 	</body>
 </html>
 

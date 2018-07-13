@@ -7,34 +7,15 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 		<title>EmployeeAddrList</title>
-		<style>
-			.zui-table {
-			    border: solid 1px #DDEEEE;
-			    border-collapse: collapse;
-			    border-spacing: 0;
-			    font: normal 13px Arial, sans-serif;
-			}
-			.zui-table thead th {
-			    background-color: #DDEFEF;
-			    border: solid 1px #DDEEEE;
-			    color: #336B6B;
-			    padding: 10px;
-			    text-align: left;
-			    text-shadow: 1px 1px 1px #fff;
-			}
-			.zui-table tbody td {
-			    border: solid 1px #DDEEEE;
-			    color: #333;
-			    padding: 10px;
-			    text-shadow: 1px 1px 1px #fff;
-			}
-		</style>
 	</head>
 	<body>
-		<h3>직원 주소</h3>
-		<table class="zui-table">
+		<h1>Employee Address</h1>
+		<br><br><br>
+		<table border="1">
 			<tr>
-				<th>주소</th>
+				<th>주소 번호</th>
+				<th>회원 번호</th>
+				<th>회원 주소</th>
 			</tr>
 		<%
 	        request.setCharacterEncoding("euc-kr");
@@ -44,19 +25,22 @@
 			EmployeeAddr employeeAddr = new EmployeeAddr();
 			
 			EmployeeAddrDao employeeAddrDao = new EmployeeAddrDao();
-			ArrayList<EmployeeAddr> list = employeeAddrDao.selectEmployeeAddrByPage(employeeNo);
-			System.out.println(list + " : 01 list check");
+			ArrayList<EmployeeAddr> arrayListEmployeeAddr = employeeAddrDao.selectEmployeeAddrByPage(employeeNo);
+			System.out.println(arrayListEmployeeAddr + " : 01 arrayListEmployeeAddr check");
 			
 			
-			for(int i=0; i<list.size(); i++) {
-				employeeAddr = list.get(i);
+			for(int i=0; i<arrayListEmployeeAddr.size(); i++) {
 		%>
 				<tr>
-					<td><%=employeeAddr.getEmployeeAddrContent()%></td>
+					<td><%=arrayListEmployeeAddr.get(i).getEmployeeAddrNo()%></td>
+					<td><%=arrayListEmployeeAddr.get(i).getEmployeeNo()%></td>
+					<td><%=arrayListEmployeeAddr.get(i).getEmployeeAddrContent()%></td>
 				</tr>
 		<%
 			}
 		%>
 		</table>
+		<br>
+		<a href="./EmployeeList.jsp">목록으로</a>
 	</body>
 </html>

@@ -30,11 +30,11 @@
 			%>
 				<tr>
 					<td>회원 번호 : </td>
-					<td><input type="text" name="name" value="<%=member.getMemberName()%>"></td>
+					<td><input type="text" name="no" value="<%=member.getMemberNo()%>"></td>
 				</tr>
 				<tr>
 					<td>회원 이름 : </td>
-					<td><input type="text" name="age"  value="<%=member.getMemberAge()%>"></td>
+					<td><input type="text" name="name"  value="<%=member.getMemberName()%>"></td>
 				</tr>
 				<tr>
 					<td>회원 나이 : </td>
@@ -48,8 +48,8 @@
 				</tr>
 				
 			</table>
-			<br>
-				<a href="./MemberList.jsp">MemberList로 이동</a>
 		</form>
+		<br>
+		<a href="./MemberList.jsp">MemberList로 이동</a>
 	</body>
 </html>

@@ -25,7 +25,7 @@ public class EmployeeAddrDao {
 			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
 			System.out.println(connection + " : Connection 객체 생성 완료");
 			
-			preparedStatementAddress = connection.prepareStatement("SELECT employee_addr_content FROM employee_addr WHERE employee_no=?");
+			preparedStatementAddress = connection.prepareStatement("SELECT employee_addr_no,employee_no,employee_addr_content FROM employee_addr WHERE employee_no=?");
 			preparedStatementAddress.setInt(1, employeeNo);
 			
 			resultsetAddress = preparedStatementAddress.executeQuery();
@@ -35,7 +35,9 @@ public class EmployeeAddrDao {
 				//주소를 저장해줄 객체 생성
 				EmployeeAddr employeeAddr = new EmployeeAddr();
 				//객체에 주소값 저장
-				employeeAddr.setEmployeeAddrContent(resultsetAddress.getString(1));
+				employeeAddr.setEmployeeAddrNo(resultsetAddress.getInt(1));
+				employeeAddr.setEmployeeNo(resultsetAddress.getInt(2));
+				employeeAddr.setEmployeeAddrContent(resultsetAddress.getString(3));
 				//객체의 주소값을 리스트의 마지막 인덱스에 추가
 				list.add(employeeAddr);
 			}

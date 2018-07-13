@@ -6,18 +6,18 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-		<title>Insert Member Score Action</title>
+		<title>Insert Employee Score Action</title>
 	</head>
 	<body>
 		<%
-			MemberScore memberScore = new MemberScore();
-			memberScore.setMemberNo(Integer.parseInt(request.getParameter("no")));
-			memberScore.setScore(Integer.parseInt(request.getParameter("score")));
+			EmployeeScore employeeScore = new EmployeeScore();
+			employeeScore.setEmployeeNo(Integer.parseInt(request.getParameter("no")));
+			employeeScore.setScore(Integer.parseInt(request.getParameter("score")));
 			
-			MemberScoreDao memberScoreDao = new MemberScoreDao();
-			memberScoreDao.insertMemberScore(memberScore);
+			EmployeeScoreDao employeeScoreDao = new EmployeeScoreDao();
+			employeeScoreDao.insertEmployeeScore(employeeScore);
 			
-			response.sendRedirect("./MemberList.jsp");
+			response.sendRedirect("./EmployeeList.jsp");
 		%>
 	</body>
 </html>

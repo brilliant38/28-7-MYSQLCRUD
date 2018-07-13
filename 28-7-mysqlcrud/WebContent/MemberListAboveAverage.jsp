@@ -29,9 +29,11 @@
 		</div>
 		<table border="1">
 			<thead>
-				<th>Member_No</th>
-				<th>Member_Name</th>
-				<th>Member_Score</th>
+				<tr>
+					<th>Member_No</th>
+					<th>Member_Name</th>
+					<th>Member_Score</th>
+				</tr>
 			</thead>
 			<tbody>
 			<%
@@ -64,7 +66,9 @@
 		<%
 			} 
 		%>
-		<br><br>
-		<a href = "./index.jsp">메인화면으로..</a>
+		<br>
+		<div>
+			<a href = "./index.jsp">메인화면</a>
+		</div>
 	</body>
 </html>

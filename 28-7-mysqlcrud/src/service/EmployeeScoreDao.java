@@ -9,12 +9,53 @@ import java.util.ArrayList;
 
 public class EmployeeScoreDao {
 	
-	public ArrayList<EmployeeScore> personalScore(int employeeNo) {
-		ArrayList<EmployeeScore> list = new ArrayList<EmployeeScore>();
+	public void insertEmployeeScore(EmployeeScore employeeScore) {
+		
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		String driver = "com.mysql.jdbc.Driver";
+		String url = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
+		String databaseUser = "root";
+		String password = "java0000";
+		String insertEmployeeScoreSql = "INSERT INTO employee_score (employee_no,score) VALUES (?,?)";
+		
+		try {
+			Class.forName(driver);
+			connection = DriverManager.getConnection(url, databaseUser, password);
+			preparedStatement = connection.prepareStatement(insertEmployeeScoreSql);
+			preparedStatement.setInt(1, employeeScore.getEmployeeNo());
+			preparedStatement.setInt(2, employeeScore.getScore());
+			
+			preparedStatement.executeUpdate();
+			
+			
+		} catch (Exception e){
+			e.printStackTrace();
+			
+		} finally {
+			
+			try {
+				preparedStatement.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	
+	public ArrayList<EmployeeAndScore> selectEmployeeAndEmployeeScore(int employeeNo) {
+		ArrayList<EmployeeAndScore> list = new ArrayList<EmployeeAndScore>();
 		Connection connection = null;
 		PreparedStatement preparedstatement = null;
 		ResultSet resultset = null;
-		String personalScoreSql = "SELECT score FROM employee_score WHERE employee_no=?";
+		String personalScoreSql = "SELECT es.employee_score_no, es.employee_no, e.employee_name, e.employee_age, es.score FROM employee_score es INNER JOIN employee e ON es.employee_no = e.employee_no WHERE e.employee_no = ? ORDER BY es.employee_score_no DESC";
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -31,12 +72,19 @@ public class EmployeeScoreDao {
 			resultset = preparedstatement.executeQuery();
 			
 			if(resultset.next()) {
-				EmployeeScore employeeScore = new EmployeeScore();
-				employeeScore.setScore(resultset.getInt(1));
+				Employee employee = new Employee();
+				employee.setEmployeeName(resultset.getString(3));
 				
-				list.add(employeeScore);
+				EmployeeScore employeeScore = new EmployeeScore();
+				employeeScore.setScore(resultset.getInt(5));
+				employeeScore.setEmployeeNo(resultset.getInt(2));
+				
+				EmployeeAndScore employeeAndScore = new EmployeeAndScore();
+				employeeAndScore.setEmployee(employee);
+				employeeAndScore.setEmployeeScore(employeeScore);
+				
+				list.add(employeeAndScore);
 			}
-			
 			
 		} catch (ClassNotFoundException e) {	//클래스 예외처리 작성
 			System.out.println("컴파일된 자바 클래스 파일을 찾을 수 없는 문제");
@@ -67,8 +115,6 @@ public class EmployeeScoreDao {
 			}
 			
 		}
-		
-		
 		return list;
 	}
 	
