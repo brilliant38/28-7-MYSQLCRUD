@@ -52,7 +52,7 @@
 				</table>
 				<br>
 				
-					<a id="buttonToList" href="<%= request.getContextPath() %>/TeacherList.jsp">목록으로</a>
+					<a id="buttonToList" href="<%= request.getContextPath() %>./TeacherList.jsp">목록으로</a>
 		
 	</body>
 </html>

@@ -39,12 +39,12 @@
 						<td><%= teacherAndTeacherScore.getTeacher().getTeacherNo() %></td>
 						<td><%= teacherAndTeacherScore.getTeacher().getTeacherName() %></td>
 						<td><%= teacherAndTeacherScore.getTeacherScore().getScore() %></td>
-						<td><a class="buttonToUpdateEntity" href="<%= request.getContextPath() %>/UpdateTeacherScoreForm.jsp?teacherNo=<%= teacherAndTeacherScore.getTeacher().getTeacherNo() %>">수정버튼</a>
+						<td><a class="buttonToUpdateEntity" href="<%= request.getContextPath() %>./UpdateTeacherScoreForm.jsp?teacherNo=<%= teacherAndTeacherScore.getTeacher().getTeacherNo() %>">수정버튼</a>
 					</tr>
 				</table>
 				<br>
 			
-					<a id="buttonToList" href="<%= request.getContextPath() %>/TeacherList.jsp">목록으로</a>
+					<a id="buttonToList" href="<%= request.getContextPath() %>./TeacherList.jsp">목록으로</a>
 				
 	
 	</body>
