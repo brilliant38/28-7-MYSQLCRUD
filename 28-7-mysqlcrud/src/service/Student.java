@@ -5,6 +5,8 @@ public class Student {
 	private String student_name;
 	private int student_age;
 	private int rowNumber;
+	private String searchWord;
+
 	public int getStudent_no() {
 		return student_no;
 	}
@@ -28,6 +30,12 @@ public class Student {
 	}
 	public void setRowNumber(int rowNumber) {
 		this.rowNumber = rowNumber;
+	}
+	public String getSearchWord() {
+		return searchWord;
+	}
+	public void setSearchWord(String searchWord) {
+		this.searchWord = searchWord;
 	}
 	
 

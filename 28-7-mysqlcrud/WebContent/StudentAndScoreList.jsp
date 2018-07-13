@@ -1,3 +1,4 @@
+<!--  28기 구해성 2018-07-13 -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import ="service.StudentAndScore"%>
 <%@ page import ="service.StudentScore" %>
@@ -5,7 +6,7 @@
 <%@ page import ="java.util.ArrayList"%>
 <%@ page import ="java.net.URLDecoder"%>
 <!DOCTYPE html>
-<table width="100%" border="1">
+<table border="1">
 <tr>
 	<td>점수번호</td><td>학생번호</td><td>이름</td><td>점수</td>
 </tr>
@@ -38,7 +39,7 @@
 		}
 		%>
 		</table>
-		<%-- <%
+		 <%
 			if(currentPage>1) {
 		%>
 			<a href="./StudentAndScore.jsp?currentPage=<%=currentPage-1%>&searchWord=>">이전</a>
@@ -54,4 +55,4 @@
 				<a href="./StudentAndScore.jsp?currentPgge=<%=currentPage+1 %>&searchWord=">다음</a>
 		<%
 			} 
-		%> --%>
+		%> 

@@ -10,9 +10,10 @@ public class StudentAddrDao {
 	
 
 	public void insertStudentAddr(StudentAddr studentaddr) {
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		int staddr = studentaddr.getStudent_no();
+		String staddr2 = studentaddr.getStudent_addr_content();
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -20,30 +21,34 @@ public class StudentAddrDao {
 			String jdbcDriver = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
 			String dbUser = "root";
 			String dbPass = "java0000";
-			conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
-			System.out.println(conn + " : Connection 객체 생성 완료");
+			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
+			System.out.println(connection + " : conn 객체 생성 완료");
 			
-			pstmt = conn.prepareStatement("INSERT INTO student_addr (student_no,student_addr_content) VALUES (?,?))");
-			pstmt.setInt(1, studentaddr.getStudent_no());
-			pstmt.setString(2, studentaddr.getStudent_addr_content());
+			preparedStatement = connection.prepareStatement("INSERT INTO student_addr (student_no,student_addr_content) VALUES (?,?))");
+			preparedStatement.setInt(1, staddr);
+			preparedStatement.setString(2, staddr2);
 			
 			//번호를 참조하여 주소 테이블에 행 추가.
-			pstmt.executeUpdate();
-		
-		
+			preparedStatement.executeUpdate();
+			
+			preparedStatement.close();
+			connection.close();
+			
+				
+				
 			
 		}catch (Exception e) {
 		}finally {
 			
-		}return;
+		}
 	}
 		// TODO: handle exception
 	
 	public ArrayList<StudentAddr> studentAddrlist(int addr) {
 		System.out.println("StudentAddrlist 01");
 		ArrayList<StudentAddr> List = new ArrayList<StudentAddr>();
-		Connection conn = null;
-		PreparedStatement pstmt = null;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
 		
 		try {
@@ -52,13 +57,13 @@ public class StudentAddrDao {
 			String jdbcDriver = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
 			String dbUser = "root";
 			String dbPass = "java0000";
-			conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
+			connection = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
 			
-			pstmt = conn.prepareStatement("SELECT student_addr_content,student_addr_no,student_no FROM student_addr WHERE student_no=?");
-			pstmt.setInt(1,addr);
+			preparedStatement = connection.prepareStatement("SELECT student_addr_content,student_addr_no,student_no FROM student_addr WHERE student_no=?");
+			preparedStatement.setInt(1,addr);
 			
 			
-			rs = pstmt.executeQuery();
+			rs = preparedStatement.executeQuery();
 			
 			while(rs.next()) {
 				
@@ -66,8 +71,8 @@ public class StudentAddrDao {
 				studentaddr.setStudent_addr_content(rs.getString(1));
 				List.add(studentaddr);
 				rs.close();
-				pstmt.close();
-				conn.close();
+				preparedStatement.close();
+				connection.close();
 				
 				return List;
 			}
@@ -97,15 +102,15 @@ public class StudentAddrDao {
 			String jdbcDriver = "jdbc:mysql://localhost:3306/engineer?useUnicode=true&characterEncoding=euckr";
 			String dbUser = "root";
 			String dbPass = "java0000";
-			Connection conn  = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
+			Connection connection  = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
 			
- 			PreparedStatement pstmt = conn.prepareStatement("insert into student (student_name, student_age) values (?, ? )");
-			pstmt.setString(1,st);
-			pstmt.setInt(2, ag);
-			pstmt.executeUpdate();
+ 			PreparedStatement preparedStatement = connection.prepareStatement("insert into student (student_name, student_age) values (?, ? )");
+ 			preparedStatement.setString(1,st);
+ 			preparedStatement.setInt(2, ag);
+ 			preparedStatement.executeUpdate();
 			
-			pstmt.close();
-			conn.close();
+ 			preparedStatement.close();
+ 			connection.close();
 			
 		
 			
