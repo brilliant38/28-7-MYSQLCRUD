@@ -26,7 +26,7 @@
 			employeeAddrDao.insertEmployeeAddr(employeeAddr);
 			System.out.println("DB에 직원 주소 1줄이 추가되었습니다.");
 			
-			response.sendRedirect("./employee/EmployeeList.jsp"); //InsertMemberAddrForm.jsp 페이지로 리다이렉트
+			response.sendRedirect("./EmployeeList.jsp"); //InsertMemberAddrForm.jsp 페이지로 리다이렉트
 		%>
 	</body>
 </html>

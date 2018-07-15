@@ -26,7 +26,7 @@
 			int result = memberdao.insertMember(member);
 			System.out.println("DB에 회원 한명이 추가되었습니다.");
 			
-			response.sendRedirect("./member/InsertMemberForm.jsp"); //memberInsert.jsp 페이지로 리다이렉트
+			response.sendRedirect("./InsertMemberForm.jsp"); //memberInsert.jsp 페이지로 리다이렉트
 		%>
 	</body>
 </html>

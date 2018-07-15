@@ -41,6 +41,6 @@
 		%>
 		</table>
 		<br>
-		<a href = "./member/MemberList.jsp">목록으로</a>
+		<a href = "./MemberList.jsp">목록으로</a>
 	</body>
 </html>

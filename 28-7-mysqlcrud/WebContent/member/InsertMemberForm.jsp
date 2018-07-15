@@ -7,7 +7,7 @@
 		<title>InsertMemberForm</title>
 	</head>
 	<body>
-		<form action="./member/InsertMemberAction.jsp" method="post">
+		<form action="./InsertMemberAction.jsp" method="post">
 			<h2>Member 정보 입력</h2>
 			<div>
 				이름 : <input type="text" name="name" size="10px"> 
@@ -19,5 +19,7 @@
 				<input type="submit" value="입력" id="btn">
 			</div>
 		</form>
+		<br>
+		<a href = "./MemberList.jsp">목록으로</a>
 	</body>
 </html>

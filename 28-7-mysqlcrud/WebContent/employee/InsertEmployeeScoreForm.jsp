@@ -8,12 +8,14 @@
 		<title>Insert Employee Score</title>
 	</head>
 	<body>
+	<h1>Employee Score</h1>
+		<br><br><br>
 		<%
 			Employee employee = new Employee();
 			employee.setEmployeeNo(Integer.parseInt(request.getParameter("no")));
 			
 		%>
-		<form action="./employee/InsertEmployeeScoreAction.jsp" method="post">
+		<form action="./InsertEmployeeScoreAction.jsp" method="post">
 			<table border="1">
 				<tr>
 					<td>점수 : </td>
@@ -27,5 +29,7 @@
 				</tr>
 			</table>
 		</form>
+		<br>
+		<a href="./EmployeeList.jsp">EmployeeList로 이동</a>
 	</body>
 </html>

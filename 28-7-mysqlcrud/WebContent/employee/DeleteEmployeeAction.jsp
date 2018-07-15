@@ -15,7 +15,7 @@
 			EmployeeDao employeeDao = new EmployeeDao();
 			employeeDao.deleteEmployee(employeeNo); // 회원번호 입력하여 회원 정보 행 1줄 삭제 메소드 호출
 			
-			response.sendRedirect("./member/EmployeeList.jsp"); // List 페이지로 복귀
+			response.sendRedirect("./EmployeeList.jsp"); // List 페이지로 복귀
 		%>
 	</body>
 </html>

@@ -26,7 +26,7 @@
 			memberaddrdao.insertMemberAddr(memberaddr);
 			System.out.println("DB에 회원 주소 1줄이 추가되었습니다.");
 			
-			response.sendRedirect("./member/MemberList.jsp"); //InsertMemberAddrForm.jsp 페이지로 리다이렉트
+			response.sendRedirect("./MemberList.jsp"); //InsertMemberAddrForm.jsp 페이지로 리다이렉트
 		%>
 	</body>
 </html>

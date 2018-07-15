@@ -12,7 +12,7 @@
 	<body>
 		<h1>Update Member</h1>
 		<br><br><br>
-		<form action="./member/UpdateMemberAction.jsp" method="post">
+		<form action="./UpdateMemberAction.jsp" method="post">
 			<table border="1">
 			<%
 		        request.setCharacterEncoding("euc-kr");
@@ -50,6 +50,6 @@
 			</table>
 		</form>
 		<br>
-		<a href="./member/MemberList.jsp">MemberList로 이동</a>
+		<a href="./MemberList.jsp">MemberList로 이동</a>
 	</body>
 </html>

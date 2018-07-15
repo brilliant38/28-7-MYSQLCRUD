@@ -12,7 +12,7 @@
 	<body>
 		<h1>Employee List</h1>
 		<br>
-		<form action="./MemberList.jsp" method="post">
+		<form action="./EmployeeList.jsp" method="post">
 			<div>
 				이름 :
 				<input type="text" name="searchWord">
@@ -91,6 +91,6 @@
 			} 
 		%>
 		<br>
-		<a href = "./index.jsp">메인화면</a>
+		<a href = "../index.jsp">메인화면</a>
 	</body>
 </html>

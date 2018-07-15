@@ -23,7 +23,7 @@
 			EmployeeDao employeeDao = new EmployeeDao();
 			employeeDao.updateEmployee(employee);
 			
-			response.sendRedirect("./employee/EmployeeList.jsp");
+			response.sendRedirect("./EmployeeList.jsp");
 		%>
 	</body>
 </html>
