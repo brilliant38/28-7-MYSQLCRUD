@@ -8,7 +8,7 @@
 <title>insert Teacher Form</title>
 </head>
 <body>
-	<form action="./InsertTeacherAction.jsp" method="post" name="f">
+	<form action="/teacher/InsertTeacherAction.jsp" method="post" name="f">
 		<h2>Teacher 정보 입력</h2>
 		<div>
 			이름 : <input type="text" id="teacherName" name="teacherName" size="10px"> 
@@ -20,6 +20,6 @@
 			<input type="submit" value="입력" id="btn">
 		</div>
 	</form>
-	<script type="text/javascript" src="script./teacher/InserteacherOrAddr.js" charset="utf-8"></script>
+	<script type="text/javascript" src="script/teacher/InserteacherOrAddr.js" charset="utf-8"></script>
 </body>
 </html>

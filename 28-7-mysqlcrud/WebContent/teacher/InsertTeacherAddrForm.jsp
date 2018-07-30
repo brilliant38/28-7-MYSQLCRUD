@@ -13,7 +13,7 @@
 	
 				<h1>Teacher Address</h1>
 				<br><br><br>
-				<form action="<%= request.getContextPath() %>./InsertTeacherAddrAction.jsp" method="post">
+				<form action="<%= request.getContextPath() %>/teacher/InsertTeacherAddrAction.jsp" method="post">
 					<table border="1">
 						<tr>
 							<td>주소 : </td>
@@ -33,7 +33,7 @@
 					</table>
 				</form>
 				<br>
-				<a href="<%= request.getContextPath() %>./teacher/TeacherList.jsp">teacherList로 이동</a>
+				<a href="<%= request.getContextPath() %>/teacher/TeacherList.jsp">teacherList로 이동</a>
 	
 	</body>
 </html>
