@@ -10,7 +10,7 @@
 		<h1>index</h1>
 		<ul>
 			<li><a href="./member/MemberList.jsp">MemberList</a></li>
-			<li><a href="./student/Studentlist.jsp">StudentList</a></li>
+			<li><a href="./student/StudentList.jsp">StudentList</a></li>
 			<li><a href="./teacher/TeacherList.jsp">TeacherList</a></li>
 			<li><a href="./employee/EmployeeList.jsp">EmployeeList</a></li>
 		</ul>

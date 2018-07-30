@@ -21,7 +21,7 @@
 	%>
 		<h1>Update Student</h1>
 		<br><br><br>
-		<form action="./UpdateStudentAction.jsp" method="post">
+		<form action="../UpdateStudentAction.jsp" method="post">
 			<table border="1">
 				<tr>
 					<td>학생 번호 :</td>
@@ -41,6 +41,6 @@
 			</table>
 		</form>
 		<br>
-		<a href="<%= request.getContextPath() %>/StudentList.jsp">StudentList로 이동</a>
+		<a href="<%= request.getContextPath() %>../StudentList.jsp">StudentList로 이동</a>
 	</body>
 </html>

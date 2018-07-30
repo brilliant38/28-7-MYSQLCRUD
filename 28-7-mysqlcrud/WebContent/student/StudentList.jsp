@@ -93,7 +93,7 @@
 						<td><%=searchList.get(p).getStudent_age()%></td>
 						<td><a href="./InsertStudentAddrForm.jsp?no=<%=searchList.get(p).getStudent_no()%>">주소 입력</a></td>
 						<td><a href="./InsertStudentScoreForm.jsp?no=<%=searchList.get(p).getStudent_no()%>">점수 입력</a></td>
-						<td><a href="./StudentScoreList.jsp?no=<%=searchList.get(p).getStudent_no()%>">점수 보기</a></td>
+						<td><a href="./StudentAndScoreList.jsp?no=<%=searchList.get(p).getStudent_no()%>">점수 보기</a></td>
 						<td><a href="./UpdateStudentForm.jsp?no=<%=searchList.get(p).getStudent_no()%>">수정</a></td>
 						<td><a href="./DeleteStudentAction.jsp?no=<%=searchList.get(p).getStudent_no()%>">삭제</a></td>
 					</tr>
@@ -123,7 +123,7 @@
 		%>
 		<br>
 		<div>
-		<a href = "./index.jsp">메인화면</a>
+		<a href = "../index.jsp">메인화면</a>
 		</div>
 		
 	</body>

@@ -22,7 +22,7 @@
 		StudentDao studentdao = new StudentDao();
 		studentdao.updateStudent(student);
 		
-		response.sendRedirect("./StudentList.jsp");
+		response.sendRedirect("../StudentList.jsp");
 	%>
 	</body>
 </html>

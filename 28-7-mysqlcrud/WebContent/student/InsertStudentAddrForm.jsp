@@ -22,6 +22,6 @@
 			</table>
 		</form>
 			<br>
-			<a href="<%= request.getContextPath() %>/StudentList.jsp">StudentList로 이동</a>
+			<a href="<%= request.getContextPath() %>../StudentList.jsp">StudentList로 이동</a>
 	</body>
 </html>

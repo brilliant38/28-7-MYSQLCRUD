@@ -42,7 +42,7 @@
 		 <%
 			if(currentPage>1) {
 		%>
-			<a href="./StudentAndScore.jsp?currentPage=<%=currentPage-1%>&searchWord=>">이전</a>
+			<a href="../StudentAndScore.jsp?currentPage=<%=currentPage-1%>&searchWord=>">이전</a>
 		<%
 			}
 			int lastPage = (RowNumber-1) /pagePerRow;
@@ -52,7 +52,7 @@
 			}
 			if(currentPage<lastPage) {
 				%>
-				<a href="./StudentAndScore.jsp?currentPgge=<%=currentPage+1 %>&searchWord=">다음</a>
+				<a href="../StudentAndScore.jsp?currentPgge=<%=currentPage+1 %>&searchWord=">다음</a>
 		<%
 			} 
 		%> 
